@@ -17,7 +17,7 @@ REGRAS = Path(__file__).with_name("cs_regras.json")
 AVISO = ("Protótipo educacional: não é um canal oficial e não confirma a concessão de serviços "
          "ou direitos. Nenhum dado pessoal é pedido ou guardado. Confirme no canal oficial.")
 FALTA = ("A lógica ainda não foi cadastrada. Faça à mão a tabela-verdade, a simplificação e o "
-         "Karnaugh (roteiro: 03_Relatorios_e_Entregas/CS_ROTEIRO_FEITO_A_MAO.pdf) e preencha "
+         "Karnaugh (roteiro: CS_ROTEIRO_FEITO_A_MAO.pdf) e preencha "
          "'mintermos' e 'expr_simplificada' em cs_regras.json.")
 SIM = {"1", "s", "sim"}
 NAO = {"0", "n", "nao", "não"}
