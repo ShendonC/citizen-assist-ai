@@ -567,7 +567,8 @@ fieldset.triage-row:first-of-type { border-top: 1px solid var(--rule); }
                 <tbody>
                   <tr><th scope="row">Hoje (tarifa R$ 0,85 por kWh)</th><td class="num" id="simCurrentBill"></td><td class="num">—</td></tr>
                   <tr><th scope="row">Kit LED + chuveiro no verão</th><td class="num" id="simEffBill"></td><td class="num" id="simEffSave"></td></tr>
-                  <tr><th scope="row">Energia solar por assinatura</th><td class="num" id="simSolarBill"></td><td class="num" id="simSolarSave"></td></tr>
+                  <tr><th scope="row">Energia solar própria (2 kWp, investimento de R$ 9.200)</th><td class="num" id="simSolarBill"></td><td class="num" id="simSolarSave"></td></tr>
+                  <tr><th scope="row">Assinatura solar compartilhada (sem obra, cerca de 15% de desconto)</th><td class="num" id="simSharedBill"></td><td class="num" id="simSharedSave"></td></tr>
                 </tbody>
               </table>
             </div>
@@ -1541,7 +1542,9 @@ fieldset.triage-row:first-of-type { border-top: 1px solid var(--rule); }
       $("simEffSave").textContent = BRL0(econAnualEff);
       $("simSolarBill").textContent = BRL(contaAtual - econAnualSolar / 12);
       $("simSolarSave").textContent = BRL0(econAnualSolar);
-      $("simSolarCo2").innerHTML = "Com energia solar você evita cerca de " + co2Evitado.toFixed(1).replace(".", ",") + " kg de CO<sub>2</sub> por ano.";
+      $("simSharedBill").textContent = BRL(contaAtual * 0.85);
+      $("simSharedSave").textContent = BRL0(contaAtual * 0.15 * 12);
+      $("simSolarCo2").innerHTML = "Com a usina própria de 2 kWp você evita cerca de " + co2Evitado.toFixed(1).replace(".", ",") + " kg de CO<sub>2</sub> por ano.";
     }
 
     /* ===== assistente ===== */
