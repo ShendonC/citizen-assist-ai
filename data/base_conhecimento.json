@@ -60,7 +60,10 @@
       "zona eleitoral",
       "transferencia",
       "voto",
-      "eleicao"
+      "eleicao",
+      "alistamento eleitoral",
+      "alistamento",
+      "primeiro titulo"
     ],
     "resposta": "A primeira via, a segunda via e a transferência do Título de Eleitor são gratuitas. O voto é obrigatório de 18 a 69 anos e facultativo para jovens de 16 ou 17 anos e maiores de 70 anos. O título digital é entregue em até 5 dias úteis. Atenção: o cadastro eleitoral é fechado 150 dias antes de cada eleição; pedidos feitos após esse prazo só valem para a eleição seguinte.",
     "documentos": [
@@ -243,7 +246,10 @@
       "eficiencia energetica",
       "reduzir conta",
       "led",
-      "procel"
+      "procel",
+      "economizar",
+      "fatura de energia",
+      "casa alugada"
     ],
     "resposta": "A Alternativa 1 (Retrofit de Eficiência Energética) substitui 8 lâmpadas de 60W por LEDs de 9W Procel A (reduzindo de 72,0 para 10,8 kWh/mês, economia de 61,2 kWh/mês) e ajusta o chuveiro para o modo Verão 3200W (reduzindo de 110,0 para 63,7 kWh/mês, economia de 46,3 kWh/mês). O consumo cai de 280,0 para 172,5 kWh/mês (-107,5 kWh/mês), reduzindo a conta de R$ 238,00 para R$ 146,63/mês (economia de R$ 1.096,50/ano). Com investimento de R$ 96,00 (8 LEDs a R$ 12,00), o retorno (payback) ocorre em 1,05 mês, sendo viável inclusive em imóveis alugados.",
     "documentos": [
@@ -266,7 +272,10 @@
       "geracao distribuida",
       "placa solar",
       "solar",
-      "energia renovavel"
+      "energia renovavel",
+      "aluguel",
+      "inquilino",
+      "assinatura solar"
     ],
     "resposta": "A Alternativa 2 (Fonte Renovável) utiliza um sistema solar fotovoltaico On-Grid de 2,0 kWp (geração média de 250,0 kWh/mês ou 3.000 kWh/ano). Para o consumo de 280,0 kWh/mês, a fatura cai para a taxa mínima monofásica da rede (30,0 kWh/mês = R$ 25,50/mês), gerando economia estimada de R$ 2.550,00/ano, investimento inicial de R$ 9.200,00, payback de 3,6 anos (vida útil de 25 anos) e evitando 115,5 kg de CO2/ano no SIN (MCTI: 0,0385 kg CO2/kWh). Limitação: exige telhado próprio sem sombreamento; para inquilinos ou apartamentos, recomenda-se a Geração Solar Compartilhada (assinatura com R$ 0,00 de investimento e ~15% de desconto na fatura).",
     "documentos": [

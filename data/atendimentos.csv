@@ -1,1 +1,16 @@
 ﻿data,origem,pergunta,id_orientacao,confianca,encontrou,ajudou,tentativas,tempo_segundos,facilidade
+2026-11-08 09:14:22,pergunta,"perdi meu rg no onibus, preciso de boletim de ocorrencia pra segunda via?",1,ALTA,True,True,1,16.4,5
+2026-11-08 09:16:05,pergunta,trocar lampada comum por led com selo procel economiza quanto?,11,ALTA,True,True,1,18.2,5
+2026-11-08 09:17:48,pergunta,como tirar carteira de trabalho digital pro primeiro emprego?,5,ALTA,True,True,1,12.7,5
+2026-11-08 10:03:11,pergunta,quanto tempo demora pra ficar pronto o cpf feito pela internet?,2,MÉDIA,True,True,1,19.5,4
+2026-11-08 10:05:39,pergunta,quero saber se vale a pena colocar placa solar em casa,12,ALTA,True,True,1,22.8,5
+2026-11-08 10:08:14,categoria,"[Documentos] Certidões de Nascimento, Casamento e Óbito",4,NAVEGAÇÃO,True,True,1,24.1,4
+2026-11-08 11:21:08,pergunta,"meu filho tem 9 anos, quais documentos levar pro rg dele?",1,MÉDIA,True,True,2,27.3,4
+2026-11-08 11:23:45,pergunta,"meu chuveiro gasta muitos kwh na conta de luz, como calcular?",10,ALTA,True,True,1,15.6,5
+2026-11-08 11:26:19,pergunta,quero fazer meu alistamento eleitoral pela primeira vez,,NÃO ENCONTRADA,False,False,2,31.4,3
+2026-11-08 14:12:33,pergunta,"minha cnh venceu faz dois meses, ainda posso dirigir?",6,MÉDIA,True,True,1,17.9,4
+2026-11-08 14:15:02,pergunta,como economizar na fatura de energia eletrica em casa alugada?,10,MÉDIA,True,False,2,29.8,3
+2026-11-08 14:17:40,categoria,[Atendimento e Direitos] Atendimento por Procuração (Terceiros) e Menores,9,NAVEGAÇÃO,True,True,1,21.0,4
+2026-11-08 15:40:18,pergunta,preciso agendar interprete de libras pra minha tia idosa,8,ALTA,True,True,1,14.3,5
+2026-11-08 15:42:51,pergunta,energia solar compartilhada funciona pra quem mora de aluguel?,12,ALTA,True,True,1,19.7,5
+2026-11-08 15:45:29,pergunta,onde faco passaporte ou visto pra viajar pra fora?,,NÃO ENCONTRADA,False,False,2,26.5,4

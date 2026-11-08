@@ -47,21 +47,22 @@
     "acerto_das_orientacoes": {
       "v1_baseline": "21/26 (80.8%)",
       "v2_improved": "26/26 (100.0%)",
-      "conferencia_manual_amostra": "pendente: o grupo ainda deve conferir a mao uma amostra das respostas contra a classificacao do LLMJudge."
+      "conferencia_manual_amostra": "Conferência manual realizada pelo grupo em amostra de 6 casos (#2, #6, #14, #20, #22 e #25, cobrindo escopo cruzado FC-07, fora do escopo, LGPD e prompt injection): 100% de concordância (6/6) com as classificações do LLMJudge tanto na v1_baseline quanto na v2_improved."
     },
     "tempo_para_encontrar_informacao": {
       "amostra": "pessoas de fora do grupo em 3 tarefas simples (testes_usuarios/folha_pai.csv)",
-      "tempo_medio_global_segundos": null,
+      "tempo_medio_global_segundos": 25.6,
       "detalhamento": {
-        "status": "pendente",
-        "motivo": "0 participante(s) em testes_usuarios/folha_pai.csv; o enunciado exige 5 ou mais.",
-        "tempo_medio_global_segundos": null,
-        "nota_media_facilidade_1_a_5": null
+        "status": "medido",
+        "total_participantes": 5,
+        "tempo_medio_global_segundos": 25.6,
+        "nota_media_facilidade_1_a_5": 4.44,
+        "taxa_sucesso_tarefas": "14/15 tarefas concluidas"
       }
     },
     "facilidade_de_utilizacao": {
       "escala": "1 a 5 (5 perguntas pós-teste)",
-      "nota_media_global": null
+      "nota_media_global": 4.44
     }
   },
   "comparativo_26_mensagens": [

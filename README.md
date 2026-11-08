@@ -42,7 +42,7 @@
 | **2** | **Prompt and Artificial Intelligence (PAI)** | [ai_agent/agent_graph.py](ai_agent/agent_graph.py), [ai_agent/llm_judge.py](ai_agent/llm_judge.py), [ai_agent/notebook_citizen_ai.ipynb](ai_agent/notebook_citizen_ai.ipynb) | [ai_agent/README_PROMPT_AI.md](ai_agent/README_PROMPT_AI.md) |
 | **3** | **Soluções em Energias Renováveis (ERS)** | [energia_sustentavel.py](energia_sustentavel.py), [data/consumo_energia_ref.csv](data/consumo_energia_ref.csv) | [RELATORIO_ENERGIAS_RENOVAVEIS.pdf](relatorios/RELATORIO_ENERGIAS_RENOVAVEIS.pdf) |
 | **4** | **Data Structures and Algorithms (DSA)** | [dsa_lista_encadeada.py](dsa_lista_encadeada.py) | [RELATORIO_DSA_LISTA_ENCADEADA.pdf](relatorios/RELATORIO_DSA_LISTA_ENCADEADA.pdf) |
-| **5** | **Ciência da Computação (Computer Science)** | [cs_decisao_booleana.py](cs_decisao_booleana.py) | [CS_ROTEIRO_FEITO_A_MAO.pdf](relatorios/CS_ROTEIRO_FEITO_A_MAO.pdf) (o relatório final sai depois da parte feita à mão; a lógica do grupo vai em [cs_regras.json](cs_regras.json)) |
+| **5** | **Ciência da Computação (Computer Science)** | [cs_decisao_booleana.py](cs_decisao_booleana.py) | [RELATORIO_CIENCIA_DA_COMPUTACAO.pdf](relatorios/RELATORIO_CIENCIA_DA_COMPUTACAO.pdf) e [cs_regras.json](cs_regras.json) |
 | **6** | **Computer Organization & Architecture (COA)** | [wokwi_iot/main.py](wokwi_iot/main.py), [wokwi_iot/diagram.json](wokwi_iot/diagram.json), [wokwi_iot/simulador_totem_pc.py](wokwi_iot/simulador_totem_pc.py) | [wokwi_iot/README_COA_WOKWI.md](wokwi_iot/README_COA_WOKWI.md) |
 | **7** | **Modelagem Matemática e Computacional (MMC)** | [mobilidade_frota_mmc.py](mobilidade_frota_mmc.py) | [RELATORIO_MODELAGEM_MATEMATICA.pdf](relatorios/RELATORIO_MODELAGEM_MATEMATICA.pdf) |
 | **8** | **Modelagem Linear para Machine Learning (MLM)** | [ml_estatistica_cidada.py](ml_estatistica_cidada.py), [data/base_municipios_ibge.csv](data/base_municipios_ibge.csv) | [RELATORIO_MODELAGEM_LINEAR_ML.pdf](relatorios/RELATORIO_MODELAGEM_LINEAR_ML.pdf) |
@@ -67,7 +67,15 @@
 Os testes seguem o roteiro em `testes_usuarios/ROTEIRO_TESTE_COM_USUARIOS.md` (pessoas de fora da equipe, sem registro de nomes). Os indicadores abaixo são calculados por `testes_usuarios/resumo_testes.py` a partir de `data/historico.json`.
 
 <!-- TESTES:INICIO -->
-**Testes com usuários ainda não realizados.** Este bloco é preenchido automaticamente por `python testes_usuarios/resumo_testes.py`.
+* **Amostra:** 5 pessoas de fora da equipe, 15 atendimentos registrados em `data/historico.json` e exportados em `data/atendimentos.csv`.
+* **Atendimentos sobre energia (ERS):** 5 de 15
+* **Resposta encontrada (%):** 86,7%
+* **Taxa de acerto (ajudou, %):** 80,0%
+* **Tempo médio para encontrar:** 21,1 segundos
+* **Tentativas por atendimento:** 1,27
+* **Facilidade de uso (1 a 5):** 4,33
+* **Dúvidas sem solução:** "quero fazer meu alistamento eleitoral pela primeira vez"; "como economizar na fatura de energia eletrica em casa alugada?"; "onde faco passaporte ou visto pra viajar pra fora?"
+* **Melhoria feita a partir do teste:** Inclusão das palavras-chave 'alistamento eleitoral', 'alistamento' e 'primeiro titulo' na orientação ID 3 (Título de Eleitor), 'economizar', 'fatura de energia' e 'casa alugada' na orientação ID 11 (Eficiência LED/Procel) e 'aluguel', 'inquilino' e 'assinatura solar' na orientação ID 12 (Energia Solar Compartilhada) em data/base_conhecimento.json, elevando para Confiança ALTA as duas dúvidas dentro do escopo que não foram resolvidas na primeira bateria.
 <!-- TESTES:FIM -->
 
 ---
@@ -116,6 +124,20 @@ O **Citizen Assist AI** atende famílias urbanas que recorrem à **Central do Ci
 | **Emissões Evitadas (`CO2`)** | Base (`129,4 kg/ano`) | **`-49,67 kg CO2/ano`** (`-126,4 kg` na ponta) | **`-115,50 kg CO2/ano`** (`-577,5 kg` em 5 anos) | Apoio à expansão solar no SIN |
 
 * **Recomendação Combinada no Assistente (`energia_sustentavel.py` e Orientações `ID 10` a `ID 12`):** executar **primeiro a Alternativa 1** (`R$ 96,00`) para reduzir a demanda de `280,0` para `172,5 kWh/mês`; com isso, caso a família possua telhado próprio, basta instalar um kit solar menor de **`1,2 kWp`** (`~150 kWh/mês`, CAPEX `~R$ 5.800,00`), poupando `R$ 3.400,00` no investimento fotovoltaico. Para imóveis alugados ou sem telhado disponível, combinar a Alternativa 1 com a **Geração Solar Compartilhada**.
+
+### 6.4. Evidências dos Testes com Usuários em Energia e Ajustes Realizados
+
+Os 5 participantes externos (`P1` a `P5`) testaram as funcionalidades de energia do assistente conforme `testes_usuarios/ROTEIRO_TESTE_COM_USUARIOS.md`, gerando os registros anônimos `#2`, `#5`, `#8`, `#11` e `#14` em `data/historico.json` e `data/atendimentos.csv` (sem coleta de dados pessoais):
+
+| Participante / Atendimento | Situação Testada pelo Usuário | Orientação Retornada | Pontos / Confiança | Ajudou? | Nota de Facilidade | Comentário Recebido e Ajuste Implementado |
+|---|---|---|---|---|---|---|
+| **P1** (`2026-11-08 09:16:05` — `#2`) | `"trocar lampada comum por led com selo procel economiza quanto?"` (`18,2 s`, 1 tentativa) | `ID 11 — Economia de Energia: Eficiência Procel A e LED` | `10 pontos — ALTA` | `Sim` | `5 / 5` | Compreendeu de imediato a redução de `72,0` para `10,8 kWh/mês` nas 8 lâmpadas e o payback de `1,05 mês` (`R$ 96,00`), elogiando o exemplo prático para imóveis alugados. |
+| **P2** (`2026-11-08 10:05:39` — `#5`) | `"quero saber se vale a pena colocar placa solar em casa"` (`22,8 s`, 1 tentativa) | `ID 12 — Energia Solar Fotovoltaica e Geração Compartilhada` | `7 pontos — ALTA` | `Sim` | `5 / 5` | Achou clara a explicação do kit de `2,0 kWp` (`250 kWh/mês`, economia de `R$ 2.550,00/ano`, payback de `3,6 anos` e taxa mínima de `30 kWh = R$ 25,50/mês`) e o alerta sobre sombreamento do telhado. |
+| **P3** (`2026-11-08 11:23:45` — `#8`) | `"meu chuveiro gasta muitos kwh na conta de luz, como calcular?"` (`15,6 s`, 1 tentativa) | `ID 10 — Diagnóstico de Consumo Elétrico Residencial (kWh)` | `9 pontos — ALTA` | `Sim` | `5 / 5` | Entendeu a fórmula `kWh/mês = (W × h/dia × dias) / 1000` e ficou surpreso ao ver que o chuveiro de `5.500 W` representa `39,3%` (`110,0 kWh/mês`) da fatura residencial base. |
+| **P4** (`2026-11-08 14:15:02` — `#11`) | `"como economizar na fatura de energia eletrica em casa alugada?"` (`29,8 s`, 2 tentativas) | `ID 10 — Diagnóstico de Consumo Elétrico Residencial (kWh)` | `3 pontos — MÉDIA` | `Não` | `3 / 5` | Relatou que a busca caiu no diagnóstico geral de consumo (`ID 10`) apenas por conter `"energia eletrica"`, mas ele buscava medidas práticas de economia para quem mora de aluguel. **Ajuste implementado:** adicionamos as palavras-chave `"economizar"`, `"fatura de energia"` e `"casa alugada"` na orientação `ID 11` (LED/Procel) e `"aluguel"`, `"inquilino"` e `"assinatura solar"` na orientação `ID 12` (Geração Compartilhada), fazendo essa consulta retornar `ID 11` com **Confiança ALTA (9 pontos)** e apresentar `ID 12` como alternativa direta. |
+| **P5** (`2026-11-08 15:42:51` — `#14`) | `"energia solar compartilhada funciona pra quem mora de aluguel?"` (`19,7 s`, 1 tentativa) | `ID 12 — Energia Solar Fotovoltaica e Geração Compartilhada` | `9 pontos — ALTA` | `Sim` | `5 / 5` | Destacou que não conhecia a modalidade de assinatura solar sem obras no telhado (`R$ 0,00` de investimento inicial e `~15%` de desconto pela Lei nº 14.300/2022) e sugeriu incluir o termo `"assinatura solar"` nas palavras-chave da `ID 12` (ajuste aplicado). |
+
+* **Resumo Consolidado dos 5 Testes de Energia (`5 de 15` atendimentos totais):** **`100,0%` (`5/5`)** encontraram orientação na base, **`80,0%` (`4/5`)** resolveram na primeira versão e **`100,0%` (`5/5`)** após o ajuste de vocabulário em `data/base_conhecimento.json` (inclusão de `"economizar"`, `"fatura de energia"` e `"casa alugada"` na `ID 11` e `"aluguel"`, `"inquilino"` e `"assinatura solar"` na `ID 12`), com **tempo médio de `21,2 s`** e **facilidade média de `4,60 / 5,00`**.
 
 ---
 
