@@ -103,7 +103,7 @@ flowchart TD
 - [README_COA_WOKWI.md](file:///d:/M%20Drive/Meu%20Drive/FIAP/Global%20Solution%202/wokwi_iot/README_COA_WOKWI.md): Documentação técnica completa nas 4 etapas da rubrica de COA.
 
 ### 3.2. Como Executar no Simulador Wokwi
-1. Acesse o template oficial de MicroPython para Raspberry Pi Pico no Wokwi: `https://wokwi.com/projects/new/micropython-pi-pico`
+1. Acesse diretamente o projeto público salvo no Wokwi: [https://wokwi.com/projects/480088937104796673](https://wokwi.com/projects/480088937104796673) *(ou o template oficial `https://wokwi.com/projects/new/micropython-pi-pico`)*
 2. Na aba **`main.py`**, cole o conteúdo integral de [main.py](file:///d:/M%20Drive/Meu%20Drive/FIAP/Global%20Solution%202/wokwi_iot/main.py).
 3. Na aba **`diagram.json`**, cole o conteúdo integral de [diagram.json](file:///d:/M%20Drive/Meu%20Drive/FIAP/Global%20Solution%202/wokwi_iot/diagram.json).
 4. Clique no botão verde **Start the simulation (Play)**:
@@ -143,5 +143,5 @@ python wokwi_iot/simulador_totem_pc.py
 - **Integrantes do Grupo (Turma 1CC — FIAP):**
   - **Luiz** *(Responsável pela Frente A: Arquitetura Embarcada MicroPython, Integração IoT e Demonstração de Filas)*
   - **Ana** *(Responsável pela Frente B e Coapresentação: Diagnóstico Urbano, Sensoriamento Ambiental e Demonstração DHT22)*
-- **Link do Projeto no Wokwi:** `[Inserir Link Público do Projeto Salvo no Wokwi antes do envio no Portal]`
+- **Link do Projeto no Wokwi:** [https://wokwi.com/projects/480088937104796673](https://wokwi.com/projects/480088937104796673)
 - **Link do Vídeo Demonstrativo (YouTube Não Listado):** `[Inserir Link do YouTube Não Listado antes do envio no Portal]`
