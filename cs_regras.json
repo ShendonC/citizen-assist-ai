@@ -1,10 +1,30 @@
 {
   "situacao": "Triagem do atendimento presencial de segunda via da Carteira de Identidade (RG) no Posto de Identificação de Aurora.",
   "variaveis": [
-    {"nome": "A", "descricao": "Agendamento e pagamento", "significado_0": "sem agendamento no portal ou guia de R$ 38,00 não paga", "significado_1": "agendado no portal e guia de R$ 38,00 paga"},
-    {"nome": "B", "descricao": "Documentos", "significado_0": "falta algum documento obrigatório", "significado_1": "tem certidão (original ou cópia autenticada), comprovante de residência dos últimos 90 dias e boletim de ocorrência (roubo ou furto) ou declaração de extravio (perda)"},
-    {"nome": "C", "descricao": "Idade", "significado_0": "menor de 12 anos", "significado_1": "12 anos ou mais"},
-    {"nome": "D", "descricao": "Responsável legal", "significado_0": "sem responsável legal junto", "significado_1": "com responsável legal, com documento original com foto"}
+    {
+      "nome": "A",
+      "descricao": "Agendamento e pagamento",
+      "significado_0": "sem agendamento no portal ou guia de R$ 38,00 não paga",
+      "significado_1": "agendado no portal e guia de R$ 38,00 paga"
+    },
+    {
+      "nome": "B",
+      "descricao": "Documentos",
+      "significado_0": "falta algum documento obrigatório",
+      "significado_1": "tem certidão (original ou cópia autenticada), comprovante de residência dos últimos 90 dias e boletim de ocorrência (roubo ou furto) ou declaração de extravio (perda)"
+    },
+    {
+      "nome": "C",
+      "descricao": "Idade",
+      "significado_0": "menor de 12 anos",
+      "significado_1": "12 anos ou mais"
+    },
+    {
+      "nome": "D",
+      "descricao": "Responsável legal",
+      "significado_0": "sem responsável legal junto",
+      "significado_1": "com responsável legal, com documento original com foto"
+    }
   ],
   "saida": {
     "nome": "S",
@@ -12,10 +32,20 @@
     "orientacao_0": "Ainda há pendência. Confira o agendamento e a guia paga, os documentos e, para menores de 12 anos, o responsável legal. Detalhes nas fichas FC-01 e FC-07 ou no canal oficial."
   },
   "fontes": [
-    {"descricao": "Central do Cidadão de Aurora, ficha FC-01 (RG, primeira e segunda via), versão de 01/10/2026", "consultado_em": "07/11/2026"},
-    {"descricao": "Central do Cidadão de Aurora, ficha FC-07 (regras gerais de atendimento), versão de 01/10/2026", "consultado_em": "07/11/2026"}
+    {
+      "descricao": "Central do Cidadão de Aurora, ficha FC-01 (RG, primeira e segunda via), versão de 01/10/2026",
+      "consultado_em": "07/11/2026"
+    },
+    {
+      "descricao": "Central do Cidadão de Aurora, ficha FC-07 (regras gerais de atendimento), versão de 01/10/2026",
+      "consultado_em": "07/11/2026"
+    }
   ],
-  "mintermos": null,
-  "expr_simplificada": null,
-  "expr_de_morgan": null
+  "mintermos": [
+    13,
+    14,
+    15
+  ],
+  "expr_simplificada": "A and B and (C or D)",
+  "expr_de_morgan": "not (not A or not B or (not C and not D))"
 }
