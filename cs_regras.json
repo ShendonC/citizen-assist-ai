@@ -39,6 +39,18 @@
     {
       "descricao": "Central do Cidadão de Aurora, ficha FC-07 (regras gerais de atendimento), versão de 01/10/2026",
       "consultado_em": "07/11/2026"
+    },
+    {
+      "descricao": "Portal Gov.br — Carteira de Identidade Nacional (CIN), Lei Federal nº 7.116/1983 e Decreto nº 10.977/2022 (regras de emissão, certidão original/autenticada e 2ª via): https://www.gov.br/governodigital/pt-br/identidade/identificacao-do-cidadao-e-carteira-de-identidade-nacional",
+      "consultado_em": "07/11/2026"
+    },
+    {
+      "descricao": "Portal Poupatempo SP / Instituto de Identificação Ricardo Gumbleton Daunt (IIRGD) — Agendamento prévio obrigatório, guia de 2ª via do RG e acompanhamento presencial de menores de 12 anos por responsável legal: https://www.poupatempo.sp.gov.br/",
+      "consultado_em": "07/11/2026"
+    },
+    {
+      "descricao": "Estatuto da Criança e do Adolescente (ECA — Lei Federal nº 8.069/1990, art. 2º: conceito legal de criança até 12 anos incompletos) e LGPD (Lei Federal nº 13.709/2018, art. 6º, III: princípio da necessidade/minimização de dados): https://www.planalto.gov.br/ccivil_03/leis/l8069.htm",
+      "consultado_em": "07/11/2026"
     }
   ],
   "mintermos": [
