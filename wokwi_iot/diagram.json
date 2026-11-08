@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "author": "Equipe Citizen Assist AI - FIAP 1CC (GS 2026.2)",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-pi-pico",
+      "id": "pico",
+      "top": 0,
+      "left": 0,
+      "attrs": {
+        "env": "micropython-20231227-v1.22.0"
+      }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_normal",
+      "top": 220,
+      "left": -175,
+      "attrs": {
+        "color": "green",
+        "label": "Entrada Fila Normal (GP14)"
+      }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_prio",
+      "top": 290,
+      "left": -175,
+      "attrs": {
+        "color": "blue",
+        "label": "Entrada Prioritaria FC-07 (GP15)"
+      }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_chamar",
+      "top": 220,
+      "left": 155,
+      "attrs": {
+        "color": "yellow",
+        "label": "Guiche Chamar Proximo (GP16)"
+      }
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": -15,
+      "left": 165,
+      "attrs": {
+        "temperature": "24.5",
+        "humidity": "55.0"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_verde",
+      "top": 75,
+      "left": -210,
+      "attrs": {
+        "color": "green",
+        "label": "Livre / Normal (GP10)"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_amarelo",
+      "top": 120,
+      "left": -210,
+      "attrs": {
+        "color": "yellow",
+        "label": "Moderada / Atencao (GP11)"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_vermelho",
+      "top": 165,
+      "left": -210,
+      "attrs": {
+        "color": "red",
+        "label": "Lotado / Alerta >28C (GP12)"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_verde",
+      "top": 100,
+      "left": -125,
+      "attrs": {
+        "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_amarelo",
+      "top": 145,
+      "left": -125,
+      "attrs": {
+        "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_vermelho",
+      "top": 190,
+      "left": -125,
+      "attrs": {
+        "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz1",
+      "top": 105,
+      "left": 165,
+      "attrs": {
+        "volume": "0.6",
+        "label": "Acessibilidade Sonora (GP18)"
+      }
+    }
+  ],
+  "connections": [
+    [ "pico:GP0", "$serialMonitor:RX", "", [] ],
+    [ "pico:GP1", "$serialMonitor:TX", "", [] ],
+    [ "btn_normal:1.r", "pico:GP14", "green", [ "h20", "v-15" ] ],
+    [ "btn_normal:2.r", "pico:GND.4", "black", [ "h30", "v-35" ] ],
+    [ "btn_prio:1.r", "pico:GP15", "blue", [ "h25", "v-50" ] ],
+    [ "btn_prio:2.r", "pico:GND.4", "black", [ "h35", "v-85" ] ],
+    [ "btn_chamar:1.l", "pico:GP16", "gold", [ "h-20", "v-10" ] ],
+    [ "btn_chamar:2.l", "pico:GND.5", "black", [ "h-30", "v-35" ] ],
+    [ "dht1:VCC", "pico:3V3", "red", [ "v20", "h-45" ] ],
+    [ "dht1:SDA", "pico:GP22", "cyan", [ "v30", "h-55" ] ],
+    [ "dht1:GND", "pico:GND.6", "black", [ "v40", "h-65" ] ],
+    [ "pico:GP10", "r_verde:2", "green", [ "h-15" ] ],
+    [ "r_verde:1", "led_verde:A", "green", [ "h-15" ] ],
+    [ "led_verde:C", "pico:GND.3", "black", [ "v15", "h110" ] ],
+    [ "pico:GP11", "r_amarelo:2", "yellow", [ "h-15" ] ],
+    [ "r_amarelo:1", "led_amarelo:A", "yellow", [ "h-15" ] ],
+    [ "led_amarelo:C", "pico:GND.3", "black", [ "v15", "h110" ] ],
+    [ "pico:GP12", "r_vermelho:2", "red", [ "h-15" ] ],
+    [ "r_vermelho:1", "led_vermelho:A", "red", [ "h-15" ] ],
+    [ "led_vermelho:C", "pico:GND.4", "black", [ "v15", "h110" ] ],
+    [ "pico:GP18", "bz1:2", "purple", [ "h25", "v-20" ] ],
+    [ "pico:GND.5", "bz1:1", "black", [ "h35", "v-15" ] ]
+  ],
+  "dependencies": {}
+}

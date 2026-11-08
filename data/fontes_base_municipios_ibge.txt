@@ -1,0 +1,10 @@
+﻿Base de dados: base_municipios_ibge.csv
+Fonte: IBGE, API de Dados Agregados (SIDRA). Consultado em 07/11/2026.
+Cada URL abaixo foi consultada para os 5.570 municipios (N6[all]):
+
+https://servicodados.ibge.gov.br/api/v3/agregados/4714/periodos/2022/variaveis/93|6318|614?localidades=N6[all]
+https://servicodados.ibge.gov.br/api/v3/agregados/9922/periodos/2022/variaveis/5930?localidades=N6[all]&classificacao=1[6795]
+https://servicodados.ibge.gov.br/api/v3/agregados/9543/periodos/2022/variaveis/2513?localidades=N6[all]&classificacao=2[6794]|86[95251]|287[100362]
+https://servicodados.ibge.gov.br/api/v3/agregados/9515/periodos/2022/variaveis/10612|10613?localidades=N6[all]
+https://servicodados.ibge.gov.br/api/v3/agregados/9936/periodos/2022/variaveis/381?localidades=N6[all]&classificacao=2072[77584,77585]|63[95826]|125[2932]
+https://servicodados.ibge.gov.br/api/v3/agregados/5938/periodos/2022/variaveis/37?localidades=N6[all]

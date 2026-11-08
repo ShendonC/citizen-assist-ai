@@ -1,0 +1,281 @@
+[
+  {
+    "id": 1,
+    "categoria": "Documentos",
+    "titulo": "Carteira de Identidade (RG): 1ª e 2ª via",
+    "palavras_chave": [
+      "rg",
+      "identidade",
+      "segunda via",
+      "carteira de identidade",
+      "extravio",
+      "primeira via",
+      "perdi",
+      "roubaram",
+      "posto de identificacao"
+    ],
+    "resposta": "A 1ª via do RG é gratuita. A 2ª via custa R$ 38,00, paga por guia gerada no portal da Central do Cidadão. O agendamento pelo portal é obrigatório e a carteira fica pronta em 10 dias úteis após o atendimento no Posto de Identificação. Qualquer pessoa pode solicitar; menores de 12 anos devem ir acompanhados de um responsável legal com documento original com foto. Em caso de roubo ou furto, apresente o boletim de ocorrência; em caso de perda, basta assinar a declaração de extravio no próprio balcão (o boletim de ocorrência não é exigido).",
+    "documentos": [
+      "Certidão de nascimento ou de casamento (original ou cópia autenticada)",
+      "Comprovante de residência dos últimos 90 dias",
+      "Boletim de ocorrência (em caso de roubo ou furto) ou Declaração de extravio assinada no balcão (em caso de perda)",
+      "Documento original com foto do responsável legal (obrigatório para menores de 12 anos)"
+    ],
+    "onde": "Posto de Identificação de Aurora (mediante agendamento obrigatório no portal da Central do Cidadão)",
+    "fonte": "Central do Cidadão de Aurora, ficha FC-01 (versão de 01/10/2026)",
+    "verificado_em": "2026-11-06"
+  },
+  {
+    "id": 2,
+    "categoria": "Documentos",
+    "titulo": "CPF: Inscrição, Regularização e 2ª via",
+    "palavras_chave": [
+      "cpf",
+      "cadastro de pessoa fisica",
+      "inscricao cpf",
+      "comprovante cpf",
+      "inscricao",
+      "regularizar",
+      "comprovante",
+      "correcao de dados"
+    ],
+    "resposta": "A inscrição e a correção de dados do CPF pelo portal da Central do Cidadão são gratuitas. No atendimento presencial de balcão há taxa de R$ 7,00. Não é necessário agendamento prévio e o comprovante de inscrição fica disponível no portal em até 2 dias úteis. Atenção: a Central do Cidadão nunca pede o número do seu CPF por chat, telefone ou mensagem.",
+    "documentos": [
+      "Documento original com foto",
+      "Certidão de nascimento ou de casamento",
+      "Documento com foto do responsável legal (para menores de 12 anos)"
+    ],
+    "onde": "Portal da Central do Cidadão (gratuito) ou balcão de atendimento de Aurora (taxa de R$ 7,00)",
+    "fonte": "Central do Cidadão de Aurora, ficha FC-02 (versão de 01/10/2026)",
+    "verificado_em": "2026-11-06"
+  },
+  {
+    "id": 3,
+    "categoria": "Documentos",
+    "titulo": "Título de Eleitor: Emissão e Transferência",
+    "palavras_chave": [
+      "titulo",
+      "titulo de eleitor",
+      "votar",
+      "zona eleitoral",
+      "transferencia",
+      "voto",
+      "eleicao"
+    ],
+    "resposta": "A primeira via, a segunda via e a transferência do Título de Eleitor são gratuitas. O voto é obrigatório de 18 a 69 anos e facultativo para jovens de 16 ou 17 anos e maiores de 70 anos. O título digital é entregue em até 5 dias úteis. Atenção: o cadastro eleitoral é fechado 150 dias antes de cada eleição; pedidos feitos após esse prazo só valem para a eleição seguinte.",
+    "documentos": [
+      "Documento original com foto",
+      "Comprovante de residência dos últimos 90 dias (obrigatório na transferência)"
+    ],
+    "onde": "Portal da Central do Cidadão ou balcão da Central Eleitoral de Aurora",
+    "fonte": "Central do Cidadão de Aurora, ficha FC-03 (versão de 01/10/2026)",
+    "verificado_em": "2026-11-06"
+  },
+  {
+    "id": 4,
+    "categoria": "Documentos",
+    "titulo": "Certidões de Nascimento, Casamento e Óbito",
+    "palavras_chave": [
+      "certidao",
+      "certidao de nascimento",
+      "casamento",
+      "obito",
+      "cartorio",
+      "baixa renda",
+      "segunda via certidao"
+    ],
+    "resposta": "A emissão de cada certidão custa R$ 49,00 pelo portal em PDF (pronta em 3 dias úteis) ou R$ 55,00 no balcão do Cartório Central de Aurora (pronta em 5 dias úteis). Quem comprovar baixa renda no balcão fica isento da taxa. Não é necessário agendamento. O pedido pode ser feito pela própria pessoa ou por terceiros com procuração simples.",
+    "documentos": [
+      "Documento original com foto de quem solicita",
+      "Dados do registro (nome do registrado e data do evento)",
+      "Procuração simples e documento original com foto do terceiro (se solicitado por outra pessoa)"
+    ],
+    "onde": "Portal da Central do Cidadão (PDF) ou balcão do Cartório Central de Aurora",
+    "fonte": "Central do Cidadão de Aurora, ficha FC-05 (versão de 01/10/2026)",
+    "verificado_em": "2026-11-06"
+  },
+  {
+    "id": 5,
+    "categoria": "Trabalho e Mobilidade",
+    "titulo": "Carteira de Trabalho Digital (CTPS)",
+    "palavras_chave": [
+      "carteira de trabalho",
+      "ctps",
+      "primeiro emprego",
+      "trabalho digital",
+      "emprego",
+      "trabalho"
+    ],
+    "resposta": "A Carteira de Trabalho Digital (CTPS) é gratuita em qualquer canal e não exige agendamento. A versão digital fica disponível imediatamente após o cadastro no portal ou no aplicativo da Central do Cidadão; no balcão presencial, o atendimento também é imediato. Menores de 18 anos devem estar acompanhados de um responsável legal.",
+    "documentos": [
+      "CPF",
+      "Documento original com foto",
+      "Documento e presença de responsável legal (para menores de 18 anos)"
+    ],
+    "onde": "Portal ou aplicativo da Central do Cidadão, ou balcão de atendimento de Aurora",
+    "fonte": "Central do Cidadão de Aurora, ficha FC-04 (versão de 01/10/2026)",
+    "verificado_em": "2026-11-06"
+  },
+  {
+    "id": 6,
+    "categoria": "Trabalho e Mobilidade",
+    "titulo": "CNH: Renovação, Prazos e Exame Médico",
+    "palavras_chave": [
+      "cnh",
+      "carteira de motorista",
+      "habilitacao",
+      "renovar cnh",
+      "exame medico",
+      "renovar",
+      "renovacao",
+      "vencida"
+    ],
+    "resposta": "A taxa de renovação da CNH é de R$ 180,00 (o exame médico é pago à parte na clínica credenciada). O agendamento no portal é obrigatório e a nova CNH fica pronta em 7 dias úteis após aprovação no exame médico. Pode ser renovada a partir de 30 dias antes do vencimento. Com CNH vencida há mais de 30 dias não é permitido dirigir; vencida há mais de 5 anos exige refazer curso e prova. Validade: 10 anos (até 49 anos), 5 anos (50 a 69 anos) e 3 anos (70 anos ou mais).",
+    "documentos": [
+      "CNH atual (ou documento original com foto, se perdida)",
+      "Comprovante de residência dos últimos 90 dias",
+      "Laudo do exame médico da clínica credenciada"
+    ],
+    "onde": "Clínica credenciada e Posto da Central do Cidadão de Aurora (mediante agendamento no portal)",
+    "fonte": "Central do Cidadão de Aurora, ficha FC-06 (versão de 01/10/2026)",
+    "verificado_em": "2026-11-06"
+  },
+  {
+    "id": 7,
+    "categoria": "Atendimento e Direitos",
+    "titulo": "Agendamento, Horários e Pagamento de Taxas",
+    "palavras_chave": [
+      "agendamento",
+      "horario",
+      "sabado",
+      "pagamento",
+      "pix",
+      "boleto",
+      "taxa",
+      "segunda a sexta"
+    ],
+    "resposta": "O atendimento presencial funciona de segunda a sexta, das 8h às 17h (não há expediente aos sábados, domingos e feriados). O agendamento é obrigatório para RG (FC-01) e CNH (FC-06), sendo dispensado para CPF, Carteira de Trabalho digital, certidões e título de eleitor. Todas as taxas são pagas por guia gerada no portal, em banco ou por PIX, com confirmação em até 2 dias úteis.",
+    "documentos": [
+      "Documento original com foto (fotocópias simples não são aceitas; certidões aceitam cópia autenticada)",
+      "Guia de pagamento emitida no portal e comprovante de quitação (quando houver taxa)"
+    ],
+    "onde": "Portal da Central do Cidadão e Balcão Presencial de Aurora (segunda a sexta, das 8h às 17h)",
+    "fonte": "Central do Cidadão de Aurora, ficha FC-07 (versão de 01/10/2026)",
+    "verificado_em": "2026-11-06"
+  },
+  {
+    "id": 8,
+    "categoria": "Atendimento e Direitos",
+    "titulo": "Acessibilidade, Prioridade e Intérprete de Libras",
+    "palavras_chave": [
+      "libras",
+      "interprete",
+      "prioridade",
+      "idoso",
+      "gestante",
+      "deficiencia",
+      "acessibilidade",
+      "atendimento prioritario"
+    ],
+    "resposta": "Têm direito a atendimento prioritário pessoas com 60 anos ou mais, gestantes e pessoas com deficiência (PcD). O serviço de Intérprete de Libras está disponível gratuitamente mediante agendamento prévio com pelo menos 48 horas de antecedência no portal da Central do Cidadão.",
+    "documentos": [
+      "Documento original com foto",
+      "Protocolo de solicitação de intérprete de Libras com 48h de antecedência (quando aplicável)"
+    ],
+    "onde": "Guichê de Atendimento Prioritário da Central do Cidadão de Aurora",
+    "fonte": "Central do Cidadão de Aurora, ficha FC-07 (versão de 01/10/2026)",
+    "verificado_em": "2026-11-06"
+  },
+  {
+    "id": 9,
+    "categoria": "Atendimento e Direitos",
+    "titulo": "Atendimento por Procuração (Terceiros) e Menores",
+    "palavras_chave": [
+      "procuracao",
+      "terceiros",
+      "outra pessoa",
+      "menor de idade",
+      "responsavel",
+      "representante",
+      "menor"
+    ],
+    "resposta": "O atendimento por terceiros é permitido mediante apresentação de procuração simples e documento original com foto do representante. Para menores de 12 anos (RG, CPF e regra geral), o responsável legal deve comparecer presencialmente com a criança portando documento original com foto. Para Carteira de Trabalho (FC-04), menores de 18 anos devem ir acompanhados do responsável legal.",
+    "documentos": [
+      "Procuração simples assinada pelo titular (para atendimento por terceiros)",
+      "Documento original com foto do terceiro ou do responsável legal",
+      "Certidão ou documento original do menor acompanhado"
+    ],
+    "onde": "Balcão de Atendimento da Central do Cidadão de Aurora",
+    "fonte": "Central do Cidadão de Aurora, ficha FC-07 (versão de 01/10/2026)",
+    "verificado_em": "2026-11-06"
+  },
+  {
+    "id": 10,
+    "categoria": "Energia e Sustentabilidade",
+    "titulo": "Diagnóstico de Consumo Elétrico Residencial (kWh)",
+    "palavras_chave": [
+      "conta de luz",
+      "consumo",
+      "kwh",
+      "chuveiro",
+      "geladeira",
+      "desperdicio",
+      "energia eletrica",
+      "aparelho"
+    ],
+    "resposta": "Na residência-tipo de Aurora (4 moradores, consumo base de 280,0 kWh/mês e fatura de R$ 238,00/mês à tarifa de R$ 0,85/kWh), o consumo divide-se em: Chuveiro elétrico 5500W (110,0 kWh/mês, 39,3%), Iluminação com 8 lâmpadas de 60W por 5h/dia (72,0 kWh/mês, 25,7%), Geladeira 1 porta antiga (50,0 kWh/mês, 17,9%) e demais aparelhos (48,0 kWh/mês, 17,1%). Fórmula: kWh/mês = (Potência W × horas/dia × dias) / 1000. Os valores são estimativas técnicas que variam conforme o hábito familiar e bandeiras tarifárias.",
+    "documentos": [
+      "Fatura recente de energia elétrica (histórico de consumo em kWh e tarifa aplicada)",
+      "Levantamento de potência (W) e tempo de uso diário dos equipamentos"
+    ],
+    "onde": "Módulo de Simulação Energética do Citizen Assist AI e Balcão Socioambiental da Central de Aurora",
+    "fonte": "ANEEL / Procel-INMETRO / EPE — Estudo Técnico ERS-01 (2026)",
+    "verificado_em": "2026-11-06"
+  },
+  {
+    "id": 11,
+    "categoria": "Energia e Sustentabilidade",
+    "titulo": "Economia de Energia: Eficiência Procel A e LED",
+    "palavras_chave": [
+      "economia de energia",
+      "lampada led",
+      "selo procel",
+      "eficiencia energetica",
+      "reduzir conta",
+      "led",
+      "procel"
+    ],
+    "resposta": "A Alternativa 1 (Retrofit de Eficiência Energética) substitui 8 lâmpadas de 60W por LEDs de 9W Procel A (reduzindo de 72,0 para 10,8 kWh/mês, economia de 61,2 kWh/mês) e ajusta o chuveiro para o modo Verão 3200W (reduzindo de 110,0 para 63,7 kWh/mês, economia de 46,3 kWh/mês). O consumo cai de 280,0 para 172,5 kWh/mês (-107,5 kWh/mês), reduzindo a conta de R$ 238,00 para R$ 146,63/mês (economia de R$ 1.096,50/ano). Com investimento de R$ 96,00 (8 LEDs a R$ 12,00), o retorno (payback) ocorre em 1,05 mês, sendo viável inclusive em imóveis alugados.",
+    "documentos": [
+      "Conta de luz atual para comparação antes e depois",
+      "Especificação de lâmpadas LED 9W certificadas com Selo Procel A / INMETRO"
+    ],
+    "onde": "Módulo de Simulação Energética do Citizen Assist AI e comércio credenciado Procel/INMETRO",
+    "fonte": "Procel / INMETRO / ANEEL — Estudo Técnico ERS-02 (2026)",
+    "verificado_em": "2026-11-06"
+  },
+  {
+    "id": 12,
+    "categoria": "Energia e Sustentabilidade",
+    "titulo": "Energia Solar Fotovoltaica e Geração Compartilhada",
+    "palavras_chave": [
+      "energia solar",
+      "painel solar",
+      "fotovoltaica",
+      "renovavel",
+      "geracao distribuida",
+      "placa solar",
+      "solar",
+      "energia renovavel"
+    ],
+    "resposta": "A Alternativa 2 (Fonte Renovável) utiliza um sistema solar fotovoltaico On-Grid de 2,0 kWp (geração média de 250,0 kWh/mês ou 3.000 kWh/ano). Para o consumo de 280,0 kWh/mês, a fatura cai para a taxa mínima monofásica da rede (30,0 kWh/mês = R$ 25,50/mês), gerando economia estimada de R$ 2.550,00/ano, investimento inicial de R$ 9.200,00, payback de 3,6 anos (vida útil de 25 anos) e evitando 115,5 kg de CO2/ano no SIN (MCTI: 0,0385 kg CO2/kWh). Limitação: exige telhado próprio sem sombreamento; para inquilinos ou apartamentos, recomenda-se a Geração Solar Compartilhada (assinatura com R$ 0,00 de investimento e ~15% de desconto na fatura).",
+    "documentos": [
+      "Faturas de energia dos últimos 12 meses (histórico em kWh)",
+      "Documento de titularidade da unidade consumidora",
+      "Projeto técnico homologado junto à distribuidora local (para sistema On-Grid)"
+    ],
+    "onde": "Módulo de Simulação Energética do Citizen Assist AI e Portal de Geração Distribuída da ANEEL",
+    "fonte": "ANEEL (Lei 14.300/2022) / ABSOLAR / EPE / MCTI — Estudo Técnico ERS-03 (2026)",
+    "verificado_em": "2026-11-06"
+  }
+]

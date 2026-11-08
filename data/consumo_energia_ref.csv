@@ -1,0 +1,5 @@
+﻿id_equipamento,equipamento,quantidade,potencia_atual_w,horas_uso_dia,dias_mes,consumo_atual_kwh_mes,acao_eficiencia,potencia_eficiente_w,consumo_eficiente_kwh_mes,economia_kwh_mes,investimento_retrofit_brl,fonte_referencia
+1,Chuveiro Eletrico Resistivo (Modo Inverno -> Modo Verao),1,5500,0.6667,30,110.0,Ajuste para posicao Verao (3200W) e controle de tempo de banho,3200,63.7,46.3,0.00,EPE / Procel-INMETRO (2026)
+2,Iluminacao Residencial (Lampadas 60W -> LED 9W Procel A),8,60,5.0000,30,72.0,Substituicao das 8 lampadas de 60W por LEDs de 9W Selo Procel A,9,10.8,61.2,96.00,Procel / INMETRO (2026)
+3,Geladeira Domestica 1 Porta Antiga (Ciclo Termostatico),1,150,11.1111,30,50.0,Manutencao de borrachas de vedacao e afastamento de fontes de calor,150,50.0,0.0,0.00,Procel / EPE (2026)
+4,Demais Eletrodomesticos (TV Ferro Lavadora Carregadores),1,400,4.0000,30,48.0,Desligamento de aparelhos em stand-by e uso acumulado da lavadora,400,48.0,0.0,0.00,ANEEL / EPE (2026)

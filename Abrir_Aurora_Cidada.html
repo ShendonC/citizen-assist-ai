@@ -1,0 +1,1626 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Central do Cidadão de Aurora</title>
+  <meta name="description" content="Protótipo educacional da Global Solution FIAP 2026.2: orientações sobre documentos, conta de luz, atendimento e ônibus em Aurora, cidade fictícia." />
+  <link rel="icon" type="image/x-icon" href="assets/aurora_icon.ico" />
+  <style>
+@font-face {
+  font-family: "Atkinson Hyperlegible Next Variable";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url(assets/fonts/atkinson-hyperlegible-next-latin-wght-normal.woff2) format("woff2-variations"),
+       url(assets/fonts/atkinson-hyperlegible-next-latin-wght-normal.woff2) format("woff2");
+}
+
+:root {
+  --base-size: 17px;
+  --paper: #FCFBF8;
+  --surface: #FFFFFF;
+  --tint: #F1EBDD;
+  --rule: #E1DACB;
+  --rule-strong: #B9AD95;
+  --ink: #1E1A14;
+  --ink-2: #463F33;
+  --ink-3: #645B4B;
+  --primary: #0C3D66;
+  --primary-hover: #082B4A;
+  --on-primary: #FFFDF8;
+  --solar: #D58208;
+  --solar-ink: #7A4300;
+  --solar-tint: #FBEBCB;
+  --ok: #1E5B34;
+  --ok-tint: #DDEBDD;
+  --warn-ink: #6B3F00;
+  --warn-tint: #FBEBCB;
+  --bad: #8F2A1B;
+  --bad-tint: #F6DCD6;
+  --focus: #0B57D0;
+  --board-bg: #1B1610;
+  --board-ink: #F7F3EA;
+  --board-hot: #F6B73C;
+  --font: "Atkinson Hyperlegible Next Variable", "Atkinson Hyperlegible Next", "Segoe UI", system-ui, sans-serif;
+  --r: 6px;
+}
+
+body.high-contrast {
+  --paper: #000; --surface: #000; --tint: #1A1A1A;
+  --rule: #FFF; --rule-strong: #FFF;
+  --ink: #FFF; --ink-2: #FFF; --ink-3: #E8E8E8;
+  --primary: #FFD43B; --primary-hover: #FFE680; --on-primary: #000;
+  --solar-ink: #FFD43B; --solar-tint: #1A1A1A;
+  --ok: #7CFC9A; --ok-tint: #0D2616;
+  --warn-ink: #FFD43B; --warn-tint: #262000;
+  --bad: #FF9C8F; --bad-tint: #2E0F0B;
+  --focus: #7DB8FF;
+  --board-bg: #000; --board-ink: #FFF; --board-hot: #FFD43B;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: var(--base-size); -webkit-text-size-adjust: 100%; scroll-padding-top: 5rem; scrollbar-color: var(--rule-strong) var(--paper); }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font: 400 1rem/1.55 var(--font); font-variant-numeric: tabular-nums;
+  caret-color: var(--primary); accent-color: var(--primary);
+}
+::selection { background: var(--solar-tint); color: var(--ink); }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+h1, h2, h3, p, ul, ol, dl, dd { margin: 0; padding: 0; }
+h1, h2, h3 { text-wrap: balance; line-height: 1.2; }
+p, li { text-wrap: pretty; }
+ul, ol { list-style: none; }
+a { color: var(--primary); text-underline-offset: .2em; }
+button, input { font: inherit; color: inherit; }
+svg { flex: none; }
+[hidden] { display: none !important; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; left: .5rem; top: -4rem; background: var(--ink); color: var(--paper); padding: .6rem 1rem; border-radius: var(--r); z-index: 99; }
+.skip:focus { top: .5rem; }
+.wrap { max-width: 74rem; margin-inline: auto; padding-inline: clamp(1rem, 4vw, 2rem); }
+
+/* faixa de aviso */
+.notice { margin: 0; padding: .5rem max(clamp(1rem, 4vw, 2rem), calc((100% - 74rem) / 2 + clamp(1rem, 4vw, 2rem))); background: var(--tint); border-bottom: 1px solid var(--rule); font-size: .875rem; color: var(--ink-2); }
+
+
+/* cabeçalho */
+.top { background: var(--paper); border-bottom: 1px solid var(--rule); }
+.top .wrap { position: relative; display: flex; align-items: center; flex-wrap: wrap; gap: .5rem 1.5rem; padding-block: .7rem; }
+.brand { display: flex; align-items: center; gap: .75rem; text-decoration: none; color: var(--ink); margin-right: auto; }
+.brand img { width: 2.6rem; height: auto; border-radius: 6px; display: block; }
+.brand strong { display: block; font-weight: 800; font-size: 1.125rem; line-height: 1.15; }
+.brand small { display: block; font-size: .8125rem; color: var(--ink-3); }
+.nav { display: flex; gap: .15rem; flex-wrap: wrap; }
+.nav-link {
+  display: inline-flex; align-items: center; gap: .45rem; min-height: 2.75rem; padding: .4rem .8rem;
+  border: 0; border-radius: var(--r); background: none; cursor: pointer; text-decoration: none;
+  font-weight: 600; color: var(--ink-2);
+}
+.nav-link:hover { background: var(--tint); color: var(--ink); }
+.nav-link[aria-current="page"] { color: var(--ink); box-shadow: inset 0 -3px 0 var(--primary); border-radius: var(--r) var(--r) 0 0; }
+.pill { background: var(--solar-tint); color: var(--solar-ink); font-size: .8125rem; font-weight: 700; padding: .05rem .5rem; border-radius: 99px; }
+.tools { display: flex; align-items: center; gap: .5rem; }
+.a11y { position: static; }
+.a11y > summary { list-style: none; cursor: pointer; }
+.a11y > summary::-webkit-details-marker { display: none; }
+.a11y-panel {
+  position: absolute; right: clamp(1rem, 4vw, 2rem); top: calc(100% - .1rem); z-index: 30; min-width: 16rem;
+  background: var(--surface); border: 1px solid var(--rule-strong); border-radius: var(--r); padding: 1rem;
+  box-shadow: 0 10px 28px -8px rgba(30, 26, 20, .22);
+}
+.a11y-panel h2 { font-size: .9375rem; margin-bottom: .5rem; }
+.a11y-row { display: flex; gap: .5rem; margin-bottom: .9rem; }
+.a11y-row:last-child { margin-bottom: 0; }
+.a11y-row .btn { flex: 1; min-width: 0; padding-inline: .5rem; }
+.btn[aria-pressed="true"] { background: var(--tint); border-color: var(--primary); color: var(--ink); }
+
+/* botões */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 2.9rem;
+  padding: .55rem 1.1rem; border: 2px solid var(--primary); border-radius: var(--r);
+  background: var(--primary); color: var(--on-primary); font-weight: 700; line-height: 1.2;
+  text-decoration: none; cursor: pointer; transition: background-color .15s, border-color .15s, color .15s;
+}
+.btn:hover { background: var(--primary-hover); border-color: var(--primary-hover); }
+.btn-quiet { background: transparent; color: var(--ink); border-color: var(--rule-strong); }
+.btn-quiet:hover { background: var(--tint); border-color: var(--ink-3); }
+.btn[disabled] { opacity: .65; cursor: default; }
+.btn-solar { background: var(--solar-ink); border-color: var(--solar-ink); color: #FFF; }
+.btn-solar:hover { background: #5C3200; border-color: #5C3200; }
+body.high-contrast .btn-solar { color: #000; }
+.btn-sm { min-height: 2.5rem; padding: .35rem .85rem; font-size: .9375rem; }
+.btn-text { background: none; border: 0; padding: .4rem .2rem; min-height: 2.75rem; display: inline-flex; align-items: center; gap: .45rem; color: var(--ink-2); font-weight: 600; cursor: pointer; text-decoration: none; }
+.btn-text:hover { color: var(--ink); text-decoration: underline; text-underline-offset: .2em; }
+
+.tag { display: inline-block; padding: .05rem .6rem; border-radius: 99px; background: var(--ok-tint); color: var(--ok); font-size: .8125rem; font-weight: 700; }
+.tag.paid { background: var(--warn-tint); color: var(--warn-ink); }
+
+/* tabelas */
+.table-scroll { overflow-x: auto; }
+.data-table { width: 100%; border-collapse: collapse; font-size: .9375rem; }
+.data-table th, .data-table td { padding: .75rem .75rem; text-align: left; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.data-table thead th { font-size: .8125rem; font-weight: 700; color: var(--ink-3); border-bottom: 2px solid var(--ink); }
+.data-table tbody th { font-weight: 700; }
+.data-table .num { text-align: right; white-space: nowrap; }
+.delta { font-weight: 700; padding: .05rem .45rem; border-radius: 99px; font-size: .8125rem; }
+.delta.up { background: var(--ok-tint); color: var(--ok); }
+.delta.down { background: var(--warn-tint); color: var(--warn-ink); }
+
+/* rodapé */
+.foot { border-top: 1px solid var(--rule-strong); margin-top: 3rem; background: var(--tint); }
+.foot .wrap { display: flex; flex-wrap: wrap; gap: 1rem 3rem; justify-content: space-between; align-items: flex-start; padding-block: 1.75rem; font-size: .9375rem; color: var(--ink-2); }
+.foot p { max-width: 46rem; }
+.foot strong { color: var(--ink); }
+
+@keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+@media (min-width: 48rem) { .top { position: sticky; top: 0; z-index: 20; } }
+
+@media (max-width: 40rem) {
+  .top .wrap { gap: .25rem .5rem; padding-block: .6rem; }
+  .nav { width: 100%; flex-wrap: wrap; }
+  .nav-link { flex: 1 1 auto; justify-content: center; padding: .4rem .5rem; font-size: .9375rem; }
+  .nav-link svg { display: none; }
+  .tools { width: 100%; }
+  .tools > * { flex: 1; }
+  .a11y > summary { width: 100%; justify-content: center; }
+  .a11y-panel { left: 1rem; right: 1rem; min-width: 0; }
+  .tools > .btn { text-align: center; }
+}
+
+.hero .wrap { padding-inline: 0; max-width: calc(74rem - 2 * clamp(1rem, 4vw, 2rem)); }
+
+main:focus { outline: none; }
+.view-pane { display: none; }
+.view-pane.active { display: block; }
+
+/* início */
+.hero { padding: 2.25rem clamp(1rem, 4vw, 2rem) 2.5rem; border-bottom: 1px solid var(--rule); }
+.hero-grid { display: grid; gap: 2.5rem; align-items: start; }
+.hero h1 { font-size: 2.1rem; font-weight: 800; letter-spacing: -.02em; max-width: 16ch; }
+.lead { margin-top: .9rem; font-size: 1.125rem; color: var(--ink-2); max-width: 36rem; }
+.search { margin-top: 1.5rem; max-width: 38rem; }
+.search label { display: block; font-weight: 700; margin-bottom: .4rem; }
+.search-row { display: flex; gap: .5rem; }
+.search-row input {
+  flex: 1; min-width: 0; min-height: 3.4rem; padding: .5rem 1rem; font-size: 1.125rem;
+  background: var(--surface); border: 2px solid var(--ink-3); border-radius: var(--r);
+}
+.search-row input::placeholder { color: var(--ink-3); opacity: 1; }
+.search-row input:focus-visible { outline-offset: 0; border-color: var(--focus); }
+.search-row .btn { min-height: 3.4rem; padding-inline: 1.5rem; font-size: 1.0625rem; }
+.hint { margin-top: .5rem; font-size: .9375rem; color: var(--warn-ink); background: var(--warn-tint); padding: .5rem .8rem; border-radius: var(--r); }
+.quick { margin-top: 1.1rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+.quick > span { font-size: .9375rem; color: var(--ink-3); font-weight: 600; margin-right: .25rem; }
+.chip {
+  min-height: 2.75rem; padding: .35rem .95rem; border: 1px solid var(--rule-strong); border-radius: 99px;
+  background: var(--surface); font-weight: 600; font-size: .9375rem; cursor: pointer;
+  transition: background-color .15s, border-color .15s;
+}
+.chip:hover { background: var(--tint); border-color: var(--ink-3); }
+.chip.active { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
+
+.now { background: var(--surface); border: 1px solid var(--rule-strong); border-radius: 10px; padding: 1.25rem 1.4rem; }
+.now h2 { font-size: 1.125rem; }
+.now-status { display: flex; align-items: center; gap: .55rem; margin-top: .4rem; font-weight: 600; color: var(--ink-2); }
+.dot { width: .7rem; height: .7rem; border-radius: 50%; background: var(--ok); flex: none; }
+.dot.off { background: var(--ink-3); }
+.now-list { margin-top: .9rem; border-top: 1px solid var(--rule); }
+.now-list > div { display: flex; justify-content: space-between; gap: 1rem; padding: .6rem 0; border-bottom: 1px solid var(--rule); }
+.now-list dt { color: var(--ink-2); }
+.now-list dd { font-weight: 800; }
+.now-note { margin-top: .75rem; font-size: .875rem; color: var(--ink-3); }
+.now .btn { margin-top: .9rem; width: 100%; }
+
+/* catálogo */
+.catalog { padding-block: 2.25rem 1rem; }
+.catalog > .wrap > h2 { font-size: 1.6rem; font-weight: 800; }
+.catalog > .wrap > p { margin-top: .35rem; color: var(--ink-2); }
+.groups { margin-top: 1.75rem; display: grid; gap: 2.5rem 3.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 30rem), 1fr)); }
+.group h3 { font-size: 1.25rem; font-weight: 800; padding-bottom: .6rem; border-bottom: 2px solid var(--ink); }
+.row {
+  display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: center; width: 100%; min-height: 4.25rem;
+  padding: 1rem .5rem; text-align: left; background: none; border: 0; border-bottom: 1px solid var(--rule);
+  color: var(--ink); cursor: pointer; transition: background-color .15s;
+}
+.row:hover { background: var(--tint); }
+.row-main { display: grid; gap: .25rem; }
+.row-title { font-size: 1.0625rem; font-weight: 700; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: .2em; transition: text-decoration-color .15s; }
+.row:hover .row-title { text-decoration-color: currentColor; }
+.row-desc { color: var(--ink-2); font-size: .9375rem; }
+.row-meta { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem .75rem; font-size: .875rem; color: var(--ink-3); margin-top: .15rem; }
+.row .chev { color: var(--ink-3); transition: transform .15s; }
+.row:hover .chev { transform: translateX(3px); color: var(--ink); }
+
+/* páginas internas */
+.page { max-width: 50rem; margin: 0 auto; padding: 1.25rem clamp(1rem, 4vw, 2rem) 2rem; }
+.page-wide { max-width: 74rem; margin: 0 auto; padding: 1.5rem clamp(1rem, 4vw, 2rem) 2rem; }
+.page h1, .page-wide h1 { font-size: 1.9rem; font-weight: 800; letter-spacing: -.015em; }
+.page h2, .page-wide h2 { font-size: 1.35rem; font-weight: 800; }
+.crumb { font-size: .9375rem; font-weight: 600; color: var(--ink-3); }
+.sheet-lead { margin-top: .6rem; font-size: 1.125rem; color: var(--ink-2); }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: 1rem 2rem; margin-block: 1.4rem 0; padding-block: 1rem; border-block: 1px solid var(--rule-strong); }
+.facts dt { font-size: .875rem; font-weight: 600; color: var(--ink-3); }
+.facts dd { font-weight: 700; font-size: 1.0625rem; }
+
+.stepper { scroll-margin-top: 5rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; margin-block: 1.5rem 0; }
+.stepper-node {
+  display: flex; align-items: center; gap: .65rem; min-height: 3.4rem; padding: .5rem .75rem; text-align: left;
+  background: var(--surface); border: 1px solid var(--rule-strong); border-radius: var(--r); cursor: pointer; font-weight: 700;
+}
+.stepper-node:hover { background: var(--tint); }
+.node-circle { display: grid; place-items: center; width: 1.9rem; height: 1.9rem; border-radius: 50%; background: var(--tint); border: 2px solid var(--ink-3); font-size: .9375rem; flex: none; }
+.node-circle svg { display: none; }
+.stepper-node.active { border: 2px solid var(--primary); background: var(--surface); }
+.stepper-node.active .node-circle { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
+.stepper-node.done .node-circle { background: var(--ok-tint); border-color: var(--ok); color: var(--ok); }
+.stepper-node.done .node-circle b { display: none; }
+.stepper-node.done .node-circle svg { display: block; }
+
+.stage-body { display: none; padding-top: 1.75rem; }
+.stage-body.active { display: block; animation: rise .2s ease-out; }
+.stage-body > h2 { margin-bottom: .35rem; }
+.stage-desc { color: var(--ink-2); margin-bottom: 1.1rem; }
+.stage-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: .5rem 1rem; }
+.progress { font-size: .9375rem; font-weight: 700; color: var(--ink-2); }
+.checklist-item {
+  display: flex; align-items: flex-start; gap: .9rem; padding: .9rem 1rem; margin-bottom: .5rem;
+  background: var(--surface); border: 1px solid var(--rule-strong); border-radius: var(--r); cursor: pointer;
+}
+.checklist-item input { width: 1.5rem; height: 1.5rem; flex: none; margin: .1rem 0 0; }
+.checklist-item:has(input:checked) { background: var(--ok-tint); border-color: var(--ok); }
+.checklist-list { margin-bottom: 2rem; }
+.connected-timeline { margin: .9rem 0 1.5rem; display: grid; gap: .9rem; }
+.connected-timeline li { display: flex; gap: .9rem; align-items: flex-start; }
+.timeline-bullet { display: grid; place-items: center; width: 1.9rem; height: 1.9rem; border-radius: 50%; background: var(--tint); font-weight: 800; font-size: .9375rem; flex: none; }
+.source-line { padding-top: 1rem; border-top: 1px solid var(--rule); font-size: .9375rem; color: var(--ink-2); }
+.source-line strong { color: var(--ink); }
+.actions { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .75rem; margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--rule-strong); }
+
+/* simulador de luz */
+.sim { background: var(--solar-tint); border-radius: 10px; padding: 1.25rem 1.4rem; margin-bottom: 2rem; color: var(--ink); }
+body.high-contrast .sim { border: 2px solid var(--solar-ink); }
+.sim h2 { font-size: 1.2rem; color: var(--solar-ink); }
+.sim > p { margin-top: .3rem; color: var(--ink-2); font-size: .9375rem; }
+.sim-row { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1rem; margin: 1rem 0; }
+.sim-row input[type=range] { flex: 1 1 12rem; min-height: 2.75rem; accent-color: var(--solar-ink); }
+.sim-row input[type=number] { width: 6rem; min-height: 2.9rem; padding: .3rem .6rem; font-weight: 700; background: var(--surface); border: 2px solid var(--ink-3); border-radius: var(--r); }
+.sim .data-table { background: var(--surface); border-radius: var(--r); }
+.sim .data-table thead th { border-bottom-color: var(--solar-ink); }
+.sim-note { margin-top: .7rem; font-size: .875rem; color: var(--ink-2); }
+
+/* triagem */
+.triage-row { padding: 1.1rem 0; border-bottom: 1px solid var(--rule); }
+.triage-row:first-child { border-top: 1px solid var(--rule); }
+.triage-question-text { font-weight: 600; font-size: 1.0625rem; max-width: 40rem; }
+.segmented-toggle { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem; }
+.seg-option {
+  display: inline-flex; align-items: center; gap: .6rem; min-height: 2.9rem; padding: .35rem 1rem;
+  background: var(--surface); border: 2px solid var(--rule-strong); border-radius: var(--r); font-weight: 600; cursor: pointer;
+}
+.seg-option input { width: 1.2rem; height: 1.2rem; margin: 0; }
+.seg-option:has(input:checked) { border-color: var(--primary); background: var(--tint); }
+.verdict-banner {
+  display: flex; gap: .9rem; align-items: flex-start; margin-top: 1.5rem; padding: 1rem 1.1rem;
+  background: var(--ok-tint); border: 1px solid var(--ok); border-radius: var(--r);
+}
+.verdict-banner h3 { font-size: 1.0625rem; }
+.verdict-banner p { margin-top: .25rem; font-size: .9375rem; color: var(--ink); }
+.verdict-banner .ico { display: none; margin-top: .1rem; }
+.verdict-banner .ico-ok { display: block; color: var(--ok); }
+.verdict-banner.blocked { background: var(--bad-tint); border-color: var(--bad); }
+.verdict-banner.pending { background: var(--warn-tint); border-color: var(--warn-ink); }
+.verdict-banner.blocked .ico, .verdict-banner.pending .ico { display: none; }
+.verdict-banner.blocked .ico-bad { display: block; color: var(--bad); }
+.verdict-banner.pending .ico-info { display: block; color: var(--warn-ink); }
+
+/* senha */
+.ticket { display: grid; grid-template-columns: 1fr auto; margin: 1.25rem 0; background: var(--surface); border: 2px solid var(--ink); border-radius: 10px; }
+.ticket-main { padding: 1.25rem 1.4rem; }
+.ticket-main small { font-weight: 700; color: var(--ink-3); font-size: .875rem; }
+.ticket-main h3 { font-size: 1.3rem; font-weight: 800; margin: .3rem 0 .5rem; }
+.ticket-main .btn { margin-top: 1rem; }
+.ticket-stub { position: relative; display: flex; flex-direction: column; justify-content: center; text-align: center; gap: .2rem; padding: 1.25rem 1.8rem; }
+.ticket-stub::before { content: ""; position: absolute; left: 0; top: .75rem; bottom: .75rem; width: 2px; background: linear-gradient(var(--ink) 50%, transparent 0) 0 0 / 2px 12px repeat-y; }
+.ticket-stub small { font-weight: 700; color: var(--ink-3); font-size: .875rem; }
+.ticket-number-display { font-size: 2.9rem; font-weight: 800; letter-spacing: -.02em; line-height: 1; }
+.ticket-stub span { font-size: .875rem; color: var(--ink-2); font-weight: 600; }
+.ok-box { display: flex; gap: .8rem; align-items: flex-start; flex-wrap: wrap; padding: 1rem 1.1rem; margin-bottom: 1.5rem; background: var(--ok-tint); border: 1px solid var(--ok); border-radius: var(--r); }
+.ok-box svg { color: var(--ok); margin-top: .15rem; }
+.ok-box .btn { margin-right: .5rem; margin-top: .5rem; }
+.bus-box { padding: 1rem 0; border-block: 1px solid var(--rule-strong); }
+.bus-box strong { font-size: 1.0625rem; }
+.bus-box p { margin-top: .3rem; color: var(--ink-2); }
+.chip-row { display: flex; flex-wrap: wrap; gap: .5rem; margin: .8rem 0 1rem; }
+h3.sub { font-size: 1.1rem; font-weight: 800; margin-top: 2rem; }
+
+/* assistente */
+.ask { margin-top: 1.4rem; }
+.ask label { display: block; font-weight: 700; margin-bottom: .4rem; }
+.ask .search-row input { font-size: 1.0625rem; }
+.answer { margin-top: 2rem; padding-top: 1.5rem; border-top: 2px solid var(--ink); }
+.answer-text { font-size: 1.125rem; line-height: 1.65; margin-top: .6rem; max-width: 42rem; }
+.answer h3 { font-size: 1.0625rem; margin-top: 1.5rem; }
+.answer ul { margin-top: .5rem; display: grid; gap: .45rem; list-style: disc; padding-left: 1.3rem; }
+.answer .btn { margin-top: 1.5rem; }
+.trace { margin-top: 1.5rem; font-size: .9375rem; color: var(--ink-2); }
+.trace summary { cursor: pointer; font-weight: 600; min-height: 2.5rem; display: flex; align-items: center; }
+.trace p { margin-top: .4rem; }
+.disclaimer { margin-top: 1rem; font-size: .875rem; color: var(--ink-3); }
+.empty { margin-top: 2rem; padding: 1.25rem; background: var(--surface); border: 1px dashed var(--rule-strong); border-radius: var(--r); color: var(--ink-2); }
+
+/* posto e ônibus */
+.unit-grid { display: grid; gap: 2.5rem 3.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); margin-top: 1.75rem; }
+.unit-grid h2 { margin-bottom: .75rem; }
+.issue-list { display: grid; gap: .6rem; }
+.issue-list .btn { justify-content: space-between; text-align: left; }
+.board { margin-top: 1.25rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1.25rem 1.5rem; background: var(--board-bg); color: var(--board-ink); border-radius: 10px; }
+body.high-contrast .board { border: 2px solid #FFF; }
+.board small { font-size: .875rem; font-weight: 700; opacity: .85; }
+.board p { margin-top: .2rem; font-size: .9375rem; opacity: .9; }
+.board strong { white-space: nowrap; font-size: 3rem; font-weight: 800; line-height: 1; color: var(--board-hot); letter-spacing: -.01em; }
+.unit-grid .lead-sm { color: var(--ink-2); font-size: .9375rem; margin-bottom: .6rem; }
+
+@media (min-width: 62rem) {
+  .hero-grid { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 4rem; }
+  .hero { padding-top: 3.25rem; padding-bottom: 3.5rem; }
+  .hero h1 { font-size: 2.9rem; }
+}
+@media (max-width: 40rem) {
+  .stepper-node { flex-direction: column; text-align: center; justify-content: center; gap: .25rem; font-size: .875rem; }
+  .ticket { grid-template-columns: 1fr; }
+  .ticket-stub::before { left: .75rem; right: .75rem; top: 0; bottom: auto; width: auto; height: 2px; background: linear-gradient(90deg, var(--ink) 50%, transparent 0) 0 0 / 12px 2px repeat-x; }
+  .search-row { flex-direction: column; }
+  .page h1 { font-size: 1.6rem; }
+  .board strong { font-size: 2.4rem; }
+}
+fieldset.triage-row { margin: 0; min-width: 0; border: 0; border-bottom: 1px solid var(--rule); }
+fieldset.triage-row:first-of-type { border-top: 1px solid var(--rule); }
+.triage-row legend { padding: 0; float: left; width: 100%; margin-bottom: .75rem; }
+.triage-row .segmented-toggle { clear: both; margin-top: 0; }
+
+.trace summary svg { transition: transform .15s; margin-right: .35rem; }
+.trace[open] summary svg { transform: rotate(90deg); }
+
+@media (max-width: 40rem) {
+  .issue-list .btn { flex-direction: column; align-items: flex-start; gap: .1rem; }
+  .issue-list .btn span + span { font-weight: 400; font-size: .9375rem; }
+  .board strong { font-size: 2.2rem; }
+}
+
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+      <symbol id="i-ok" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
+      <symbol id="i-bad" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></symbol>
+      <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></symbol>
+      <symbol id="i-chev" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></symbol>
+      <symbol id="i-left" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></symbol>
+      <symbol id="i-right" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+      <symbol id="i-list" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></symbol>
+      <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+      <symbol id="i-type" viewBox="0 0 24 24"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></symbol>
+      <symbol id="i-ext" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></symbol>
+    </defs>
+  </svg>
+
+  <a class="skip" href="#main">Pular para o conteúdo</a>
+
+  <p class="notice" role="note"><strong>Protótipo educacional, não é canal oficial.</strong> Não digite CPF, RG, telefone nem e-mail.</p>
+
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="#" onclick="switchMainView('catalog'); return false;">
+        <img src="assets/aurora_logo_sm.png" alt="" width="64" height="73" />
+        <span><strong>Central do Cidadão de Aurora</strong><small>Documentos, energia e transporte</small></span>
+      </a>
+
+      <nav class="nav" aria-label="Seções do site">
+        <button type="button" id="navCatalog" class="nav-link" aria-current="page" onclick="switchMainView('catalog')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-list"/></svg>
+          Serviços
+        </button>
+        <button type="button" id="navAssistant" class="nav-link" onclick="switchMainView('assistant')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-chat"/></svg>
+          Assistente
+        </button>
+        <button type="button" id="navUnit" class="nav-link" onclick="switchMainView('unit')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-pin"/></svg>
+          Posto e ônibus
+          <span id="headerTicketBadge" class="pill" hidden></span>
+        </button>
+      </nav>
+
+      <div class="tools">
+        <details class="a11y" id="a11yMenu">
+          <summary class="btn btn-quiet btn-sm">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-type"/></svg>
+            Acessibilidade
+          </summary>
+          <div class="a11y-panel">
+            <h2>Tamanho do texto</h2>
+            <div class="a11y-row">
+              <button type="button" class="btn btn-quiet" data-font="15" aria-label="Diminuir texto" onclick="setFontScale(15)">A−</button>
+              <button type="button" class="btn btn-quiet" data-font="17" aria-label="Texto padrão" onclick="setFontScale(17)">A</button>
+              <button type="button" class="btn btn-quiet" data-font="20" aria-label="Aumentar texto" onclick="setFontScale(20)">A+</button>
+            </div>
+            <h2>Cores</h2>
+            <div class="a11y-row">
+              <button type="button" id="btnContrast" class="btn btn-quiet" aria-pressed="false" onclick="toggleContrast()">Alto contraste</button>
+            </div>
+          </div>
+        </details>
+        <a class="btn btn-quiet btn-sm" href="Auditoria_FIAP.html">
+          Área do avaliador
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-ext"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+
+    <!-- INÍCIO -->
+    <section id="view-catalog" class="view-pane active">
+      <div class="hero">
+        <div class="wrap hero-grid">
+          <div>
+            <h1>O que você precisa resolver hoje?</h1>
+            <p class="lead">Escreva do seu jeito, como falaria no balcão. Mostramos os documentos, o prazo e o custo antes de você sair de casa.</p>
+
+            <form class="search" role="search" onsubmit="handleHeroSearch(event)">
+              <label for="heroSearchInput">Descreva o que você precisa</label>
+              <div class="search-row">
+                <input type="text" id="heroSearchInput" placeholder="Ex.: perdi meu RG" autocomplete="off" data-alert="heroPII" oninput="checkPII(this)" />
+                <button type="submit" class="btn">Buscar</button>
+              </div>
+              <p id="heroPII" class="hint" role="alert" hidden>Por segurança, não digite CPF, RG, telefone, endereço ou e-mail. Esses dados não são necessários e não são guardados.</p>
+              <p id="searchHint" class="hint" role="status" hidden>Escreva ao menos uma palavra, por exemplo: RG, CNH ou conta de luz.</p>
+            </form>
+
+            <div class="quick">
+              <span>Mais procurados:</span>
+              <button type="button" class="chip" onclick="openServiceJourney('FC-01')">2ª via do RG</button>
+              <button type="button" class="chip" onclick="openServiceJourney('ERS-01')">Desconto na conta de luz</button>
+              <button type="button" class="chip" onclick="openServiceJourney('FC-02')">CPF</button>
+              <button type="button" class="chip" onclick="openServiceJourney('FC-06')">Renovar a CNH</button>
+            </div>
+          </div>
+
+          <aside class="now" aria-labelledby="nowTitle">
+            <h2 id="nowTitle">Posto Central agora</h2>
+            <p class="now-status"><span id="postoDot" class="dot"></span><span id="postoStatusText">Verificando horário…</span></p>
+            <dl class="now-list">
+              <div><dt>Senha em atendimento</dt><dd id="heroTicket">N-103</dd></div>
+              <div><dt>Espera média</dt><dd>8 min</dd></div>
+              <div><dt>Ônibus, Linha 1</dt><dd>a cada 6 min</dd></div>
+            </dl>
+            <p class="now-note">Av. Cívica, 400 · segunda a sexta, das 8h às 17h. Valores simulados pelo totem de demonstração.</p>
+            <button type="button" class="btn btn-quiet" onclick="switchMainView('unit')">Ver fila e horários dos ônibus</button>
+          </aside>
+        </div>
+      </div>
+
+      <div class="catalog">
+        <div class="wrap">
+          <h2>Serviços disponíveis</h2>
+          <p>Escolha um serviço para ver os documentos, o prazo e o passo a passo.</p>
+          <div id="serviceDirectoryGrid" class="groups"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVIÇO: 3 ETAPAS -->
+    <section id="view-journey" class="view-pane">
+      <div class="page">
+        <button type="button" class="btn-text" onclick="switchMainView('catalog')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-left"/></svg>
+          Todos os serviços
+        </button>
+
+        <p class="crumb" style="margin-top:.75rem"><span id="journeyCategoryBadge"></span> · <span id="journeyCodeBadge"></span></p>
+        <h1 id="journeyTitle" style="margin-top:.2rem"></h1>
+        <p id="journeySummary" class="sheet-lead"></p>
+
+        <dl class="facts">
+          <div><dt>Custo</dt><dd id="journeyCost"></dd></div>
+          <div><dt>Prazo</dt><dd id="journeyDeadline"></dd></div>
+          <div><dt>Como é atendido</dt><dd id="journeyChannel"></dd></div>
+        </dl>
+
+        <div class="stepper" role="tablist" aria-label="Etapas do atendimento">
+          <button type="button" id="stepTab1" class="stepper-node active" onclick="goToWizardStep(1)">
+            <span class="node-circle"><b>1</b><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg></span>
+            <span>Documentos</span>
+          </button>
+          <button type="button" id="stepTab2" class="stepper-node" onclick="goToWizardStep(2)">
+            <span class="node-circle"><b>2</b><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg></span>
+            <span>Triagem</span>
+          </button>
+          <button type="button" id="stepTab3" class="stepper-node" onclick="goToWizardStep(3)">
+            <span class="node-circle"><b>3</b><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-check"/></svg></span>
+            <span>Senha e ônibus</span>
+          </button>
+        </div>
+
+        <!-- ETAPA 1 -->
+        <div id="wizardStage1" class="stage-body active">
+          <div id="journeyEnergySimulator" class="sim" hidden>
+            <h2>Simule sua conta de luz</h2>
+            <p>Ajuste o consumo mensal da sua casa para ver quanto você economiza com lâmpadas LED, chuveiro eficiente ou energia solar compartilhada.</p>
+            <div class="sim-row">
+              <label for="simKwhRange" class="sr-only">Consumo mensal em kWh</label>
+              <input type="range" id="simKwhRange" min="50" max="800" step="10" value="280" oninput="syncEnergyInputs(this.value)" />
+              <label for="simKwhInput" class="sr-only">Consumo mensal em kWh (digite)</label>
+              <input type="number" id="simKwhInput" value="280" min="30" max="3000" oninput="syncEnergyInputs(this.value)" />
+              <span><strong>kWh</strong> por mês</span>
+            </div>
+            <div class="table-scroll">
+              <table class="data-table">
+                <thead><tr><th scope="col">Cenário</th><th scope="col" class="num">Conta por mês</th><th scope="col" class="num">Economia por ano</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Hoje (tarifa R$ 0,85 por kWh)</th><td class="num" id="simCurrentBill"></td><td class="num">—</td></tr>
+                  <tr><th scope="row">Kit LED + chuveiro no verão</th><td class="num" id="simEffBill"></td><td class="num" id="simEffSave"></td></tr>
+                  <tr><th scope="row">Energia solar por assinatura</th><td class="num" id="simSolarBill"></td><td class="num" id="simSolarSave"></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p id="simSolarCo2" class="sim-note"></p>
+          </div>
+
+          <div class="stage-head">
+            <h2>Documentos necessários</h2>
+            <span id="docCheckCounter" class="progress" aria-live="polite"></span>
+          </div>
+          <p class="stage-desc">Marque o que você já separou, para conferir sua pasta antes de sair de casa.</p>
+          <div id="journeyChecklistContainer" class="checklist-list"></div>
+
+          <h2>Como funciona, passo a passo</h2>
+          <ol id="journeyStepsList" class="connected-timeline"></ol>
+
+          <p class="source-line"><strong>Onde:</strong> <span id="journeyWhereText"></span><br /><strong>Fonte:</strong> <span id="journeySourceText"></span></p>
+
+          <div class="actions">
+            <button type="button" class="btn btn-quiet" onclick="switchMainView('catalog')">Escolher outro serviço</button>
+            <button type="button" class="btn" onclick="goToWizardStep(2)">
+              Continuar: triagem
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-right"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- ETAPA 2 -->
+        <div id="wizardStage2" class="stage-body">
+          <h2>Antes de ir ao posto</h2>
+          <p class="stage-desc">Responda 4 perguntas rápidas. Elas mostram se você será atendido(a) hoje e em qual fila.</p>
+
+          <div class="triage-list">
+            <fieldset class="triage-row">
+              <legend class="triage-question-text">1. Você vai levar os documentos originais da etapa 1 (não vale cópia simples)?</legend>
+              <div class="segmented-toggle">
+                <label class="seg-option"><input type="radio" name="qA" value="1" checked onchange="evaluateCitizenTriage()" />Sim, originais</label>
+                <label class="seg-option"><input type="radio" name="qA" value="0" onchange="evaluateCitizenTriage()" />Ainda não</label>
+              </div>
+            </fieldset>
+            <fieldset class="triage-row">
+              <legend class="triage-question-text">2. Você já tem protocolo ou vai pegar a senha digital antes de ir?</legend>
+              <div class="segmented-toggle">
+                <label class="seg-option"><input type="radio" name="qB" value="1" checked onchange="evaluateCitizenTriage()" />Sim</label>
+                <label class="seg-option"><input type="radio" name="qB" value="0" onchange="evaluateCitizenTriage()" />Não</label>
+              </div>
+            </fieldset>
+            <fieldset class="triage-row">
+              <legend class="triage-question-text">3. O atendimento é para pessoa com prioridade legal (60+ anos, gestante, pessoa com deficiência ou autista)?</legend>
+              <div class="segmented-toggle">
+                <label class="seg-option"><input type="radio" name="qC" value="1" onchange="evaluateCitizenTriage()" />Sim, prioritário</label>
+                <label class="seg-option"><input type="radio" name="qC" value="0" checked onchange="evaluateCitizenTriage()" />Não, regular</label>
+              </div>
+            </fieldset>
+            <fieldset class="triage-row">
+              <legend class="triage-question-text">4. É urgência comprovada (viagem imediata, perícia médica ou perda total por furto)?</legend>
+              <div class="segmented-toggle">
+                <label class="seg-option"><input type="radio" name="qD" value="1" onchange="evaluateCitizenTriage()" />Sim, urgência</label>
+                <label class="seg-option"><input type="radio" name="qD" value="0" checked onchange="evaluateCitizenTriage()" />Não</label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div id="triageVerdictBox" class="verdict-banner" role="status">
+            <svg class="ico ico-ok" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-ok"/></svg>
+            <svg class="ico ico-bad" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-bad"/></svg>
+            <svg class="ico ico-info" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-info"/></svg>
+            <div>
+              <h3 id="triageVerdictTitle"></h3>
+              <p id="triageVerdictDesc"></p>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button type="button" class="btn btn-quiet" onclick="goToWizardStep(1)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-left"/></svg>
+              Voltar aos documentos
+            </button>
+            <button type="button" class="btn" onclick="goToWizardStep(3)">
+              Continuar: senha e ônibus
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-right"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- ETAPA 3 -->
+        <div id="wizardStage3" class="stage-body">
+          <h2>Sua senha e como chegar</h2>
+          <p class="stage-desc">Mostre o código da senha na recepção da Central. Abaixo, veja qual linha de ônibus deixa você na porta.</p>
+
+          <div class="ticket">
+            <div class="ticket-main">
+              <small>Senha de atendimento</small>
+              <h3 id="step3ServiceName"></h3>
+              <p id="step3QueueType"></p>
+              <button type="button" class="btn" onclick="issueCitizenTicket()">Ativar minha senha</button>
+            </div>
+            <div class="ticket-stub">
+              <small>Sua senha</small>
+              <div id="step3TicketNumber" class="ticket-number-display">N-104</div>
+              <span>Guichês 01 a 05</span>
+            </div>
+          </div>
+
+          <div id="ticketSavedConfirmation" class="ok-box" role="status" hidden>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-ok"/></svg>
+            <div>
+              <strong>Senha ativada.</strong> O código já aparece no painel do posto.<br />
+              <span id="feedbackAsk">Este passo a passo resolveu o seu problema?</span><br />
+              <button type="button" class="btn btn-quiet btn-sm" data-label="Sim, resolveu" onclick="recordFeedback(true, this)">Sim, resolveu</button>
+              <button type="button" class="btn btn-quiet btn-sm" data-label="Não resolveu" onclick="recordFeedback(false, this)">Não resolveu</button>
+            </div>
+          </div>
+
+          <h3 class="sub">Qual ônibus pegar até a Central</h3>
+          <div class="chip-row">
+            <button type="button" class="chip active" onclick="selectBusCorridor(0, this)">Linha 1 · Centro</button>
+            <button type="button" class="chip" onclick="selectBusCorridor(1, this)">Linha 2 · Zona Norte</button>
+            <button type="button" class="chip" onclick="selectBusCorridor(2, this)">Linha 3 · Zona Sul</button>
+            <button type="button" class="chip" onclick="selectBusCorridor(3, this)">Linha 4 · Leste-Oeste</button>
+          </div>
+          <div class="bus-box" aria-live="polite">
+            <strong id="busRouteTitle"></strong>
+            <p id="busRouteStats"></p>
+          </div>
+
+          <div class="actions">
+            <button type="button" class="btn btn-quiet" onclick="goToWizardStep(2)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-left"/></svg>
+              Voltar à triagem
+            </button>
+            <button type="button" class="btn" onclick="switchMainView('catalog')">Concluir</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ASSISTENTE -->
+    <section id="view-assistant" class="view-pane">
+      <div class="page">
+        <h1>Assistente de dúvidas</h1>
+        <p class="sheet-lead">Conte o seu problema com suas palavras. O assistente procura a orientação certa e mostra os documentos que você vai precisar.</p>
+
+        <form class="ask" onsubmit="handleAssistantAsk(event)">
+          <label for="assistantQueryInput">Sua dúvida</label>
+          <div class="search-row">
+            <input type="text" id="assistantQueryInput" placeholder="Ex.: fui roubado e perdi o RG, preciso pagar a 2ª via?" autocomplete="off" data-alert="assistPII" oninput="checkPII(this)" />
+            <button type="submit" class="btn">Perguntar</button>
+          </div>
+          <p id="assistPII" class="hint" role="alert" hidden>Por segurança, não digite CPF, RG, telefone, endereço ou e-mail. Esses dados não são necessários e não são guardados.</p>
+        </form>
+
+        <div class="quick" style="margin-top:1rem">
+          <span>Perguntas comuns:</span>
+          <button type="button" class="chip" onclick="quickAsk('Fui roubado e perdi o RG, preciso pagar a segunda via?')">Perda ou roubo de RG</button>
+          <button type="button" class="chip" onclick="quickAsk('Minha avó tem 72 anos e não consegue ir buscar o documento, posso ir por ela?')">Retirar documento por outra pessoa</button>
+          <button type="button" class="chip" onclick="quickAsk('Moro de aluguel, consigo desconto na conta de luz ou energia solar?')">Desconto na luz morando de aluguel</button>
+          <button type="button" class="chip" onclick="quickAsk('Preciso de intérprete de Libras. Como faço?')">Intérprete de Libras</button>
+        </div>
+
+        <div id="assistantAnswerContainer" aria-live="polite">
+          <p class="empty">A resposta aparece aqui. Escolha uma pergunta comum ou escreva a sua.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- POSTO E ÔNIBUS -->
+    <section id="view-unit" class="view-pane">
+      <div class="page-wide">
+        <h1>Posto Central, fila e ônibus</h1>
+        <p class="sheet-lead">Pegue sua senha sem ir ao balcão e confira as 4 linhas municipais que chegam à Central. Os dados vêm de um totem de demonstração.</p>
+
+        <div class="unit-grid">
+          <div>
+            <h2>Pegar senha</h2>
+            <div class="issue-list">
+              <button type="button" class="btn" onclick="totemIssue('N', 'Guichê geral · documentos e cadastros')"><span>Senha geral</span><span>Documentos e cadastros</span></button>
+              <button type="button" class="btn btn-solar" onclick="totemIssue('P', 'Guichê prioritário · Lei 10.048/2000')"><span>Senha prioritária</span><span>60+, gestante, deficiência, autismo</span></button>
+              <button type="button" class="btn btn-quiet" onclick="totemIssue('I', 'Balcão expresso · triagem e informações')"><span>Triagem expressa</span><span>Dúvida rápida, até 2 min</span></button>
+            </div>
+
+            <div class="board" role="status" aria-live="polite">
+              <div>
+                <small>Painel de chamada da recepção</small>
+                <p id="unitCurrentTicketDesc">Guichê 04</p>
+              </div>
+              <strong id="unitCurrentTicketCode">N-103</strong>
+            </div>
+          </div>
+
+          <div>
+            <h2>Frota por linha (72 ônibus)</h2>
+            <p class="lead-sm">A frota foi redistribuída para reforçar os corredores com mais demanda.</p>
+            <div class="table-scroll">
+              <table class="data-table">
+                <thead><tr><th scope="col">Linha</th><th scope="col" class="num">Antes</th><th scope="col" class="num">Agora</th><th scope="col">Passa a cada</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">1 · Central / Cívica</th><td class="num">12</td><td class="num"><strong>14</strong> <span class="delta up">+2</span></td><td>6 min</td></tr>
+                  <tr><th scope="row">2 · Zona Norte</th><td class="num">20</td><td class="num"><strong>19</strong> <span class="delta down">−1</span></td><td>8 min</td></tr>
+                  <tr><th scope="row">3 · Zona Sul</th><td class="num">16</td><td class="num"><strong>18</strong> <span class="delta up">+2</span></td><td>7 min</td></tr>
+                  <tr><th scope="row">4 · Leste-Oeste</th><td class="num">24</td><td class="num"><strong>21</strong> <span class="delta down">−3</span></td><td>7 min</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <p><strong>Central do Cidadão de Aurora</strong> é um protótipo educacional da Global Solution FIAP 2026.2 (1º ano de Ciência da Computação, turma 1CCPZ). Aurora é uma cidade fictícia e este site não é um canal oficial de prefeitura ou governo. O assistente nunca pede nem guarda CPF, RG, telefone, endereço ou e-mail.</p>
+      <a class="btn btn-quiet btn-sm" href="Auditoria_FIAP.html">Área do avaliador (FIAP)</a>
+    </div>
+  </footer>
+
+  <script>
+    const SERVICES = [
+      {
+        id: "FC-01",
+        category: "Documentos Pessoais",
+        theme: "theme-blue",
+        icon: "doc",
+        badgeText: "1ª Via Gratuita",
+        isFree: true,
+        title: "Carteira de Identidade (RG / CIN)",
+        shortDesc: "Emissão gratuita da 1ª via ou solicitação de 2ª via por perda, roubo ou atualização cadastral.",
+        cost: "1ª via Gratuita · 2ª via R$ 38,00",
+        deadline: "10 dias úteis",
+        channel: "Presencial com Senha",
+        where: "Posto de Identificação da Central de Aurora (Guichês 01 a 05)",
+        source: "Fichas FC-01 e FC-07 · Instituto de Identificação Civil",
+        keywords: ["rg", "identidade", "cin", "segunda via", "perdi", "roubo", "furto", "boletim", "carteira"],
+        checklist: [
+          "Certidão de Nascimento ou de Casamento (original ou cópia autenticada — fotocópia simples não é aceita)",
+          "Documento oficial com número do CPF (ou comprovante de inscrição no CPF)",
+          "Comprovante de residência recente (emitido nos últimos 90 dias)",
+          "Em caso de roubo ou furto: Boletim de Ocorrência (se foi perda simples, assine a declaração gratuita no balcão)",
+          "Se menor de 12 anos: presença obrigatória do responsável legal portando documento oficial com foto"
+        ],
+        steps: [
+          "Separe a Certidão original e o comprovante de residência marcando a lista acima.",
+          "Para 2ª via por perda simples, gere a guia de R$ 38,00 via PIX (cidadãos inscritos no CadÚnico ou vítimas de roubo com B.O. têm isenção no balcão).",
+          "Realize a checagem rápida na Etapa 2 a seguir para validar sua prioridade.",
+          "Ative sua senha digital na Etapa 3 e compareça à Central de Aurora para foto e biometria."
+        ]
+      },
+      {
+        id: "FC-02",
+        category: "Documentos Pessoais",
+        theme: "theme-blue",
+        icon: "doc",
+        badgeText: "Gratuito",
+        isFree: true,
+        title: "CPF: Inscrição, 2ª Via e Regularização",
+        shortDesc: "Emissão do comprovante de CPF pela internet ou regularização presencial de cadastro suspenso na Receita.",
+        cost: "100% Gratuito",
+        deadline: "Imediato ou até 2 dias úteis",
+        channel: "Online ou Balcão Receita",
+        where: "Balcão Receita Cidadã · Térreo da Central de Aurora",
+        source: "Ficha FC-02 · Receita Federal do Brasil",
+        keywords: ["cpf", "receita", "cadastro", "suspenso", "regularizar", "primeira via"],
+        checklist: [
+          "Documento de identificação oficial com foto (RG, CNH ou Certidão de Nascimento para menores)",
+          "Título de Eleitor (para cidadãos entre 18 e 70 anos)",
+          "Comprovante de endereço atualizado",
+          "Para menores de 16 anos: RG original do pai, mãe ou tutor legal"
+        ],
+        steps: [
+          "Para 1ª inscrição ou 2ª via simples, o comprovante pode ser impresso na hora pelo portal Gov.br ou nos totens da Central.",
+          "Se o CPF constar como 'Pendente de Regularização', apresente os documentos originais no Balcão Receita Cidadã.",
+          "O protocolo de regularização cadastral é emitido na hora em cerca de 15 minutos."
+        ]
+      },
+      {
+        id: "FC-05",
+        category: "Documentos Pessoais",
+        theme: "theme-blue",
+        icon: "doc",
+        badgeText: "Isenção CadÚnico",
+        isFree: true,
+        title: "2ª Via de Certidões (Nascimento e Casamento)",
+        shortDesc: "Solicitação de segunda via atualizada de certidões civis, com gratuidade garantida para famílias de baixa renda.",
+        cost: "Gratuita (CadÚnico) ou R$ 42,50",
+        deadline: "5 dias úteis (física) · 48h (digital)",
+        channel: "Balcão de Registro Civil",
+        where: "Setor de Registro Civil · Central do Cidadão de Aurora",
+        source: "Ficha FC-05 · Cartório de Registro Civil e Defensoria Pública",
+        keywords: ["certidao", "nascimento", "casamento", "obito", "cartorio", "segunda via"],
+        checklist: [
+          "Documento de identificação com foto do solicitante (ou Boletim de Ocorrência se perdeu todos os documentos)",
+          "Nome completo do registrado, data aproximada e cartório/município onde foi registrado",
+          "Para gratuidade: folha resumo do CadÚnico ou declaração de hipossuficiência assinada no posto"
+        ],
+        steps: [
+          "Informe no balcão da Central o município e o cartório onde o registro original foi lavrado.",
+          "Para cidadãos de baixa renda, solicite a requisição de isenção da Defensoria Pública no próprio guichê.",
+          "Retire a certidão física na Central de Aurora ou receba a certidão digital no seu e-mail."
+        ]
+      },
+      {
+        id: "FC-03",
+        category: "Documentos Pessoais",
+        theme: "theme-blue",
+        icon: "doc",
+        badgeText: "Gratuito",
+        isFree: true,
+        title: "Título de Eleitor e Biometria Eleitoral",
+        shortDesc: "Emissão do primeiro título eleitoral, transferência de município, revisão de dados e coleta biométrica.",
+        cost: "100% Gratuito",
+        deadline: "Emitido na hora (e-Título)",
+        channel: "Posto Eleitoral na Central",
+        where: "Posto Eleitoral Integrado · Central de Aurora",
+        source: "Ficha FC-03 · Justiça Eleitoral / TRE",
+        keywords: ["titulo", "eleitor", "votar", "biometria", "transferencia", "multa eleitoral"],
+        checklist: [
+          "Documento oficial com foto (RG, Carteira de Trabalho ou Passaporte — CNH não é aceita para o 1º título)",
+          "Comprovante de residência emitido há no mínimo 3 meses e no máximo 1 ano",
+          "Certificado de quitação militar (para homens que completam 19 anos no ano vigente)"
+        ],
+        steps: [
+          "Consulte e quite eventuais multas eleitorais via PIX diretamente pelo aplicativo e-Título.",
+          "Compareça ao Posto Eleitoral da Central de Aurora para coleta da biometria digital e fotografia.",
+          "Lembrete: transferências de domicílio eleitoral devem ser concluídas até 150 dias antes da eleição."
+        ]
+      },
+      {
+        id: "FC-04",
+        category: "Trabalho e Trânsito",
+        theme: "theme-emerald",
+        icon: "work",
+        badgeText: "100% Digital",
+        isFree: true,
+        title: "Carteira de Trabalho Digital e Seguro-Desemprego",
+        shortDesc: "Habilitação imediata da CTPS Digital pelo número do CPF para contratação e entrada no Seguro-Desemprego.",
+        cost: "100% Gratuito",
+        deadline: "Liberação imediata na hora",
+        channel: "App Digital ou Balcão SINE",
+        where: "Balcão SINE / Ministério do Trabalho na Central de Aurora",
+        source: "Ficha FC-04 · Ministério do Trabalho e Emprego",
+        keywords: ["carteira de trabalho", "ctps", "emprego", "assinada", "seguro desemprego", "sine"],
+        checklist: [
+          "Número do CPF regularizado na Receita Federal",
+          "Conta Gov.br ativa (caso não tenha celular, o Balcão SINE da Central gera sua senha gratuitamente)",
+          "Para Seguro-Desemprego: Termo de Rescisão (TRCT) e Requerimento emitido pelo empregador"
+        ],
+        steps: [
+          "A antiga carteira azul de papel foi substituída: hoje o número da sua Carteira de Trabalho é o próprio CPF.",
+          "Ao ser contratado, informe apenas o seu CPF ao empregador; o contrato aparece no aplicativo em até 48h.",
+          "Caso precise de apoio para Seguro-Desemprego ou vagas do SINE, retire uma senha para o Balcão do Trabalho."
+        ]
+      },
+      {
+        id: "FC-06",
+        category: "Trabalho e Trânsito",
+        theme: "theme-emerald",
+        icon: "work",
+        badgeText: "Taxa R$ 127,69",
+        isFree: false,
+        title: "Renovação e 2ª Via da CNH (Motorista)",
+        shortDesc: "Renovação de CNH vencida, realização do exame médico na clínica anexa da Central e liberação da CNH Digital.",
+        cost: "Taxa + Exame: R$ 127,69",
+        deadline: "Digital em 3 dias · Física em 7 dias",
+        channel: "Presencial (Exame Médico)",
+        where: "Núcleo DETRAN · Ala B da Central de Aurora",
+        source: "Ficha FC-06 · DETRAN / SENATRAN",
+        keywords: ["cnh", "motorista", "habilitacao", "renovar", "detran", "exame medico", "carteira de motorista"],
+        checklist: [
+          "CNH atual (ou documento oficial de identidade com foto em caso de perda/roubo)",
+          "CPF e comprovante de residência emitido nos últimos 90 dias",
+          "Para categorias C, D ou E: laudo de exame toxicológico negativo dentro da validade",
+          "Comprovante de pagamento da guia unificada via PIX ou rede bancária"
+        ],
+        steps: [
+          "Atenção ao prazo: é permitido dirigir por até 30 dias após a data de vencimento impressa na CNH.",
+          "Realize a biometria e o exame médico de aptidão física e mental na clínica credenciada dentro da Central.",
+          "Após a aprovação no exame, sua CNH Digital fica disponível no aplicativo Carteira Digital de Trânsito."
+        ]
+      },
+      {
+        id: "MMC-01",
+        category: "Trabalho e Trânsito",
+        theme: "theme-emerald",
+        icon: "work",
+        badgeText: "1ª Via Gratuita",
+        isFree: true,
+        title: "Cartão Transporte Cidadão e Passe Livre",
+        shortDesc: "Emissão na hora do Cartão Municipal de Integração, Passe Livre Estudantil e Gratuidade Sênior (60+ anos).",
+        cost: "1ª via Gratuita",
+        deadline: "Emitido na hora (10 min)",
+        channel: "Balcão Mobilidade Aurora",
+        where: "Terminal Integrado anexo à Central do Cidadão de Aurora",
+        source: "Secretaria Municipal de Mobilidade · Frota de 72 Ônibus",
+        keywords: ["onibus", "transporte", "passe livre", "bilhete", "cartao transporte", "estudante", "horario"],
+        checklist: [
+          "Documento oficial com foto (RG ou CIN) e CPF",
+          "Comprovante de residência no Município de Aurora",
+          "Para Passe Livre Estudantil: declaração de matrícula escolar ativa emitida há menos de 30 dias"
+        ],
+        steps: [
+          "Compareça ao Balcão de Mobilidade na entrada da Central para captura de foto e impressão imediata do cartão.",
+          "O cartão permite integração gratuita por até 2 horas entre as 4 linhas estruturais da frota de 72 ônibus.",
+          "Consulte na Etapa 3 os intervalos atualizados da sua linha após o reforço da frota municipal."
+        ]
+      },
+      {
+        id: "ERS-01",
+        category: "Luz, Água e Moradia",
+        theme: "theme-amber",
+        icon: "energy",
+        badgeText: "Até 65% OFF",
+        isFree: true,
+        title: "Tarifa Social de Energia (Desconto na Luz)",
+        shortDesc: "Ativação do desconto legal de 10% a 65% na fatura mensal de energia elétrica para famílias no CadÚnico ou BPC.",
+        cost: "100% Gratuito (Lei 12.212/2010)",
+        deadline: "Entra na próxima fatura",
+        channel: "Balcão Energia Cidadã",
+        where: "Espaço Eficiência Energética · Central de Aurora",
+        source: "ANEEL · Leis Federais nº 12.212/2010 e nº 14.203/2021",
+        keywords: ["conta de luz", "energia", "desconto", "tarifa social", "luz cara", "cadunico", "bpc", "aneel"],
+        checklist: [
+          "Conta de luz recente da residência (mesmo que esteja no nome do proprietário, caso você more de aluguel)",
+          "Número do NIS (Cadastro Único atualizado) ou número do Benefício de Prestação Continuada (BPC/LOAS)",
+          "CPF e RG do titular do benefício social"
+        ],
+        steps: [
+          "Simule acima o consumo mensal em kWh da sua casa para ver o impacto direto no orçamento familiar.",
+          "Mesmo morando de aluguel, a lei garante o direito de vincular seu NIS à conta de luz do imóvel onde você reside.",
+          "Apresente a fatura e o CPF no Balcão Energia Cidadã da Central para ativar o desconto de até 65%."
+        ]
+      },
+      {
+        id: "ERS-02",
+        category: "Luz, Água e Moradia",
+        theme: "theme-amber",
+        icon: "energy",
+        badgeText: "Kit LED Gratuito",
+        isFree: true,
+        title: "Programa Casa Eficiente: Troca por Lâmpadas LED",
+        shortDesc: "Retirada gratuita de até 8 lâmpadas LED Selo Procel A e plano prático para reduzir sua conta de luz em 38%.",
+        cost: "Kit de 8 lâmpadas: Gratuito",
+        deadline: "Retirada imediata no posto",
+        channel: "Presencial no Espaço Energia",
+        where: "Espaço Eficiência Energética · Central de Aurora",
+        source: "PROCEL / INMETRO · Programa Nacional de Conservação de Energia",
+        keywords: ["lampada", "led", "chuveiro", "economizar luz", "procel", "troca de lampadas"],
+        checklist: [
+          "Última conta de energia elétrica da residência",
+          "Documento oficial com foto do titular ou morador",
+          "Levar até 8 lâmpadas antigas (incandescentes ou fluorescentes) para reciclagem e troca por LED 9W"
+        ],
+        steps: [
+          "Trocar 8 lâmpadas antigas por modelos LED 9W Selo Procel A reduz o gasto com iluminação em até 80%.",
+          "Mudar a chave do chuveiro elétrico para o modo 'Verão' (3.200W) corta em mais 35% o consumo do banho.",
+          "Juntas, essas duas ações geram uma economia média de R$ 1.096,00 por ano para uma família em Aurora."
+        ]
+      },
+      {
+        id: "ERS-03",
+        category: "Luz, Água e Moradia",
+        theme: "theme-amber",
+        icon: "energy",
+        badgeText: "Zero Custo Adesão",
+        isFree: true,
+        title: "Energia Solar Compartilhada (Mesmo de Aluguel)",
+        shortDesc: "Receba créditos de energia solar limpa direto na sua conta de luz sem precisar instalar placas no telhado.",
+        cost: "Adesão R$ 0,00 (Assinatura Solar)",
+        deadline: "Créditos em até 60 dias",
+        channel: "Online ou Balcão Sustentável",
+        where: "Espaço Eficiência Energética · Central de Aurora",
+        source: "Marco Legal da Geração Distribuída (Lei 14.300/2022 · ANEEL / MCTI)",
+        keywords: ["solar", "painel solar", "placa solar", "aluguel", "apartamento", "energia renovavel", "co2"],
+        checklist: [
+          "Fatura de energia elétrica com consumo médio acima de 150 kWh/mês",
+          "Documento de identificação com foto e CPF regular",
+          "Para quem deseja instalar kit próprio de 2,0 kWp no telhado: endereço para vistoria técnica gratuita"
+        ],
+        steps: [
+          "Na modalidade 'Geração Compartilhada' (Lei 14.300/2022), moradores de aluguel ou apartamento recebem créditos de uma fazenda solar municipal sem obras.",
+          "Para casas com telhado próprio, o sistema de 2,0 kWp gera cerca de 250 kWh/mês, economizando R$ 2.550/ano com retorno em 3,6 anos.",
+          "Cada residência integrada evita a emissão de 115,5 kg de CO₂ por ano."
+        ]
+      },
+      {
+        id: "FC-07",
+        category: "Direitos e Acessibilidade",
+        theme: "theme-blue",
+        icon: "rights",
+        badgeText: "Fila Preferencial",
+        isFree: true,
+        title: "Atendimento Prioritário (60+, PcD) e Libras",
+        shortDesc: "Guichê preferencial imediato, sala silenciosa para autistas (TEA) e intérprete de Libras em tempo real.",
+        cost: "100% Gratuito",
+        deadline: "Atendimento imediato (3 min)",
+        channel: "Todos os setores da Central",
+        where: "Recepção Preferencial · Térreo da Central de Aurora",
+        source: "Ficha FC-07 · Leis Federais 10.048/2000, 10.436/2002 e 13.146/2015",
+        keywords: ["prioridade", "idoso", "60+", "gestante", "autista", "pcd", "deficiencia", "libras", "surdo"],
+        checklist: [
+          "Documento oficial com foto (para comprovação de 60+ anos) ou carteira/laudo PcD, CIPTEA ou cartão gestante",
+          "Para atendimento em Libras: não é necessário agendar previamente (intérprete disponível durante todo o expediente)"
+        ],
+        steps: [
+          "Na Etapa 2 deste portal (ou no totem físico da entrada), marque a opção de Prioridade Legal.",
+          "Sua senha da série 'P' garante chamada imediata em guichê preferencial com espera média de 3 minutos.",
+          "Solicite na chegada o acompanhamento presencial em Libras ou acesso à Sala Sensorial Silenciosa se desejar."
+        ]
+      },
+      {
+        id: "FC-07B",
+        category: "Direitos e Acessibilidade",
+        theme: "theme-blue",
+        icon: "rights",
+        badgeText: "Modelo Gratuito",
+        isFree: true,
+        title: "Retirada por Procuração e Regras para Menores",
+        shortDesc: "Como um familiar pode retirar documentos prontos para idoso/acamado e regras de acompanhamento de menores.",
+        cost: "Gratuito",
+        deadline: "Validação na hora no balcão",
+        channel: "Balcão de Triagem Jurídica",
+        where: "Setor de Apoio Jurídico · Central de Aurora",
+        source: "Ficha FC-07 · Código Civil e Estatuto da Criança e do Adolescente",
+        keywords: ["procuracao", "menor", "filho", "acamado", "terceiro", "representante", "responsavel legal"],
+        checklist: [
+          "Documento oficial com foto original do representante/familiar que comparecer à Central",
+          "Protocolo de atendimento e documento original do titular",
+          "Procuração assinada (ou atestado médico em caso de titular acamado/hospitalizado)",
+          "Para menores de 12 anos: presença obrigatória do pai, mãe ou responsável legal com termo de guarda"
+        ],
+        steps: [
+          "A coleta inicial de foto e digitais do RG é individual (cidadãos acamados podem agendar coleta domiciliar pelo 156).",
+          "Já a retirada de documentos prontos ou solicitação de certidões pode ser feita por familiar com procuração simples.",
+          "Menores entre 12 e 15 anos podem retirar documentos prontos desde que acompanhados de um dos pais."
+        ]
+      }
+    ];
+
+    const BUS_ROUTES = [
+      {
+        title: "Linha 101 · Expresso Central — Desembarque na Porta Principal (Av. Cívica, 400)",
+        stats: "Frota em operação: <strong>14 ônibus</strong> (reforçada com +2 veículos pela matriz de mobilidade) · Passa no ponto <strong>a cada 6 minutos</strong> · Viagem média: <strong>14 minutos</strong>."
+      },
+      {
+        title: "Linha 204 · Corredor Zona Norte → Terminal Central de Aurora",
+        stats: "Frota em operação: <strong>19 ônibus</strong> · Passa no ponto <strong>a cada 8 minutos</strong> · Viagem média: <strong>22 minutos</strong> (integração gratuita)."
+      },
+      {
+        title: "Linha 308 · Corredor Zona Sul → Av. Cívica (Central do Cidadão)",
+        stats: "Frota em operação: <strong>18 ônibus</strong> (reforçada com +2 veículos no pico) · Passa no ponto <strong>a cada 7 minutos</strong> · Viagem média: <strong>19 minutos</strong>."
+      },
+      {
+        title: "Linha 412 · Eixo Transversal Leste-Oeste → Central de Aurora",
+        stats: "Frota em operação: <strong>21 ônibus</strong> · Passa no ponto <strong>a cada 7 minutos</strong> · Viagem média: <strong>24 minutos</strong>."
+      }
+    ];
+
+    function findBestServices(queryText) {
+      const q = queryText.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      return SERVICES.map(s => {
+        let score = 0;
+        s.keywords.forEach(kw => {
+          const kwNorm = kw.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+          if (q.includes(kwNorm)) score += 3;
+        });
+        s.title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").split(/\W+/).forEach(w => {
+          if (w.length > 2 && q.includes(w)) score += 1;
+        });
+        return { service: s, score };
+      }).sort((a, b) => b.score - a.score);
+    }
+
+    function evaluateCitizenTriage() {
+      const A = document.querySelector('input[name="qA"]:checked')?.value === "1";
+      const B = document.querySelector('input[name="qB"]:checked')?.value === "1";
+      const C = document.querySelector('input[name="qC"]:checked')?.value === "1";
+      const D = document.querySelector('input[name="qD"]:checked')?.value === "1";
+
+      const sPriority = A && B && (C || D);
+      const sRegular = A && B && !C && !D;
+
+      const box = document.getElementById("triageVerdictBox");
+      const title = document.getElementById("triageVerdictTitle");
+      const desc = document.getElementById("triageVerdictDesc");
+      const queueLbl = document.getElementById("step3QueueType");
+      const codeLbl = document.getElementById("step3TicketNumber");
+
+      if (!A) {
+        box.className = "verdict-banner blocked";
+        title.textContent = "Atenção: Não vá ao posto ainda! Falta documento original.";
+        desc.textContent = "Fotocópias simples não são aceitas para emissão de documentos oficiais. Volte à Etapa 1 e separe os originais antes de sair de casa.";
+      } else if (!B && !D) {
+        box.className = "verdict-banner pending";
+        title.textContent = "Gere sua senha digital na Etapa 3 antes de sair.";
+        desc.textContent = "Para garantir atendimento rápido sem espera desnecessária, avance para a Etapa 3 e ative seu passe digital.";
+      } else if (sPriority) {
+        box.className = "verdict-banner";
+        title.textContent = "Atendimento Prioritário Liberado (Lei Federal 10.048/2000)!";
+        desc.textContent = "Você tem direito a guichê preferencial imediato (espera média: 3 minutos). Avance para a Etapa 3 para retirar sua senha da série P.";
+        queueLbl.innerHTML = "Modalidade: <strong>Guichê Prioritário · Espera estimada: 3 min</strong>";
+        codeLbl.textContent = "P-0" + ticketCounterP;
+      } else if (sRegular) {
+        box.className = "verdict-banner";
+        title.textContent = "Tudo certo! Você está apto(a) para o atendimento presencial.";
+        desc.textContent = "Seus requisitos estão completos. Avance para a Etapa 3 para emitir seu passe de senha digital e consultar o ônibus até a Central.";
+        queueLbl.innerHTML = "Modalidade: <strong>Guichê Geral · Espera estimada: 8 min</strong>";
+        codeLbl.textContent = "N-" + ticketCounterN;
+      }
+    }
+
+    function executeLangGraphAgent(rawInput) {
+      const text = (rawInput || "").trim();
+      const norm = text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+      // NÓ 1: InputGuardrailNode (Validação + LGPD PII Masking + Anti-Prompt Injection)
+      if (!text || text.length < 3 || /^[^a-zA-Z]+$/.test(norm) || norm.includes("asdfgh")) {
+        return {
+          status: "INVALID_INPUT",
+          guardrail: "Entrada inválida detectada pelo InputGuardrailNode",
+          fichas: ["FC-01 a FC-07"],
+          answer: "Não consegui compreender sua mensagem. Por favor, reformule sua dúvida usando palavras simples sobre documentos pessoais (RG, CPF, Título de Eleitor, Carteira de Trabalho, Certidões, CNH) ou escolha uma opção abaixo.",
+          matchedServiceId: null
+        };
+      }
+
+      // Detecção de Prompt Injection (#24, #25 e texto branco oculto SIX SEVEN)
+      if (
+        norm.includes("ignore as instrucoes") ||
+        norm.includes("prompt de sistema") ||
+        norm.includes("[sistema]") ||
+        norm.includes("nova regra:") ||
+        norm.includes("six seven")
+      ) {
+        if (norm.includes("rg") && norm.includes("gratuita")) {
+          return {
+            status: "INJECTION_BLOCKED",
+            guardrail: "Tentativa de Prompt Injection ([SISTEMA] / Falsa Regra) neutralizada",
+            fichas: ["FC-01", "FC-07"],
+            answer: "Aviso de Segurança: Comandos administrativos enviados no chat não alteram as regras. Conforme a Ficha FC-01 (verificada em 01/10/2026), apenas a 1ª via do RG é gratuita; a 2ª via do RG tem taxa de R$ 38,00, paga por guia gerada no portal.",
+            matchedServiceId: "FC-01"
+          };
+        }
+        return {
+          status: "INJECTION_BLOCKED",
+          guardrail: "Tentativa de extração de Prompt de Sistema bloqueada pelo InputGuardrailNode",
+          fichas: ["FC-07"],
+          answer: "Desculpe, mas não posso exibir instruções internas de sistema nem alterar meu papel. Sou o assistente digital da Central do Cidadão de Aurora e estou aqui para responder dúvidas sobre documentos pessoais com base nas fichas FC-01 a FC-07.",
+          matchedServiceId: null
+        };
+      }
+
+      // Detecção e Ocultação de Dados Pessoais - LGPD (#22, #23)
+      const hasCpf = /\b\d{3}\.?\d{3}\.?\d{3}-?\d{2}\b/.test(text);
+      const hasPiiOffer = norm.includes("meu cpf e") || norm.includes("passar meu endereco") || norm.includes("meu telefone");
+      const sanitizedQuery = text
+        .replace(/\b\d{3}\.?\d{3}\.?\d{3}-?\d{2}\b/g, "[CPF_OCULTADO_LGPD]")
+        .replace(/\b\d{4,5}-?\d{4}\b/g, "[TELEFONE_OCULTADO_LGPD]");
+
+      if (hasCpf || hasPiiOffer) {
+        const isRg = norm.includes("rg") || norm.includes("agendar");
+        return {
+          status: "LGPD_PROTECTED",
+          guardrail: "Dado pessoal ocultado automaticamente ([CPF_OCULTADO_LGPD]) — Não salvo em log",
+          sanitized: sanitizedQuery,
+          fichas: isRg ? ["FC-01", "FC-07"] : ["FC-02", "FC-07"],
+          answer: isRg
+            ? "Para sua proteção (LGPD), não informe endereço, telefone ou números de documentos no chat (dados ocultados e não armazenados). Este assistente não realiza agendamentos: o agendamento obrigatório do RG deve ser feito diretamente pelo canal de agendamento da Central do Cidadão de Aurora (Fichas FC-01 e FC-07, verificadas em 01/10/2026)."
+            : "Para sua proteção (LGPD), seu número de documento foi ocultado e não é armazenado. Este assistente não consulta situação cadastral individual. Para verificar ou regularizar seu CPF, acesse diretamente o site do órgão responsável ou agende atendimento presencial (Fichas FC-02 e FC-07, verificadas em 01/10/2026).",
+          matchedServiceId: isRg ? "FC-01" : "FC-02"
+        };
+      }
+
+      // Fora do Escopo (#20 Passaporte, Visto, etc.)
+      if (norm.includes("passaporte") || norm.includes("visto") || norm.includes("detran multa")) {
+        return {
+          status: "OUT_OF_SCOPE",
+          guardrail: "Assunto fora das 7 fichas de referência (Regra de Ouro: Não inventar dados)",
+          fichas: ["Fora do Escopo (FC-01 a FC-07)"],
+          answer: "Essa informação não consta nas fichas de referência da Central do Cidadão de Aurora (FC-01 a FC-07). Para emissão de Passaporte, consulte diretamente o site oficial da Polícia Federal.",
+          matchedServiceId: null
+        };
+      }
+
+      // Aviso de Limitação / Canal Oficial (#26)
+      if (norm.includes("canal oficial") || norm.includes("prefeitura")) {
+        return {
+          status: "OFFICIAL_DISCLAIMER",
+          guardrail: "Verificação de Transparência Institucional",
+          fichas: ["FC-07"],
+          answer: "Não. Este assistente é um protótipo educacional de orientação baseado nas fichas de referência (01/10/2026) e não substitui os canais oficiais. Sempre confirme prazos, taxas e agendamentos diretamente no portal do órgão competente.",
+          matchedServiceId: null
+        };
+      }
+
+      // NÓ 2 e 3: HybridFichaRetrieverNode + GeneratorNode (Casos Cruzados e Específicos das Fichas FC-01..FC-07)
+      if (norm.includes("8 anos") || norm.includes("menor") || norm.includes("sozinho")) {
+        return {
+          status: "OK",
+          guardrail: "Entrada íntegra (Sem PII / Sem Injection) · Cruzamento Híbrido FC-01 + FC-07",
+          fichas: ["FC-01", "FC-07"],
+          answer: "Não. Menores de 12 anos não podem realizar o atendimento sozinhos: devem comparecer acompanhados de um responsável legal portando documento original com foto, mediante agendamento prévio no portal (Fichas FC-01 e FC-07, verificadas em 01/10/2026).",
+          matchedServiceId: "FC-01"
+        };
+      }
+      if (norm.includes("certidao") && (norm.includes("outra pessoa") || norm.includes("terceiro") || norm.includes("avo") || norm.includes("procuracao"))) {
+        return {
+          status: "OK",
+          guardrail: "Entrada íntegra · Cruzamento Híbrido FC-05 + FC-07",
+          fichas: ["FC-05", "FC-07"],
+          answer: "Sim! Outra pessoa pode solicitar ou retirar a 2ª via da certidão no balcão, desde que apresente procuração simples assinada e o documento original com foto de quem retira (Fichas FC-05 e FC-07, verificadas em 01/10/2026).",
+          matchedServiceId: "FC-05"
+        };
+      }
+      if (norm.includes("certidao") && (norm.includes("quanto custa") || norm.includes("portal") || norm.includes("valor"))) {
+        return {
+          status: "OK",
+          guardrail: "Entrada íntegra · Recuperação Ficha FC-05",
+          fichas: ["FC-05"],
+          answer: "Pelo portal (formato PDF), a 2ª via da certidão custa R$ 49,00 e fica pronta em 3 dias úteis. No atendimento presencial no balcão (impressa), custa R$ 55,00 com prazo de 5 dias úteis. Pessoas inscritas no CadÚnico têm isenção gratuita (Ficha FC-05, verificada em 01/10/2026).",
+          matchedServiceId: "FC-05"
+        };
+      }
+      if (norm.includes("cpf") && norm.includes("presencial")) {
+        return {
+          status: "OK",
+          guardrail: "Entrada íntegra · Recuperação Ficha FC-02",
+          fichas: ["FC-02"],
+          answer: "Pelo portal da internet a inscrição e 2ª via do CPF são gratuitas (em até 2 dias úteis). Já no atendimento presencial no balcão há uma taxa de R$ 7,00 (Ficha FC-02, verificada em 01/10/2026).",
+          matchedServiceId: "FC-02"
+        };
+      }
+      if (norm.includes("sabado") || norm.includes("horario de funcionamento")) {
+        return {
+          status: "OK",
+          guardrail: "Entrada íntegra · Recuperação Ficha FC-07",
+          fichas: ["FC-07"],
+          answer: "Não atendemos aos sábados. O atendimento presencial na Central do Cidadão de Aurora funciona de segunda a sexta-feira, das 8h às 17h (Ficha FC-07, verificada em 01/10/2026).",
+          matchedServiceId: "FC-07"
+        };
+      }
+      if (norm.includes("libras") || norm.includes("interprete")) {
+        return {
+          status: "OK",
+          guardrail: "Entrada íntegra · Recuperação Ficha FC-07",
+          fichas: ["FC-07"],
+          answer: "O atendimento com intérprete de Libras é gratuito e deve ser solicitado no agendamento pelo portal com pelo menos 48 horas de antecedência (Ficha FC-07, verificada em 01/10/2026).",
+          matchedServiceId: "FC-07"
+        };
+      }
+      if (norm.includes("cnh") && (norm.includes("45 dias") || norm.includes("55 anos") || norm.includes("antecedencia"))) {
+        return {
+          status: "OK",
+          guardrail: "Entrada íntegra · Recuperação Ficha FC-06",
+          fichas: ["FC-06"],
+          answer: "Regras de Renovação da CNH (Ficha FC-06, verificada em 01/10/2026): (1) Pode ser renovada a partir de 30 dias antes do vencimento; (2) Para condutores de 50 a 69 anos (como 55 anos), a validade é de 5 anos; (3) Com a CNH vencida há mais de 30 dias (ex.: 45 dias), NÃO é permitido dirigir até concluir a renovação.",
+          matchedServiceId: "FC-06"
+        };
+      }
+
+      // Busca geral ponderada nas fichas
+      const ranked = findBestServices(text);
+      const best = ranked[0].service;
+      return {
+        status: "OK",
+        guardrail: "Entrada íntegra · Recuperação Híbrida + Validação de Citação",
+        fichas: [...new Set([best.id.replace("FC-07B", "FC-07"), "FC-07"])],
+        answer: best.shortDesc + " Custo: " + best.cost + ". Prazo: " + best.deadline + ". Canal: " + best.channel + ".",
+        matchedServiceId: best.id,
+        serviceObj: best
+      };
+    }
+
+    /* ===== estado e preferências ===== */
+    const store = {
+      get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+      set(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* sem armazenamento: segue sem salvar */ }
+      }
+    };
+    let currentService = SERVICES[0];
+    let ticketCounterN = 104;
+    let ticketCounterP = 42;
+    let ticketCounterI = 18;
+
+    const $ = id => document.getElementById(id);
+    const ICON = (id, size = 20, sw = 2) =>
+      `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#${id}"/></svg>`;
+
+    function setFontScale(px) {
+      document.documentElement.style.setProperty("--base-size", px + "px");
+      store.set("aurora_font", String(px));
+      document.querySelectorAll("[data-font]").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.font === px)));
+    }
+
+    function toggleContrast(force) {
+      const on = document.body.classList.toggle("high-contrast", force);
+      store.set("aurora_contrast", on ? "1" : "0");
+      $("btnContrast").setAttribute("aria-pressed", String(on));
+    }
+
+    /* ===== navegação ===== */
+    function switchMainView(viewName) {
+      document.querySelectorAll(".view-pane").forEach(el => el.classList.remove("active"));
+      const target = $("view-" + viewName);
+      if (target) target.classList.add("active");
+
+      const current = viewName === "journey" ? "catalog" : viewName;
+      [["catalog", "navCatalog"], ["assistant", "navAssistant"], ["unit", "navUnit"]].forEach(([v, id]) => {
+        if (v === current) $(id).setAttribute("aria-current", "page");
+        else $(id).removeAttribute("aria-current");
+      });
+      window.scrollTo(0, 0);
+      $("main").focus({ preventScroll: true });
+    }
+
+    /* ===== catálogo ===== */
+    const GROUPS = [
+      ["Documentos Pessoais", "Documentos pessoais"],
+      ["Trabalho e Trânsito", "Trabalho e transporte"],
+      ["Luz, Água e Moradia", "Luz, água e moradia"],
+      ["Direitos e Acessibilidade", "Direitos e acessibilidade"]
+    ];
+
+    function renderCatalog() {
+      $("serviceDirectoryGrid").innerHTML = GROUPS.map(([key, label], gi) => {
+        const rows = SERVICES.filter(s => s.category === key).map(s => `
+          <li>
+            <button type="button" class="row" onclick="openServiceJourney('${s.id}')">
+              <span class="row-main">
+                <span class="row-title">${s.title}</span>
+                <span class="row-desc">${s.shortDesc}</span>
+                <span class="row-meta"><span class="tag${s.isFree ? "" : " paid"}">${s.badgeText}</span><span>Prazo: ${s.deadline}</span></span>
+              </span>
+              <span class="chev">${ICON("i-chev", 22)}</span>
+            </button>
+          </li>`).join("");
+        return `<section class="group" aria-labelledby="grp${gi}"><h3 id="grp${gi}">${label}</h3><ul>${rows}</ul></section>`;
+      }).join("");
+    }
+
+    /* ===== busca ===== */
+    function checkPII(input) {
+      const bad = input.value.includes("@") || input.value.replace(/\D/g, "").length >= 8;
+      $(input.dataset.alert).hidden = !bad;
+    }
+
+    function handleHeroSearch(e) {
+      e.preventDefault();
+      const input = $("heroSearchInput");
+      const q = input.value.trim();
+      $("searchHint").hidden = !!q;
+      if (!q) { input.focus(); return; }
+      const ranked = findBestServices(q);
+      if (ranked[0].score > 0) {
+        openServiceJourney(ranked[0].service.id);
+      } else {
+        switchMainView("assistant");
+        $("assistantQueryInput").value = q;
+        runAssistantQuery(q);
+      }
+    }
+
+    /* ===== serviço em 3 etapas ===== */
+    function updateDocProgress() {
+      const total = currentService.checklist.length;
+      const checked = document.querySelectorAll("#journeyChecklistContainer input:checked").length;
+      $("docCheckCounter").textContent = `${checked} de ${total} conferidos`;
+    }
+
+    function openServiceJourney(serviceId) {
+      const found = SERVICES.find(s => s.id === serviceId) || SERVICES[0];
+      currentService = found;
+
+      $("journeyCategoryBadge").textContent = found.category;
+      $("journeyCodeBadge").textContent = "Ficha " + found.id;
+      $("journeyTitle").textContent = found.title;
+      $("journeySummary").textContent = found.shortDesc;
+      $("journeyCost").textContent = found.cost;
+      $("journeyDeadline").textContent = found.deadline;
+      $("journeyChannel").textContent = found.channel;
+      $("journeyWhereText").textContent = found.where;
+      $("journeySourceText").textContent = found.source;
+      $("step3ServiceName").textContent = found.title;
+      $("ticketSavedConfirmation").hidden = true;
+      document.querySelectorAll("#ticketSavedConfirmation .btn").forEach(b => { b.disabled = false; b.textContent = b.dataset.label; });
+
+      const sim = $("journeyEnergySimulator");
+      sim.hidden = !found.id.startsWith("ERS-");
+      if (!sim.hidden) syncEnergyInputs(280);
+
+      $("journeyChecklistContainer").innerHTML = found.checklist.map((item, idx) => `
+        <label class="checklist-item">
+          <input type="checkbox" id="docCheck_${idx}" onchange="updateDocProgress()" />
+          <span>${item}</span>
+        </label>`).join("");
+      updateDocProgress();
+
+      $("journeyStepsList").innerHTML = found.steps.map((st, i) => `
+        <li><span class="timeline-bullet">${i + 1}</span><span>${st}</span></li>`).join("");
+
+      goToWizardStep(1);
+      switchMainView("journey");
+    }
+
+    function goToWizardStep(stepNumber) {
+      [1, 2, 3].forEach(n => {
+        const tab = $("stepTab" + n);
+        const stage = $("wizardStage" + n);
+        tab.classList.remove("active", "done");
+        stage.classList.remove("active");
+        tab.removeAttribute("aria-current");
+        if (n < stepNumber) tab.classList.add("done");
+        if (n === stepNumber) { tab.classList.add("active"); tab.setAttribute("aria-current", "step"); stage.classList.add("active"); }
+      });
+      evaluateCitizenTriage();
+      document.querySelector(".stepper").scrollIntoView({ block: "start" });
+    }
+
+    function issueCitizenTicket() {
+      const code = $("step3TicketNumber").textContent;
+      $("ticketSavedConfirmation").hidden = false;
+      const badge = $("headerTicketBadge");
+      badge.hidden = false;
+      badge.textContent = "Senha " + code;
+      $("unitCurrentTicketCode").textContent = code;
+      $("heroTicket").textContent = code;
+    }
+
+    function recordFeedback(resolved, btn) {
+      let logs = [];
+      try { logs = JSON.parse(store.get("aurora_logs") || "[]"); } catch (e) { logs = []; }
+      logs.push({
+        ts: new Date().toISOString().slice(0, 16).replace("T", " "),
+        query: currentService.title,
+        id: currentService.id,
+        resolved: resolved ? "SIM" : "NAO"
+      });
+      store.set("aurora_logs", JSON.stringify(logs));
+      btn.parentElement.querySelectorAll(".btn").forEach(b => { b.disabled = true; });
+      btn.textContent = "Registrado, obrigado";
+    }
+
+    function selectBusCorridor(idx, btnEl) {
+      btnEl.parentElement.querySelectorAll(".chip").forEach(b => b.classList.remove("active"));
+      btnEl.classList.add("active");
+      const r = BUS_ROUTES[idx] || BUS_ROUTES[0];
+      $("busRouteTitle").textContent = r.title;
+      $("busRouteStats").innerHTML = r.stats;
+    }
+
+    const BRL = v => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 2 });
+    const BRL0 = v => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
+
+    function syncEnergyInputs(val) {
+      const kwh = Math.max(30, parseFloat(val) || 280);
+      $("simKwhInput").value = kwh;
+      $("simKwhRange").value = Math.min(800, kwh);
+
+      const tarifa = 0.85;
+      const contaAtual = kwh * tarifa;
+      const kwhEconomizadoEff = Math.min(kwh - 30, kwh * 0.384);
+      const contaEff = Math.max(30 * tarifa, (kwh - kwhEconomizadoEff) * tarifa);
+      const econAnualEff = (contaAtual - contaEff) * 12;
+
+      const kwhAbatidoSolar = Math.min(Math.max(0, kwh - 30), 250);
+      const econAnualSolar = kwhAbatidoSolar * tarifa * 12;
+      const co2Evitado = kwhAbatidoSolar * 12 * 0.0385;
+
+      $("simCurrentBill").textContent = BRL(contaAtual);
+      $("simEffBill").textContent = BRL(contaEff);
+      $("simEffSave").textContent = BRL0(econAnualEff);
+      $("simSolarBill").textContent = BRL(contaAtual - econAnualSolar / 12);
+      $("simSolarSave").textContent = BRL0(econAnualSolar);
+      $("simSolarCo2").innerHTML = "Com energia solar você evita cerca de " + co2Evitado.toFixed(1).replace(".", ",") + " kg de CO<sub>2</sub> por ano.";
+    }
+
+    /* ===== assistente ===== */
+    function quickAsk(text) {
+      $("assistantQueryInput").value = text;
+      runAssistantQuery(text);
+    }
+
+    function handleAssistantAsk(e) {
+      e.preventDefault();
+      const q = $("assistantQueryInput").value.trim();
+      if (q) runAssistantQuery(q);
+    }
+
+    function runAssistantQuery(q) {
+      const res = executeLangGraphAgent(q);
+      const matched = res.matchedServiceId ? SERVICES.find(s => s.id === res.matchedServiceId) : null;
+      const blocked = res.status === "INJECTION_BLOCKED" || res.status === "INVALID_INPUT";
+      const lgpd = res.status === "LGPD_PROTECTED";
+
+      const banner = blocked
+        ? `<div class="verdict-banner blocked" style="margin:0 0 1rem"><span style="color:var(--bad)">${ICON("i-bad", 24)}</span><div><h3>Não foi possível usar essa mensagem</h3></div></div>`
+        : lgpd
+        ? `<div class="verdict-banner pending" style="margin:0 0 1rem"><span style="color:var(--warn-ink)">${ICON("i-info", 24)}</span><div><h3>Dados pessoais ocultados</h3><p>Seus dados não foram guardados.</p></div></div>`
+        : "";
+
+      $("assistantAnswerContainer").innerHTML = `
+        <div class="answer">
+          ${banner}
+          <h2>Resposta</h2>
+          <p class="answer-text">${res.answer}</p>
+          ${matched ? `
+            <h3>Documentos que você vai precisar</h3>
+            <ul>${matched.checklist.map(i => `<li>${i}</li>`).join("")}</ul>
+            <button type="button" class="btn" onclick="openServiceJourney('${matched.id}')">Ver o passo a passo completo ${ICON("i-right", 18)}</button>` : ""}
+          <details class="trace">
+            <summary>${ICON("i-chev", 18)}Como esta resposta foi verificada</summary>
+            <p>Checagem de segurança: ${res.guardrail}</p>
+            <p>Fontes: ${res.fichas.join(", ")} (conferidas em 01/10/2026).</p>
+          </details>
+          <p class="disclaimer">Este assistente é um protótipo educacional e não é um canal oficial. Confirme prazos e valores no órgão responsável.</p>
+        </div>`;
+    }
+
+    /* ===== posto ===== */
+    function totemIssue(prefix, desc) {
+      let code = "";
+      if (prefix === "N") { ticketCounterN++; code = "N-" + ticketCounterN; }
+      if (prefix === "P") { ticketCounterP++; code = "P-0" + ticketCounterP; }
+      if (prefix === "I") { ticketCounterI++; code = "I-0" + ticketCounterI; }
+      $("unitCurrentTicketCode").textContent = code;
+      $("unitCurrentTicketDesc").textContent = desc;
+      $("heroTicket").textContent = code;
+      const badge = $("headerTicketBadge");
+      badge.hidden = false;
+      badge.textContent = "Senha " + code;
+    }
+
+    function updatePostoStatus() {
+      const d = new Date();
+      const h = d.getHours() + d.getMinutes() / 60;
+      const open = d.getDay() >= 1 && d.getDay() <= 5 && h >= 8 && h < 17;
+      $("postoDot").classList.toggle("off", !open);
+      $("postoStatusText").textContent = open ? "Aberto agora, fecha às 17h" : "Fechado agora. Abre no próximo dia útil, às 8h";
+    }
+
+    /* ===== início ===== */
+    renderCatalog();
+    updatePostoStatus();
+    (function restore() {
+      const f = parseInt(store.get("aurora_font"), 10);
+      setFontScale([15, 17, 20].includes(f) ? f : 17);
+      if (store.get("aurora_contrast") === "1") toggleContrast(true);
+      document.addEventListener("click", e => { const m = $("a11yMenu"); if (m.open && !m.contains(e.target)) m.open = false; });
+      document.addEventListener("keydown", e => { if (e.key === "Escape") $("a11yMenu").open = false; });
+      const pergunta = new URLSearchParams(location.search).get("pergunta");
+      if (pergunta) { switchMainView("assistant"); $("assistantQueryInput").value = pergunta; runAssistantQuery(pergunta); }
+    })();
+
+  </script>
+</body>
+</html>
