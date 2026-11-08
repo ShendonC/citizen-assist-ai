@@ -8,7 +8,6 @@
 **Integrantes do Grupo (Turma 1CCPZ — 1º Ano de Ciência da Computação — FIAP):**
 - **Luiz Otávio Brito Freixo** — RM: `569977`
 - **Ana Beatriz Berbel Marini** — RM: `574876`
-- **Marcelo Francisco Josafá Ribeiro Martins** — RM: `573905`
 
 
 ---

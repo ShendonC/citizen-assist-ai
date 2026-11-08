@@ -4,7 +4,6 @@
 **Integrantes do Grupo (Turma 1CCPZ — 1º Ano de Ciência da Computação — FIAP):**
 - **Luiz Otávio Brito Freixo** — RM: `569977`
 - **Ana Beatriz Berbel Marini** — RM: `574876`
-- **Marcelo Francisco Josafá Ribeiro Martins** — RM: `573905`
 
 
 ![Logo Central do Cidadão de Aurora](assets/aurora_logo.png)
@@ -143,7 +142,7 @@ O **Citizen Assist AI** atende famílias urbanas que recorrem à **Central do Ci
 ## 8. Limitações Técnicas, de Escopo e Condições de Uso
 
 * **Caráter Educacional e Não Oficial:** O sistema é um protótipo acadêmico e não substitui os canais oficiais da prefeitura, Poupatempo, Receita Federal, TRE, DETRAN ou distribuidoras de energia. Taxas em reais, prazos em dias úteis e exigências documentais podem sofrer atualizações normativas.
-* **Escopo Determinístico da Base Local:** O assistente responde estritamente com base nas `15 orientações verificadas` em `data/base_conhecimento.json`. Solicitações fora do escopo (como emissão de passaporte, visto consular, declaração de Imposto de Renda, abertura de CNPJ ou consultoria jurídica) recebem recusa transparente para evitar alucinações ou informações imprecisas.
+* **Escopo Determinístico da Base Local:** O assistente responde estritamente com base nas `12 orientações verificadas` em `data/base_conhecimento.json`. Solicitações fora do escopo (como emissão de passaporte, visto consular, declaração de Imposto de Renda, abertura de CNPJ ou consultoria jurídica) recebem recusa transparente para evitar alucinações ou informações imprecisas.
 * **Condições de Uso das Estimativas Energéticas:** Os valores de consumo (`kWh/mês`), economia financeira (`R$`), tempo de retorno (*payback*) e emissões evitadas (`kg CO2/ano`) calculados em `energia_sustentavel.py` constituem **estimativas referenciais** (e não resultados garantidos), pois variam conforme a irradiação solar local, estação do ano, sombreamento do telhado, hábitos de banho/uso da família, bandeiras tarifárias vigentes e regras de faturamento da concessionária (custo de disponibilidade, CIP/COSIP e escalonamento do Fio B).
 
 ---

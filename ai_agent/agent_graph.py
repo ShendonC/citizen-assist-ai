@@ -6,7 +6,6 @@ Disciplina: Prompt and Artificial Intelligence (FIAP - Global Solution 2026.2)
 Integrantes do Grupo (Turma 1CCPZ):
 - Luiz Otavio Brito Freixo - RM: 569977
 - Ana Beatriz Berbel Marini - RM: 574876
-- Marcelo Francisco Josafa Ribeiro Martins - RM: 573905
 
 Arquitetura:
 Grafo de Estados explicito em LangGraph (StateGraph) com 4 nos:

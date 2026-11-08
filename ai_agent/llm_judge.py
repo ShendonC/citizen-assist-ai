@@ -6,7 +6,6 @@ Disciplina: Prompt and Artificial Intelligence (FIAP - Global Solution 2026.2)
 Integrantes do Grupo (Turma 1CCPZ):
 - Luiz Otavio Brito Freixo - RM: 569977
 - Ana Beatriz Berbel Marini - RM: 574876
-- Marcelo Francisco Josafa Ribeiro Martins - RM: 573905
 
 Descricao:
 Executa o agente da Central do Cidadao de Aurora nas 26 mensagens oficiais da Secao 4.1
@@ -507,7 +506,6 @@ def executar_pipeline_completo(caminho_saida: Optional[Path] = None) -> Dict[str
         "integrantes": [
             {"nome": "Luiz Otávio Brito Freixo", "rm": "569977", "turma": "1CCPZ"},
             {"nome": "Ana Beatriz Berbel Marini", "rm": "574876", "turma": "1CCPZ"},
-            {"nome": "Marcelo Francisco Josafá Ribeiro Martins", "rm": "573905", "turma": "1CCPZ"},
         ],
         "auditoria_prompt_injection_enunciado": {
             "detectado": True,
