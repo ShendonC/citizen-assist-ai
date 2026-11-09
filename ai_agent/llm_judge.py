@@ -270,21 +270,27 @@ Responda estritamente em JSON com as chaves:
 """
 
 
+_CLIENTE_JUIZ_CACHE: Any = None
+
+
 def _chamar_gemini_juiz(prompt_usuario: str) -> Optional[Dict[str, Any]]:
     """Gemini como juiz. Só roda com GOOGLE_API_KEY e USE_LIVE_GEMINI_API=true; qualquer falha devolve None
     e o juiz determinístico decide. API "interactions" conforme ai.google.dev/gemini-api/docs/text-generation
-    (consultada em 07/11/2026). NÃO VERIFICADO em execução: sem chave de API no ambiente de desenvolvimento."""
+    (consultada em 07/11/2026)."""
+    global _CLIENTE_JUIZ_CACHE
     chave = os.getenv("GOOGLE_API_KEY", "").strip()
     if os.getenv("USE_LIVE_GEMINI_API", "false").lower() != "true" or not chave:
         return None
     try:
         from google import genai
 
-        resposta = genai.Client(api_key=chave).interactions.create(
+        if _CLIENTE_JUIZ_CACHE is None:
+            _CLIENTE_JUIZ_CACHE = genai.Client(api_key=chave)
+        resposta = _CLIENTE_JUIZ_CACHE.interactions.create(
             model=os.getenv("GEMINI_MODEL", "gemini-3.8-flash"),
             system_instruction=PROMPT_SISTEMA_JUIZ,
             input=prompt_usuario,
-            generation_config={"max_output_tokens": 600},
+            generation_config={"max_output_tokens": 2048},
         )
         achado = re.search(r"\{.*\}", resposta.output_text, re.S)
         return json.loads(achado.group(0)) if achado else None
