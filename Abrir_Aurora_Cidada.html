@@ -219,20 +219,35 @@ main:focus { outline: none; }
 .catalog > .wrap > h2 { font-size: 1.6rem; font-weight: 800; }
 .catalog > .wrap > p { margin-top: .35rem; color: var(--ink-2); }
 .groups { margin-top: 1.75rem; display: grid; gap: 2.5rem 3.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 30rem), 1fr)); }
-.group h3 { font-size: 1.25rem; font-weight: 800; padding-bottom: .6rem; border-bottom: 2px solid var(--ink); }
-.row {
-  display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: center; width: 100%; min-height: 4.25rem;
-  padding: 1rem .5rem; text-align: left; background: none; border: 0; border-bottom: 1px solid var(--rule);
-  color: var(--ink); cursor: pointer; transition: background-color .15s;
+.group[data-c="0"] { --gc: #0C3D66; --gt: #E4EDF6; }
+.group[data-c="1"] { --gc: #1E5B34; --gt: #DDEBDD; }
+.group[data-c="2"] { --gc: #7A4300; --gt: #FBEBCB; }
+.group[data-c="3"] { --gc: #6B2F7F; --gt: #F0E4F4; }
+body.high-contrast .group { --gc: #FFD43B; --gt: #1A1A1A; }
+.group h3 {
+  font-size: 1.25rem; font-weight: 800; padding: .7rem 1rem; margin-bottom: 1rem;
+  background: var(--gt); border-left: 6px solid var(--gc); border-radius: 8px;
 }
-.row:hover { background: var(--tint); }
+body.high-contrast .group h3 { border: 2px solid #FFF; border-left: 6px solid var(--gc); }
+.group ul { display: grid; gap: .75rem; }
+.row {
+  display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: center; width: 100%; min-height: 4.5rem;
+  padding: 1rem 1.1rem 1rem 1rem; text-align: left; background: var(--surface);
+  border: 1px solid var(--rule-strong); border-left: 6px solid var(--gc); border-radius: 8px;
+  box-shadow: 0 1px 0 rgba(30,26,20,.08), 0 2px 6px rgba(30,26,20,.07);
+  color: var(--ink); cursor: pointer; transition: background-color .15s, border-color .15s, box-shadow .15s;
+}
+body.high-contrast .row { border-color: #FFF; border-left-color: var(--gc); box-shadow: none; }
+.row:hover { background: var(--gt); border-color: var(--gc); box-shadow: 0 3px 12px rgba(30,26,20,.16); }
 .row-main { display: grid; gap: .25rem; }
-.row-title { font-size: 1.0625rem; font-weight: 700; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: .2em; transition: text-decoration-color .15s; }
+.row-title { font-size: 1.125rem; font-weight: 700; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: .2em; transition: text-decoration-color .15s; }
 .row:hover .row-title { text-decoration-color: currentColor; }
 .row-desc { color: var(--ink-2); font-size: .9375rem; }
 .row-meta { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem .75rem; font-size: .875rem; color: var(--ink-3); margin-top: .15rem; }
-.row .chev { color: var(--ink-3); transition: transform .15s; }
-.row:hover .chev { transform: translateX(3px); color: var(--ink); }
+.row .chev { display: inline-flex; align-items: center; gap: .35rem; padding: .4rem .65rem .4rem .85rem; border-radius: 999px; background: var(--gt); color: var(--gc); font-weight: 700; font-size: .9375rem; transition: background-color .15s, color .15s; }
+.row .go { white-space: nowrap; }
+@media (max-width: 30rem) { .row .go { display: none; } .row .chev { padding: .4rem; } }
+.row:hover .chev { background: var(--gc); color: var(--surface); }
 
 /* páginas internas */
 .page { max-width: 50rem; margin: 0 auto; padding: 1.25rem clamp(1rem, 4vw, 2rem) 2rem; }
@@ -1402,10 +1417,10 @@ fieldset.triage-row:first-of-type { border-top: 1px solid var(--rule); }
                 <span class="row-desc">${s.shortDesc}</span>
                 <span class="row-meta"><span class="tag${s.isFree ? "" : " paid"}">${s.badgeText}</span><span>Prazo: ${s.deadline}</span></span>
               </span>
-              <span class="chev">${ICON("i-chev", 22)}</span>
+              <span class="chev"><span class="go">Abrir</span>${ICON("i-chev", 20)}</span>
             </button>
           </li>`).join("");
-        return `<section class="group" aria-labelledby="grp${gi}"><h3 id="grp${gi}">${label}</h3><ul>${rows}</ul></section>`;
+        return `<section class="group" data-c="${gi}" aria-labelledby="grp${gi}"><h3 id="grp${gi}">${label}</h3><ul>${rows}</ul></section>`;
       }).join("");
     }
 
