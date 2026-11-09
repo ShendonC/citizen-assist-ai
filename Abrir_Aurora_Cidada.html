@@ -560,10 +560,10 @@ fieldset.triage-row:first-of-type { border-top: 1px solid var(--rule); }
             <p class="now-status"><span id="postoDot" class="dot"></span><span id="postoStatusText">Verificando horário…</span></p>
             <dl class="now-list">
               <div><dt>Senha em atendimento</dt><dd id="heroTicket">N-103</dd></div>
-              <div><dt>Espera média</dt><dd>8 min</dd></div>
-              <div><dt>Ônibus, Linha 1</dt><dd>a cada 6 min</dd></div>
+              <div><dt>Atendimento</dt><dd>seg a sex, 8h às 17h</dd></div>
+              <div><dt>Frota de ônibus</dt><dd>72 veículos</dd></div>
             </dl>
-            <p class="now-note">Av. Cívica, 400 · segunda a sexta, das 8h às 17h. Valores simulados pelo totem de demonstração.</p>
+            <p class="now-note">Senhas simuladas por um totem de demonstração. Atendimento presencial de segunda a sexta, das 8h às 17h.</p>
             <button type="button" class="btn btn-quiet" onclick="switchMainView('unit')">Ver fila e horários dos ônibus</button>
           </aside>
         </div>
@@ -661,7 +661,7 @@ fieldset.triage-row:first-of-type { border-top: 1px solid var(--rule); }
         <!-- ETAPA 2 -->
         <div id="wizardStage2" class="stage-body">
           <h2>Antes de ir ao posto</h2>
-          <p class="stage-desc">Responda 4 perguntas rápidas. Elas mostram se você será atendido(a) hoje e em qual fila.</p>
+          <p class="stage-desc">Responda 3 perguntas rápidas. Elas mostram se você será atendido(a) hoje e em qual fila.</p>
 
           <div class="triage-list">
             <fieldset class="triage-row">
@@ -679,17 +679,10 @@ fieldset.triage-row:first-of-type { border-top: 1px solid var(--rule); }
               </div>
             </fieldset>
             <fieldset class="triage-row">
-              <legend class="triage-question-text">3. O atendimento é para pessoa com prioridade legal (60+ anos, gestante, pessoa com deficiência ou autista)?</legend>
+              <legend class="triage-question-text">3. O atendimento é para pessoa com prioridade legal (60+ anos, gestante ou pessoa com deficiência)?</legend>
               <div class="segmented-toggle">
                 <label class="seg-option"><input type="radio" name="qC" value="1" onchange="evaluateCitizenTriage()" />Sim, prioritário</label>
                 <label class="seg-option"><input type="radio" name="qC" value="0" checked onchange="evaluateCitizenTriage()" />Não, regular</label>
-              </div>
-            </fieldset>
-            <fieldset class="triage-row">
-              <legend class="triage-question-text">4. É urgência comprovada (viagem imediata, perícia médica ou perda total por furto)?</legend>
-              <div class="segmented-toggle">
-                <label class="seg-option"><input type="radio" name="qD" value="1" onchange="evaluateCitizenTriage()" />Sim, urgência</label>
-                <label class="seg-option"><input type="radio" name="qD" value="0" checked onchange="evaluateCitizenTriage()" />Não</label>
               </div>
             </fieldset>
           </div>
@@ -719,7 +712,7 @@ fieldset.triage-row:first-of-type { border-top: 1px solid var(--rule); }
         <!-- ETAPA 3 -->
         <div id="wizardStage3" class="stage-body">
           <h2>Sua senha e como chegar</h2>
-          <p class="stage-desc">Mostre o código da senha na recepção da Central. Abaixo, veja qual linha de ônibus deixa você na porta.</p>
+          <p class="stage-desc">Mostre o código da senha na recepção da Central. Abaixo, veja como está a frota de ônibus da sua região.</p>
 
           <div class="ticket">
             <div class="ticket-main">
@@ -731,7 +724,7 @@ fieldset.triage-row:first-of-type { border-top: 1px solid var(--rule); }
             <div class="ticket-stub">
               <small>Sua senha</small>
               <div id="step3TicketNumber" class="ticket-number-display">N-104</div>
-              <span>Guichês 01 a 05</span>
+              <span>Apresente na recepção</span>
             </div>
           </div>
 
@@ -745,12 +738,12 @@ fieldset.triage-row:first-of-type { border-top: 1px solid var(--rule); }
             </div>
           </div>
 
-          <h3 class="sub">Qual ônibus pegar até a Central</h3>
+          <h3 class="sub">Frota de ônibus da sua região</h3>
           <div class="chip-row">
-            <button type="button" class="chip active" onclick="selectBusCorridor(0, this)">Linha 1 · Centro</button>
-            <button type="button" class="chip" onclick="selectBusCorridor(1, this)">Linha 2 · Zona Norte</button>
-            <button type="button" class="chip" onclick="selectBusCorridor(2, this)">Linha 3 · Zona Sul</button>
-            <button type="button" class="chip" onclick="selectBusCorridor(3, this)">Linha 4 · Leste-Oeste</button>
+            <button type="button" class="chip active" onclick="selectBusCorridor(0, this)">Região Norte</button>
+            <button type="button" class="chip" onclick="selectBusCorridor(1, this)">Região Sul</button>
+            <button type="button" class="chip" onclick="selectBusCorridor(2, this)">Região Leste</button>
+            <button type="button" class="chip" onclick="selectBusCorridor(3, this)">Região Oeste</button>
           </div>
           <div class="bus-box" aria-live="polite">
             <strong id="busRouteTitle"></strong>
@@ -801,37 +794,37 @@ fieldset.triage-row:first-of-type { border-top: 1px solid var(--rule); }
     <section id="view-unit" class="view-pane">
       <div class="page-wide">
         <h1>Posto Central, fila e ônibus</h1>
-        <p class="sheet-lead">Pegue sua senha sem ir ao balcão e confira as 4 linhas municipais que chegam à Central. Os dados vêm de um totem de demonstração.</p>
+        <p class="sheet-lead">Pegue sua senha sem ir ao balcão e confira a frota de ônibus das 4 regiões. As senhas vêm de um totem de demonstração.</p>
 
         <div class="unit-grid">
           <div>
             <h2>Pegar senha</h2>
             <div class="issue-list">
-              <button type="button" class="btn" onclick="totemIssue('N', 'Guichê geral · documentos e cadastros')"><span>Senha geral</span><span>Documentos e cadastros</span></button>
-              <button type="button" class="btn btn-solar" onclick="totemIssue('P', 'Guichê prioritário · Lei 10.048/2000')"><span>Senha prioritária</span><span>60+, gestante, deficiência, autismo</span></button>
-              <button type="button" class="btn btn-quiet" onclick="totemIssue('I', 'Balcão expresso · triagem e informações')"><span>Triagem expressa</span><span>Dúvida rápida, até 2 min</span></button>
+              <button type="button" class="btn" onclick="totemIssue('N', 'Fila geral · documentos e cadastros')"><span>Senha geral</span><span>Documentos e cadastros</span></button>
+              <button type="button" class="btn btn-solar" onclick="totemIssue('P', 'Fila prioritária · Lei 10.048/2000')"><span>Senha prioritária</span><span>60+, gestante, pessoa com deficiência</span></button>
+              <button type="button" class="btn btn-quiet" onclick="totemIssue('I', 'Triagem e informações')"><span>Triagem expressa</span><span>Dúvida rápida</span></button>
             </div>
 
             <div class="board" role="status" aria-live="polite">
               <div>
                 <small>Painel de chamada da recepção</small>
-                <p id="unitCurrentTicketDesc">Guichê 04</p>
+                <p id="unitCurrentTicketDesc">Fila geral</p>
               </div>
               <strong id="unitCurrentTicketCode">N-103</strong>
             </div>
           </div>
 
           <div>
-            <h2>Frota por linha (72 ônibus)</h2>
-            <p class="lead-sm">A frota foi redistribuída para reforçar os corredores com mais demanda.</p>
+            <h2>Frota por região (72 ônibus)</h2>
+            <p class="lead-sm">A frota foi redistribuída para atender a demanda do horário de pico (40 lugares por ônibus).</p>
             <div class="table-scroll">
               <table class="data-table">
-                <thead><tr><th scope="col">Linha</th><th scope="col" class="num">Antes</th><th scope="col" class="num">Agora</th><th scope="col">Passa a cada</th></tr></thead>
+                <thead><tr><th scope="col">Região</th><th scope="col" class="num">Antes</th><th scope="col" class="num">Agora</th><th scope="col">Passageiros no pico</th></tr></thead>
                 <tbody>
-                  <tr><th scope="row">1 · Central / Cívica</th><td class="num">12</td><td class="num"><strong>14</strong> <span class="delta up">+2</span></td><td>6 min</td></tr>
-                  <tr><th scope="row">2 · Zona Norte</th><td class="num">20</td><td class="num"><strong>19</strong> <span class="delta down">−1</span></td><td>8 min</td></tr>
-                  <tr><th scope="row">3 · Zona Sul</th><td class="num">16</td><td class="num"><strong>18</strong> <span class="delta up">+2</span></td><td>7 min</td></tr>
-                  <tr><th scope="row">4 · Leste-Oeste</th><td class="num">24</td><td class="num"><strong>21</strong> <span class="delta down">−3</span></td><td>7 min</td></tr>
+                  <tr><th scope="row">Norte</th><td class="num">12</td><td class="num"><strong>14</strong> <span class="delta up">+2</span></td><td>560</td></tr>
+                  <tr><th scope="row">Sul</th><td class="num">20</td><td class="num"><strong>19</strong> <span class="delta down">−1</span></td><td>760</td></tr>
+                  <tr><th scope="row">Leste</th><td class="num">16</td><td class="num"><strong>18</strong> <span class="delta up">+2</span></td><td>720</td></tr>
+                  <tr><th scope="row">Oeste</th><td class="num">24</td><td class="num"><strong>21</strong> <span class="delta down">−3</span></td><td>840</td></tr>
                 </tbody>
               </table>
             </div>
@@ -852,342 +845,449 @@ fieldset.triage-row:first-of-type { border-top: 1px solid var(--rule); }
   <script>
     const SERVICES = [
       {
-        id: "FC-01",
-        category: "Documentos Pessoais",
-        theme: "theme-blue",
-        icon: "doc",
-        badgeText: "1ª Via Gratuita",
-        isFree: true,
-        title: "Carteira de Identidade (RG / CIN)",
-        shortDesc: "Emissão gratuita da 1ª via ou solicitação de 2ª via por perda, roubo ou atualização cadastral.",
-        cost: "1ª via Gratuita · 2ª via R$ 38,00",
-        deadline: "10 dias úteis",
-        channel: "Presencial com Senha",
-        where: "Posto de Identificação da Central de Aurora (Guichês 01 a 05)",
-        source: "Fichas FC-01 e FC-07 · Instituto de Identificação Civil",
-        keywords: ["rg", "identidade", "cin", "segunda via", "perdi", "roubo", "furto", "boletim", "carteira"],
-        checklist: [
-          "Certidão de Nascimento ou de Casamento (original ou cópia autenticada — fotocópia simples não é aceita)",
-          "Documento oficial com número do CPF (ou comprovante de inscrição no CPF)",
-          "Comprovante de residência recente (emitido nos últimos 90 dias)",
-          "Em caso de roubo ou furto: Boletim de Ocorrência (se foi perda simples, assine a declaração gratuita no balcão)",
-          "Se menor de 12 anos: presença obrigatória do responsável legal portando documento oficial com foto"
+        "id": "FC-01",
+        "category": "Documentos Pessoais",
+        "theme": "theme-blue",
+        "icon": "doc",
+        "badgeText": "1ª via gratuita",
+        "isFree": true,
+        "title": "Carteira de Identidade (RG): 1ª e 2ª via",
+        "shortDesc": "Primeira via gratuita. A segunda via, por perda, roubo ou furto, custa R$ 38,00. O agendamento é obrigatório pelo portal.",
+        "cost": "1ª via gratuita · 2ª via R$ 38,00",
+        "deadline": "10 dias úteis, contados do atendimento",
+        "channel": "Agendamento obrigatório pelo portal",
+        "where": "Posto de Identificação de Aurora",
+        "source": "Ficha FC-01 e regras gerais da FC-07 (versão de 01/10/2026)",
+        "keywords": [
+          "rg",
+          "identidade",
+          "carteira de identidade",
+          "cin",
+          "segunda via",
+          "2a via",
+          "perdi",
+          "roubo",
+          "roubaram",
+          "furto",
+          "extravio",
+          "boletim",
+          "posto de identificacao"
         ],
-        steps: [
-          "Separe a Certidão original e o comprovante de residência marcando a lista acima.",
-          "Para 2ª via por perda simples, gere a guia de R$ 38,00 via PIX (cidadãos inscritos no CadÚnico ou vítimas de roubo com B.O. têm isenção no balcão).",
-          "Realize a checagem rápida na Etapa 2 a seguir para validar sua prioridade.",
-          "Ative sua senha digital na Etapa 3 e compareça à Central de Aurora para foto e biometria."
+        "checklist": [
+          "Certidão de nascimento ou de casamento (original ou cópia autenticada; fotocópia simples não é aceita)",
+          "Comprovante de residência dos últimos 90 dias",
+          "Se foi roubo ou furto: boletim de ocorrência",
+          "Se foi perda: declaração de extravio, assinada no próprio balcão (o boletim de ocorrência não é exigido)",
+          "Se a pessoa tem menos de 12 anos: o responsável legal vai junto, com documento original com foto"
+        ],
+        "steps": [
+          "Agende o atendimento pelo portal da Central do Cidadão.",
+          "Gere e pague a guia de R$ 38,00 (no portal, em banco ou por PIX; a confirmação leva até 2 dias úteis).",
+          "Compareça ao Posto de Identificação no dia marcado, com os documentos originais.",
+          "Retire a carteira após 10 dias úteis, apresentando o protocolo."
         ]
       },
       {
-        id: "FC-02",
-        category: "Documentos Pessoais",
-        theme: "theme-blue",
-        icon: "doc",
-        badgeText: "Gratuito",
-        isFree: true,
-        title: "CPF: Inscrição, 2ª Via e Regularização",
-        shortDesc: "Emissão do comprovante de CPF pela internet ou regularização presencial de cadastro suspenso na Receita.",
-        cost: "100% Gratuito",
-        deadline: "Imediato ou até 2 dias úteis",
-        channel: "Online ou Balcão Receita",
-        where: "Balcão Receita Cidadã · Térreo da Central de Aurora",
-        source: "Ficha FC-02 · Receita Federal do Brasil",
-        keywords: ["cpf", "receita", "cadastro", "suspenso", "regularizar", "primeira via"],
-        checklist: [
-          "Documento de identificação oficial com foto (RG, CNH ou Certidão de Nascimento para menores)",
-          "Título de Eleitor (para cidadãos entre 18 e 70 anos)",
-          "Comprovante de endereço atualizado",
-          "Para menores de 16 anos: RG original do pai, mãe ou tutor legal"
+        "id": "FC-02",
+        "category": "Documentos Pessoais",
+        "theme": "theme-blue",
+        "icon": "doc",
+        "badgeText": "Portal gratuito",
+        "isFree": true,
+        "title": "CPF: inscrição e correção de dados",
+        "shortDesc": "Inscrição e correção de dados pelo portal são gratuitas. No balcão de atendimento há taxa de R$ 7,00.",
+        "cost": "Portal gratuito · balcão R$ 7,00",
+        "deadline": "Comprovante no portal em até 2 dias úteis",
+        "channel": "Portal (sem agendamento) ou balcão",
+        "where": "Portal da Central do Cidadão, área CPF, ou balcão de atendimento (com taxa)",
+        "source": "Ficha FC-02 (versão de 01/10/2026)",
+        "keywords": [
+          "cpf",
+          "inscricao",
+          "inscrever",
+          "regularizar",
+          "comprovante",
+          "cadastro de pessoa fisica",
+          "correcao de dados"
         ],
-        steps: [
-          "Para 1ª inscrição ou 2ª via simples, o comprovante pode ser impresso na hora pelo portal Gov.br ou nos totens da Central.",
-          "Se o CPF constar como 'Pendente de Regularização', apresente os documentos originais no Balcão Receita Cidadã.",
-          "O protocolo de regularização cadastral é emitido na hora em cerca de 15 minutos."
+        "checklist": [
+          "Documento original com foto",
+          "Certidão de nascimento ou de casamento",
+          "Se a pessoa tem menos de 12 anos: documento com foto do responsável legal"
+        ],
+        "steps": [
+          "Acesse o portal da Central do Cidadão, na área CPF.",
+          "Preencha o formulário e anexe as imagens dos documentos.",
+          "Aguarde o comprovante, disponível em até 2 dias úteis.",
+          "Atenção: a Central do Cidadão não pede o número do seu CPF por chat, telefone ou mensagem."
         ]
       },
       {
-        id: "FC-05",
-        category: "Documentos Pessoais",
-        theme: "theme-blue",
-        icon: "doc",
-        badgeText: "Isenção CadÚnico",
-        isFree: true,
-        title: "2ª Via de Certidões (Nascimento e Casamento)",
-        shortDesc: "Solicitação de segunda via atualizada de certidões civis, com gratuidade garantida para famílias de baixa renda.",
-        cost: "Gratuita (CadÚnico) ou R$ 42,50",
-        deadline: "5 dias úteis (física) · 48h (digital)",
-        channel: "Balcão de Registro Civil",
-        where: "Setor de Registro Civil · Central do Cidadão de Aurora",
-        source: "Ficha FC-05 · Cartório de Registro Civil e Defensoria Pública",
-        keywords: ["certidao", "nascimento", "casamento", "obito", "cartorio", "segunda via"],
-        checklist: [
-          "Documento de identificação com foto do solicitante (ou Boletim de Ocorrência se perdeu todos os documentos)",
-          "Nome completo do registrado, data aproximada e cartório/município onde foi registrado",
-          "Para gratuidade: folha resumo do CadÚnico ou declaração de hipossuficiência assinada no posto"
+        "id": "FC-05",
+        "category": "Documentos Pessoais",
+        "theme": "theme-blue",
+        "icon": "doc",
+        "badgeText": "Portal R$ 49,00",
+        "isFree": false,
+        "title": "Certidões de nascimento, casamento e óbito (2ª via)",
+        "shortDesc": "Pelo portal, em PDF: R$ 49,00 em 3 dias úteis. No balcão do Cartório Central: R$ 55,00 em 5 dias úteis. Valores por certidão.",
+        "cost": "Portal R$ 49,00 (PDF) · balcão R$ 55,00, por certidão",
+        "deadline": "Portal 3 dias úteis · balcão 5 dias úteis",
+        "channel": "Portal ou balcão (sem agendamento)",
+        "where": "Balcão do Cartório Central de Aurora ou portal da Central do Cidadão",
+        "source": "Ficha FC-05 e regras gerais da FC-07 (versão de 01/10/2026)",
+        "keywords": [
+          "certidao",
+          "certidoes",
+          "nascimento",
+          "casamento",
+          "obito",
+          "cartorio",
+          "segunda via"
         ],
-        steps: [
-          "Informe no balcão da Central o município e o cartório onde o registro original foi lavrado.",
-          "Para cidadãos de baixa renda, solicite a requisição de isenção da Defensoria Pública no próprio guichê.",
-          "Retire a certidão física na Central de Aurora ou receba a certidão digital no seu e-mail."
+        "checklist": [
+          "Documento original com foto de quem solicita",
+          "Dados do registro: nome do registrado e data do evento",
+          "Se o pedido for de outra pessoa: procuração simples (ver FC-07)",
+          "Baixa renda: a isenção da taxa é concedida mediante comprovação no balcão"
+        ],
+        "steps": [
+          "Escolha o canal: balcão ou portal.",
+          "Informe os dados do registro.",
+          "Pague a guia.",
+          "Retire no balcão ou baixe o PDF no portal."
         ]
       },
       {
-        id: "FC-03",
-        category: "Documentos Pessoais",
-        theme: "theme-blue",
-        icon: "doc",
-        badgeText: "Gratuito",
-        isFree: true,
-        title: "Título de Eleitor e Biometria Eleitoral",
-        shortDesc: "Emissão do primeiro título eleitoral, transferência de município, revisão de dados e coleta biométrica.",
-        cost: "100% Gratuito",
-        deadline: "Emitido na hora (e-Título)",
-        channel: "Posto Eleitoral na Central",
-        where: "Posto Eleitoral Integrado · Central de Aurora",
-        source: "Ficha FC-03 · Justiça Eleitoral / TRE",
-        keywords: ["titulo", "eleitor", "votar", "biometria", "transferencia", "multa eleitoral"],
-        checklist: [
-          "Documento oficial com foto (RG, Carteira de Trabalho ou Passaporte — CNH não é aceita para o 1º título)",
-          "Comprovante de residência emitido há no mínimo 3 meses e no máximo 1 ano",
-          "Certificado de quitação militar (para homens que completam 19 anos no ano vigente)"
+        "id": "FC-03",
+        "category": "Documentos Pessoais",
+        "theme": "theme-blue",
+        "icon": "doc",
+        "badgeText": "Gratuito",
+        "isFree": true,
+        "title": "Título de eleitor: 1ª via, 2ª via e transferência",
+        "shortDesc": "Gratuito. O voto é obrigatório de 18 a 69 anos e facultativo aos 16 e 17 anos e a partir dos 70. O cadastro fecha 150 dias antes de cada eleição.",
+        "cost": "Gratuito (1ª via, 2ª via e transferência)",
+        "deadline": "Título digital em até 5 dias úteis",
+        "channel": "Portal ou balcão da Central Eleitoral",
+        "where": "Central Eleitoral de Aurora ou portal da Central do Cidadão",
+        "source": "Ficha FC-03 (versão de 01/10/2026)",
+        "keywords": [
+          "titulo",
+          "titulo de eleitor",
+          "eleitor",
+          "votar",
+          "voto",
+          "obrigatorio",
+          "transferencia",
+          "zona eleitoral",
+          "eleicao"
         ],
-        steps: [
-          "Consulte e quite eventuais multas eleitorais via PIX diretamente pelo aplicativo e-Título.",
-          "Compareça ao Posto Eleitoral da Central de Aurora para coleta da biometria digital e fotografia.",
-          "Lembrete: transferências de domicílio eleitoral devem ser concluídas até 150 dias antes da eleição."
+        "checklist": [
+          "Documento original com foto",
+          "Comprovante de residência dos últimos 90 dias (obrigatório na transferência)"
+        ],
+        "steps": [
+          "Faça o pedido pelo portal ou vá ao balcão da Central Eleitoral.",
+          "Apresente os documentos.",
+          "Receba o título digital em até 5 dias úteis.",
+          "Prazo: o cadastro fecha 150 dias antes de cada eleição. Pedidos feitos depois só valem para a eleição seguinte."
         ]
       },
       {
-        id: "FC-04",
-        category: "Trabalho e Trânsito",
-        theme: "theme-emerald",
-        icon: "work",
-        badgeText: "100% Digital",
-        isFree: true,
-        title: "Carteira de Trabalho Digital e Seguro-Desemprego",
-        shortDesc: "Habilitação imediata da CTPS Digital pelo número do CPF para contratação e entrada no Seguro-Desemprego.",
-        cost: "100% Gratuito",
-        deadline: "Liberação imediata na hora",
-        channel: "App Digital ou Balcão SINE",
-        where: "Balcão SINE / Ministério do Trabalho na Central de Aurora",
-        source: "Ficha FC-04 · Ministério do Trabalho e Emprego",
-        keywords: ["carteira de trabalho", "ctps", "emprego", "assinada", "seguro desemprego", "sine"],
-        checklist: [
-          "Número do CPF regularizado na Receita Federal",
-          "Conta Gov.br ativa (caso não tenha celular, o Balcão SINE da Central gera sua senha gratuitamente)",
-          "Para Seguro-Desemprego: Termo de Rescisão (TRCT) e Requerimento emitido pelo empregador"
+        "id": "FC-04",
+        "category": "Trabalho e Trânsito",
+        "theme": "theme-emerald",
+        "icon": "work",
+        "badgeText": "100% digital",
+        "isFree": true,
+        "title": "Carteira de Trabalho Digital",
+        "shortDesc": "Gratuita em qualquer canal. A versão digital fica disponível na hora, após o cadastro no portal ou no aplicativo. No balcão também é imediato.",
+        "cost": "Gratuita em qualquer canal",
+        "deadline": "Imediato",
+        "channel": "Portal, aplicativo ou balcão (sem agendamento)",
+        "where": "Portal ou aplicativo da Central do Cidadão, ou balcão de atendimento",
+        "source": "Ficha FC-04 (versão de 01/10/2026)",
+        "keywords": [
+          "carteira de trabalho",
+          "ctps",
+          "emprego",
+          "digital",
+          "trabalho",
+          "primeiro emprego"
         ],
-        steps: [
-          "A antiga carteira azul de papel foi substituída: hoje o número da sua Carteira de Trabalho é o próprio CPF.",
-          "Ao ser contratado, informe apenas o seu CPF ao empregador; o contrato aparece no aplicativo em até 48h.",
-          "Caso precise de apoio para Seguro-Desemprego ou vagas do SINE, retire uma senha para o Balcão do Trabalho."
+        "checklist": [
+          "CPF",
+          "Documento original com foto",
+          "Se a pessoa tem menos de 18 anos: acompanhada de um responsável legal"
+        ],
+        "steps": [
+          "Acesse o portal ou o aplicativo da Central do Cidadão.",
+          "Informe os dados pedidos e confirme a identidade.",
+          "A carteira digital já aparece na sua conta."
         ]
       },
       {
-        id: "FC-06",
-        category: "Trabalho e Trânsito",
-        theme: "theme-emerald",
-        icon: "work",
-        badgeText: "Taxa R$ 127,69",
-        isFree: false,
-        title: "Renovação e 2ª Via da CNH (Motorista)",
-        shortDesc: "Renovação de CNH vencida, realização do exame médico na clínica anexa da Central e liberação da CNH Digital.",
-        cost: "Taxa + Exame: R$ 127,69",
-        deadline: "Digital em 3 dias · Física em 7 dias",
-        channel: "Presencial (Exame Médico)",
-        where: "Núcleo DETRAN · Ala B da Central de Aurora",
-        source: "Ficha FC-06 · DETRAN / SENATRAN",
-        keywords: ["cnh", "motorista", "habilitacao", "renovar", "detran", "exame medico", "carteira de motorista"],
-        checklist: [
-          "CNH atual (ou documento oficial de identidade com foto em caso de perda/roubo)",
-          "CPF e comprovante de residência emitido nos últimos 90 dias",
-          "Para categorias C, D ou E: laudo de exame toxicológico negativo dentro da validade",
-          "Comprovante de pagamento da guia unificada via PIX ou rede bancária"
+        "id": "FC-06",
+        "category": "Trabalho e Trânsito",
+        "theme": "theme-emerald",
+        "icon": "work",
+        "badgeText": "Taxa R$ 180,00",
+        "isFree": false,
+        "title": "CNH: renovação",
+        "shortDesc": "Taxa de R$ 180,00, mais o exame médico, pago à parte na clínica credenciada. O agendamento é obrigatório pelo portal.",
+        "cost": "Taxa R$ 180,00 + exame médico (pago na clínica credenciada)",
+        "deadline": "7 dias úteis após a aprovação no exame médico",
+        "channel": "Agendamento obrigatório pelo portal",
+        "where": "Portal da Central do Cidadão (agendamento) e clínica credenciada (exame médico)",
+        "source": "Ficha FC-06 (versão de 01/10/2026)",
+        "keywords": [
+          "cnh",
+          "carteira de motorista",
+          "habilitacao",
+          "renovar",
+          "renovacao",
+          "vencida",
+          "exame medico",
+          "motorista"
         ],
-        steps: [
-          "Atenção ao prazo: é permitido dirigir por até 30 dias após a data de vencimento impressa na CNH.",
-          "Realize a biometria e o exame médico de aptidão física e mental na clínica credenciada dentro da Central.",
-          "Após a aprovação no exame, sua CNH Digital fica disponível no aplicativo Carteira Digital de Trânsito."
+        "checklist": [
+          "CNH atual (ou documento com foto, se perdida)",
+          "Comprovante de residência dos últimos 90 dias",
+          "Laudo do exame médico da clínica credenciada"
+        ],
+        "steps": [
+          "Faça o exame médico na clínica credenciada.",
+          "Agende o atendimento no portal e pague a taxa.",
+          "Compareça com os documentos originais.",
+          "Retire a CNH em 7 dias úteis.",
+          "Quando renovar: a partir de 30 dias antes do vencimento. Com a CNH vencida há mais de 30 dias, não pode dirigir até concluir a renovação. Vencida há mais de 5 anos, é preciso refazer o curso e a prova.",
+          "Validade da CNH renovada: até 49 anos, 10 anos; de 50 a 69 anos, 5 anos; 70 anos ou mais, 3 anos."
         ]
       },
       {
-        id: "MMC-01",
-        category: "Trabalho e Trânsito",
-        theme: "theme-emerald",
-        icon: "work",
-        badgeText: "1ª Via Gratuita",
-        isFree: true,
-        title: "Cartão Transporte Cidadão e Passe Livre",
-        shortDesc: "Emissão na hora do Cartão Municipal de Integração, Passe Livre Estudantil e Gratuidade Sênior (60+ anos).",
-        cost: "1ª via Gratuita",
-        deadline: "Emitido na hora (10 min)",
-        channel: "Balcão Mobilidade Aurora",
-        where: "Terminal Integrado anexo à Central do Cidadão de Aurora",
-        source: "Secretaria Municipal de Mobilidade · Frota de 72 Ônibus",
-        keywords: ["onibus", "transporte", "passe livre", "bilhete", "cartao transporte", "estudante", "horario"],
-        checklist: [
-          "Documento oficial com foto (RG ou CIN) e CPF",
-          "Comprovante de residência no Município de Aurora",
-          "Para Passe Livre Estudantil: declaração de matrícula escolar ativa emitida há menos de 30 dias"
+        "id": "MMC-01",
+        "category": "Trabalho e Trânsito",
+        "theme": "theme-emerald",
+        "icon": "work",
+        "badgeText": "72 ônibus",
+        "isFree": true,
+        "title": "Ônibus até a Central: frota por região",
+        "shortDesc": "A frota de 72 ônibus foi redistribuída entre as 4 regiões para atender a demanda do horário de pico.",
+        "cost": "Informativo, sem custo",
+        "deadline": "Calculado para o horário de pico",
+        "channel": "Consulta informativa",
+        "where": "Portal da Central do Cidadão",
+        "source": "Projeto de Modelagem Matemática e Computacional (cálculo em Python)",
+        "keywords": [
+          "onibus",
+          "transporte",
+          "frota",
+          "horario",
+          "linha",
+          "regiao"
         ],
-        steps: [
-          "Compareça ao Balcão de Mobilidade na entrada da Central para captura de foto e impressão imediata do cartão.",
-          "O cartão permite integração gratuita por até 2 horas entre as 4 linhas estruturais da frota de 72 ônibus.",
-          "Consulte na Etapa 3 os intervalos atualizados da sua linha após o reforço da frota municipal."
+        "checklist": [
+          "Nenhum documento é necessário: este cartão só informa a frota de ônibus"
+        ],
+        "steps": [
+          "A frota disponível é de 72 ônibus, com 40 lugares cada, divididos em 4 regiões.",
+          "A demanda estimada no pico é de 560 passageiros no Norte, 760 no Sul, 720 no Leste e 840 no Oeste.",
+          "A redistribuição leva a frota de 12, 20, 16 e 24 ônibus (Norte, Sul, Leste, Oeste) para 14, 19, 18 e 21, atendendo 100% da demanda do pico."
         ]
       },
       {
-        id: "ERS-01",
-        category: "Luz, Água e Moradia",
-        theme: "theme-amber",
-        icon: "energy",
-        badgeText: "Até 65% OFF",
-        isFree: true,
-        title: "Tarifa Social de Energia (Desconto na Luz)",
-        shortDesc: "Ativação do desconto legal de 10% a 65% na fatura mensal de energia elétrica para famílias no CadÚnico ou BPC.",
-        cost: "100% Gratuito (Lei 12.212/2010)",
-        deadline: "Entra na próxima fatura",
-        channel: "Balcão Energia Cidadã",
-        where: "Espaço Eficiência Energética · Central de Aurora",
-        source: "ANEEL · Leis Federais nº 12.212/2010 e nº 14.203/2021",
-        keywords: ["conta de luz", "energia", "desconto", "tarifa social", "luz cara", "cadunico", "bpc", "aneel"],
-        checklist: [
-          "Conta de luz recente da residência (mesmo que esteja no nome do proprietário, caso você more de aluguel)",
-          "Número do NIS (Cadastro Único atualizado) ou número do Benefício de Prestação Continuada (BPC/LOAS)",
-          "CPF e RG do titular do benefício social"
+        "id": "ERS-01",
+        "category": "Luz, Água e Moradia",
+        "theme": "theme-amber",
+        "icon": "energy",
+        "badgeText": "Desconto na luz",
+        "isFree": true,
+        "title": "Tarifa Social de Energia (desconto na conta de luz)",
+        "shortDesc": "Desconto na conta de luz para famílias de baixa renda no CadÚnico e para quem recebe o BPC. Vale para o consumo de até 220 kWh por mês.",
+        "cost": "Sem custo para ter direito. Desconto de 65% (até 30 kWh), 40% (31 a 100 kWh) e 10% (101 a 220 kWh)",
+        "deadline": "Concedida automaticamente a quem tem direito (confirme na distribuidora)",
+        "channel": "Distribuidora de energia",
+        "where": "Atendimento da distribuidora de energia da sua conta de luz",
+        "source": "Lei 12.212/2010 e Lei 14.203/2021 (guia da AGR-GO, consultado em 09/11/2026)",
+        "keywords": [
+          "conta de luz",
+          "desconto",
+          "tarifa social",
+          "luz cara",
+          "cadunico",
+          "bpc",
+          "aneel"
         ],
-        steps: [
-          "Simule acima o consumo mensal em kWh da sua casa para ver o impacto direto no orçamento familiar.",
-          "Mesmo morando de aluguel, a lei garante o direito de vincular seu NIS à conta de luz do imóvel onde você reside.",
-          "Apresente a fatura e o CPF no Balcão Energia Cidadã da Central para ativar o desconto de até 65%."
+        "checklist": [
+          "Conta de luz recente da residência",
+          "CPF e RG (ou documento original com foto) do titular do benefício",
+          "NIS e código familiar do CadÚnico (cadastro atualizado há pelo menos 2 anos) ou número do benefício BPC"
+        ],
+        "steps": [
+          "Têm direito as famílias no CadÚnico com renda de até meio salário mínimo por pessoa e quem recebe o BPC.",
+          "Desde 2022 a concessão é automática: confirme com a distribuidora se o desconto já aparece na sua conta.",
+          "O desconto vale só para o consumo até 220 kWh por mês. Numa casa de 280 kWh, os 60 kWh acima disso pagam a tarifa cheia."
         ]
       },
       {
-        id: "ERS-02",
-        category: "Luz, Água e Moradia",
-        theme: "theme-amber",
-        icon: "energy",
-        badgeText: "Kit LED Gratuito",
-        isFree: true,
-        title: "Programa Casa Eficiente: Troca por Lâmpadas LED",
-        shortDesc: "Retirada gratuita de até 8 lâmpadas LED Selo Procel A e plano prático para reduzir sua conta de luz em 38%.",
-        cost: "Kit de 8 lâmpadas: Gratuito",
-        deadline: "Retirada imediata no posto",
-        channel: "Presencial no Espaço Energia",
-        where: "Espaço Eficiência Energética · Central de Aurora",
-        source: "PROCEL / INMETRO · Programa Nacional de Conservação de Energia",
-        keywords: ["lampada", "led", "chuveiro", "economizar luz", "procel", "troca de lampadas"],
-        checklist: [
-          "Última conta de energia elétrica da residência",
-          "Documento oficial com foto do titular ou morador",
-          "Levar até 8 lâmpadas antigas (incandescentes ou fluorescentes) para reciclagem e troca por LED 9W"
+        "id": "ERS-02",
+        "category": "Luz, Água e Moradia",
+        "theme": "theme-amber",
+        "icon": "energy",
+        "badgeText": "Economia R$ 1.096,50/ano",
+        "isFree": false,
+        "title": "Economia imediata: lâmpadas LED e chuveiro no modo verão",
+        "shortDesc": "Trocar 8 lâmpadas de 60 W por LED de 9 W (Selo Procel A) e usar o chuveiro no modo verão reduz o consumo em 38% (107,5 kWh por mês).",
+        "cost": "Investimento estimado: R$ 96,00 (8 lâmpadas LED)",
+        "deadline": "Retorno do investimento em cerca de 1 mês",
+        "channel": "Compra das lâmpadas por conta própria",
+        "where": "Em casa (a simulação é feita aqui no portal)",
+        "source": "Projeto de Energias Renováveis (simulador em Python), com dados Procel/INMETRO e EPE. Estimativas, não garantias",
+        "keywords": [
+          "lampada",
+          "led",
+          "chuveiro",
+          "economizar luz",
+          "procel",
+          "troca de lampadas",
+          "economia"
         ],
-        steps: [
-          "Trocar 8 lâmpadas antigas por modelos LED 9W Selo Procel A reduz o gasto com iluminação em até 80%.",
-          "Mudar a chave do chuveiro elétrico para o modo 'Verão' (3.200W) corta em mais 35% o consumo do banho.",
-          "Juntas, essas duas ações geram uma economia média de R$ 1.096,00 por ano para uma família em Aurora."
+        "checklist": [
+          "Última conta de luz (para saber seu consumo em kWh)",
+          "Quantidade e potência das lâmpadas atuais (no exemplo, 8 lâmpadas de 60 W)",
+          "Potência do chuveiro elétrico nos modos inverno e verão (no exemplo, 5.500 W e 3.200 W)"
+        ],
+        "steps": [
+          "As lâmpadas LED de 9 W economizam 61,2 kWh por mês em relação às de 60 W (5 horas por dia).",
+          "Mudar a chave do chuveiro para o modo verão (3.200 W) economiza 46,3 kWh por mês.",
+          "Juntas, as duas ações economizam 107,5 kWh por mês: R$ 1.096,50 por ano a R$ 0,85 por kWh e 49,66 kg de CO₂ a menos por ano."
         ]
       },
       {
-        id: "ERS-03",
-        category: "Luz, Água e Moradia",
-        theme: "theme-amber",
-        icon: "energy",
-        badgeText: "Zero Custo Adesão",
-        isFree: true,
-        title: "Energia Solar Compartilhada (Mesmo de Aluguel)",
-        shortDesc: "Receba créditos de energia solar limpa direto na sua conta de luz sem precisar instalar placas no telhado.",
-        cost: "Adesão R$ 0,00 (Assinatura Solar)",
-        deadline: "Créditos em até 60 dias",
-        channel: "Online ou Balcão Sustentável",
-        where: "Espaço Eficiência Energética · Central de Aurora",
-        source: "Marco Legal da Geração Distribuída (Lei 14.300/2022 · ANEEL / MCTI)",
-        keywords: ["solar", "painel solar", "placa solar", "aluguel", "apartamento", "energia renovavel", "co2"],
-        checklist: [
-          "Fatura de energia elétrica com consumo médio acima de 150 kWh/mês",
-          "Documento de identificação com foto e CPF regular",
-          "Para quem deseja instalar kit próprio de 2,0 kWp no telhado: endereço para vistoria técnica gratuita"
+        "id": "ERS-03",
+        "category": "Luz, Água e Moradia",
+        "theme": "theme-amber",
+        "icon": "energy",
+        "badgeText": "Energia solar",
+        "isFree": false,
+        "title": "Energia solar: usina própria ou assinatura compartilhada",
+        "shortDesc": "Quem tem telhado pode instalar uma usina de 2 kWp. Quem mora de aluguel ou em apartamento pode assinar energia solar compartilhada, com cerca de 15% de desconto.",
+        "cost": "Usina própria: R$ 9.200,00 · assinatura compartilhada: desconto estimado de 15% na conta",
+        "deadline": "Usina própria: retorno em 3,6 anos",
+        "channel": "Contratação com empresa de geração distribuída",
+        "where": "Em casa (a simulação é feita aqui no portal)",
+        "source": "Projeto de Energias Renováveis (simulador em Python), Lei 14.300/2022 e fator de emissão do MCTI. Estimativas, não garantias",
+        "keywords": [
+          "solar",
+          "painel solar",
+          "placa solar",
+          "aluguel",
+          "apartamento",
+          "energia renovavel",
+          "co2",
+          "assinatura"
         ],
-        steps: [
-          "Na modalidade 'Geração Compartilhada' (Lei 14.300/2022), moradores de aluguel ou apartamento recebem créditos de uma fazenda solar municipal sem obras.",
-          "Para casas com telhado próprio, o sistema de 2,0 kWp gera cerca de 250 kWh/mês, economizando R$ 2.550/ano com retorno em 3,6 anos.",
-          "Cada residência integrada evita a emissão de 115,5 kg de CO₂ por ano."
+        "checklist": [
+          "Fatura de energia elétrica recente (consumo em kWh)",
+          "Para a usina própria: telhado com espaço para a instalação de 2 kWp",
+          "Para a assinatura compartilhada: não é preciso instalar nada no imóvel"
+        ],
+        "steps": [
+          "Usina própria de 2 kWp: gera cerca de 250 kWh por mês e economiza R$ 2.550 por ano, com retorno do investimento de R$ 9.200 em 3,6 anos e 115,5 kg de CO₂ a menos por ano.",
+          "Assinatura compartilhada (Lei 14.300/2022): sem obra no imóvel, com desconto estimado de 15%, cerca de R$ 428,40 por ano numa fatura de R$ 238,00.",
+          "Os valores são estimativas para um consumo de 280 kWh por mês e tarifa de R$ 0,85 por kWh, não resultados garantidos."
         ]
       },
       {
-        id: "FC-07",
-        category: "Direitos e Acessibilidade",
-        theme: "theme-blue",
-        icon: "rights",
-        badgeText: "Fila Preferencial",
-        isFree: true,
-        title: "Atendimento Prioritário (60+, PcD) e Libras",
-        shortDesc: "Guichê preferencial imediato, sala silenciosa para autistas (TEA) e intérprete de Libras em tempo real.",
-        cost: "100% Gratuito",
-        deadline: "Atendimento imediato (3 min)",
-        channel: "Todos os setores da Central",
-        where: "Recepção Preferencial · Térreo da Central de Aurora",
-        source: "Ficha FC-07 · Leis Federais 10.048/2000, 10.436/2002 e 13.146/2015",
-        keywords: ["prioridade", "idoso", "60+", "gestante", "autista", "pcd", "deficiencia", "libras", "surdo"],
-        checklist: [
-          "Documento oficial com foto (para comprovação de 60+ anos) ou carteira/laudo PcD, CIPTEA ou cartão gestante",
-          "Para atendimento em Libras: não é necessário agendar previamente (intérprete disponível durante todo o expediente)"
+        "id": "FC-07",
+        "category": "Direitos e Acessibilidade",
+        "theme": "theme-blue",
+        "icon": "rights",
+        "badgeText": "Prioridade e Libras",
+        "isFree": true,
+        "title": "Atendimento prioritário, Libras e horário",
+        "shortDesc": "Prioridade para pessoas com 60 anos ou mais, gestantes e pessoas com deficiência. Intérprete de Libras com agendamento 48 horas antes. Atendimento de segunda a sexta, das 8h às 17h.",
+        "cost": "Conforme o serviço solicitado",
+        "deadline": "Libras: agendar com 48 horas de antecedência",
+        "channel": "Presencial, de segunda a sexta, das 8h às 17h",
+        "where": "Central do Cidadão de Aurora",
+        "source": "Ficha FC-07 (versão de 01/10/2026)",
+        "keywords": [
+          "prioridade",
+          "prioritario",
+          "idoso",
+          "60+",
+          "gestante",
+          "pcd",
+          "deficiencia",
+          "libras",
+          "interprete",
+          "surdo",
+          "horario",
+          "sabado",
+          "feriado",
+          "pagamento"
         ],
-        steps: [
-          "Na Etapa 2 deste portal (ou no totem físico da entrada), marque a opção de Prioridade Legal.",
-          "Sua senha da série 'P' garante chamada imediata em guichê preferencial com espera média de 3 minutos.",
-          "Solicite na chegada o acompanhamento presencial em Libras ou acesso à Sala Sensorial Silenciosa se desejar."
+        "checklist": [
+          "Documento original com foto (fotocópia simples não é aceita; certidões podem ser em cópia autenticada)",
+          "Para intérprete de Libras: agendamento com 48 horas de antecedência"
+        ],
+        "steps": [
+          "O atendimento presencial é de segunda a sexta, das 8h às 17h. Não há atendimento aos sábados, domingos e feriados.",
+          "Têm atendimento prioritário pessoas com 60 anos ou mais, gestantes e pessoas com deficiência.",
+          "O agendamento é obrigatório para RG e CNH. CPF, Carteira de Trabalho digital, certidões e título de eleitor não exigem agendamento prévio.",
+          "As taxas são pagas por guia gerada no portal, em banco ou por PIX, e o pagamento é confirmado em até 2 dias úteis."
         ]
       },
       {
-        id: "FC-07B",
-        category: "Direitos e Acessibilidade",
-        theme: "theme-blue",
-        icon: "rights",
-        badgeText: "Modelo Gratuito",
-        isFree: true,
-        title: "Retirada por Procuração e Regras para Menores",
-        shortDesc: "Como um familiar pode retirar documentos prontos para idoso/acamado e regras de acompanhamento de menores.",
-        cost: "Gratuito",
-        deadline: "Validação na hora no balcão",
-        channel: "Balcão de Triagem Jurídica",
-        where: "Setor de Apoio Jurídico · Central de Aurora",
-        source: "Ficha FC-07 · Código Civil e Estatuto da Criança e do Adolescente",
-        keywords: ["procuracao", "menor", "filho", "acamado", "terceiro", "representante", "responsavel legal"],
-        checklist: [
-          "Documento oficial com foto original do representante/familiar que comparecer à Central",
-          "Protocolo de atendimento e documento original do titular",
-          "Procuração assinada (ou atestado médico em caso de titular acamado/hospitalizado)",
-          "Para menores de 12 anos: presença obrigatória do pai, mãe ou responsável legal com termo de guarda"
+        "id": "FC-07B",
+        "category": "Direitos e Acessibilidade",
+        "theme": "theme-blue",
+        "icon": "rights",
+        "badgeText": "Regras gerais",
+        "isFree": true,
+        "title": "Atendimento por terceiros, menores e perda ou roubo de documento",
+        "shortDesc": "Outra pessoa pode atender por você com procuração simples. Menores de 12 anos vão com o responsável legal. Roubo ou furto exige boletim de ocorrência.",
+        "cost": "Conforme o serviço solicitado",
+        "deadline": "No atendimento",
+        "channel": "Balcão",
+        "where": "Balcões da Central do Cidadão de Aurora",
+        "source": "Ficha FC-07 (versão de 01/10/2026)",
+        "keywords": [
+          "procuracao",
+          "terceiro",
+          "menor",
+          "filho",
+          "responsavel legal",
+          "boletim",
+          "roubo",
+          "furto",
+          "perda"
         ],
-        steps: [
-          "A coleta inicial de foto e digitais do RG é individual (cidadãos acamados podem agendar coleta domiciliar pelo 156).",
-          "Já a retirada de documentos prontos ou solicitação de certidões pode ser feita por familiar com procuração simples.",
-          "Menores entre 12 e 15 anos podem retirar documentos prontos desde que acompanhados de um dos pais."
+        "checklist": [
+          "Para terceiros: procuração simples e documento original com foto de quem vai ao atendimento",
+          "Para menores de 12 anos: o responsável legal comparece com a criança, com documento original com foto",
+          "Roubo ou furto de documento: boletim de ocorrência"
+        ],
+        "steps": [
+          "Terceiros: o atendimento é permitido com procuração simples e documento original com foto do terceiro.",
+          "Menores de 12 anos: o responsável legal deve comparecer com a criança.",
+          "Perda de documento: siga a orientação da ficha do documento (no RG, declaração de extravio assinada no balcão).",
+          "Fotocópias simples não são aceitas. Certidões podem ser apresentadas em cópia autenticada."
         ]
       }
     ];
 
     const BUS_ROUTES = [
-      {
-        title: "Linha 101 · Expresso Central — Desembarque na Porta Principal (Av. Cívica, 400)",
-        stats: "Frota em operação: <strong>14 ônibus</strong> (reforçada com +2 veículos pela matriz de mobilidade) · Passa no ponto <strong>a cada 6 minutos</strong> · Viagem média: <strong>14 minutos</strong>."
-      },
-      {
-        title: "Linha 204 · Corredor Zona Norte → Terminal Central de Aurora",
-        stats: "Frota em operação: <strong>19 ônibus</strong> · Passa no ponto <strong>a cada 8 minutos</strong> · Viagem média: <strong>22 minutos</strong> (integração gratuita)."
-      },
-      {
-        title: "Linha 308 · Corredor Zona Sul → Av. Cívica (Central do Cidadão)",
-        stats: "Frota em operação: <strong>18 ônibus</strong> (reforçada com +2 veículos no pico) · Passa no ponto <strong>a cada 7 minutos</strong> · Viagem média: <strong>19 minutos</strong>."
-      },
-      {
-        title: "Linha 412 · Eixo Transversal Leste-Oeste → Central de Aurora",
-        stats: "Frota em operação: <strong>21 ônibus</strong> · Passa no ponto <strong>a cada 7 minutos</strong> · Viagem média: <strong>24 minutos</strong>."
-      }
-    ];
+      ["Norte", 12, 14, 560],
+      ["Sul", 20, 19, 760],
+      ["Leste", 16, 18, 720],
+      ["Oeste", 24, 21, 840]
+    ].map(([nome, antes, agora, pico]) => ({
+      title: "Região " + nome,
+      stats: `Frota: <strong>${agora} ônibus</strong> (antes eram ${antes}) · Capacidade: <strong>${agora * 40} lugares</strong> · Demanda no pico: <strong>${pico} passageiros</strong>.`
+    }));
 
     function findBestServices(queryText) {
       const q = queryText.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -1208,10 +1308,9 @@ fieldset.triage-row:first-of-type { border-top: 1px solid var(--rule); }
       const A = document.querySelector('input[name="qA"]:checked')?.value === "1";
       const B = document.querySelector('input[name="qB"]:checked')?.value === "1";
       const C = document.querySelector('input[name="qC"]:checked')?.value === "1";
-      const D = document.querySelector('input[name="qD"]:checked')?.value === "1";
 
-      const sPriority = A && B && (C || D);
-      const sRegular = A && B && !C && !D;
+      const sPriority = A && B && C;
+      const sRegular = A && B && !C;
 
       const box = document.getElementById("triageVerdictBox");
       const title = document.getElementById("triageVerdictTitle");
@@ -1223,21 +1322,21 @@ fieldset.triage-row:first-of-type { border-top: 1px solid var(--rule); }
         box.className = "verdict-banner blocked";
         title.textContent = "Atenção: Não vá ao posto ainda! Falta documento original.";
         desc.textContent = "Fotocópias simples não são aceitas para emissão de documentos oficiais. Volte à Etapa 1 e separe os originais antes de sair de casa.";
-      } else if (!B && !D) {
+      } else if (!B) {
         box.className = "verdict-banner pending";
         title.textContent = "Gere sua senha digital na Etapa 3 antes de sair.";
         desc.textContent = "Para garantir atendimento rápido sem espera desnecessária, avance para a Etapa 3 e ative seu passe digital.";
       } else if (sPriority) {
         box.className = "verdict-banner";
         title.textContent = "Atendimento Prioritário Liberado (Lei Federal 10.048/2000)!";
-        desc.textContent = "Você tem direito a guichê preferencial imediato (espera média: 3 minutos). Avance para a Etapa 3 para retirar sua senha da série P.";
-        queueLbl.innerHTML = "Modalidade: <strong>Guichê Prioritário · Espera estimada: 3 min</strong>";
+        desc.textContent = "Você tem direito a atendimento prioritário. Avance para a Etapa 3 para retirar sua senha da série P.";
+        queueLbl.innerHTML = "Modalidade: <strong>Fila prioritária</strong>";
         codeLbl.textContent = "P-0" + ticketCounterP;
       } else if (sRegular) {
         box.className = "verdict-banner";
         title.textContent = "Tudo certo! Você está apto(a) para o atendimento presencial.";
         desc.textContent = "Seus requisitos estão completos. Avance para a Etapa 3 para emitir seu passe de senha digital e consultar o ônibus até a Central.";
-        queueLbl.innerHTML = "Modalidade: <strong>Guichê Geral · Espera estimada: 8 min</strong>";
+        queueLbl.innerHTML = "Modalidade: <strong>Fila geral</strong>";
         codeLbl.textContent = "N-" + ticketCounterN;
       }
     }
@@ -1299,7 +1398,7 @@ fieldset.triage-row:first-of-type { border-top: 1px solid var(--rule); }
           fichas: isRg ? ["FC-01", "FC-07"] : ["FC-02", "FC-07"],
           answer: isRg
             ? "Para sua proteção (LGPD), não informe endereço, telefone ou números de documentos no chat (dados ocultados e não armazenados). Este assistente não realiza agendamentos: o agendamento obrigatório do RG deve ser feito diretamente pelo canal de agendamento da Central do Cidadão de Aurora (Fichas FC-01 e FC-07, verificadas em 01/10/2026)."
-            : "Para sua proteção (LGPD), seu número de documento foi ocultado e não é armazenado. Este assistente não consulta situação cadastral individual. Para verificar ou regularizar seu CPF, acesse diretamente o site do órgão responsável ou agende atendimento presencial (Fichas FC-02 e FC-07, verificadas em 01/10/2026).",
+            : "Para sua proteção (LGPD), seu número de documento foi ocultado e não é armazenado. Este assistente não consulta situação cadastral individual. Para tratar do seu CPF, acesse o portal da Central do Cidadão, na área CPF. A Central não pede o número do CPF por chat, telefone ou mensagem (Fichas FC-02 e FC-07, verificadas em 01/10/2026).",
           matchedServiceId: isRg ? "FC-01" : "FC-02"
         };
       }
@@ -1350,7 +1449,7 @@ fieldset.triage-row:first-of-type { border-top: 1px solid var(--rule); }
           status: "OK",
           guardrail: "Entrada íntegra · Recuperação Ficha FC-05",
           fichas: ["FC-05"],
-          answer: "Pelo portal (formato PDF), a 2ª via da certidão custa R$ 49,00 e fica pronta em 3 dias úteis. No atendimento presencial no balcão (impressa), custa R$ 55,00 com prazo de 5 dias úteis. Pessoas inscritas no CadÚnico têm isenção gratuita (Ficha FC-05, verificada em 01/10/2026).",
+          answer: "Pelo portal (formato PDF), a 2ª via da certidão custa R$ 49,00 e fica pronta em 3 dias úteis. No atendimento presencial no balcão (impressa), custa R$ 55,00 com prazo de 5 dias úteis. Quem comprovar baixa renda no balcão fica isento da taxa (Ficha FC-05, verificada em 01/10/2026).",
           matchedServiceId: "FC-05"
         };
       }
@@ -1377,7 +1476,7 @@ fieldset.triage-row:first-of-type { border-top: 1px solid var(--rule); }
           status: "OK",
           guardrail: "Entrada íntegra · Recuperação Ficha FC-07",
           fichas: ["FC-07"],
-          answer: "O atendimento com intérprete de Libras é gratuito e deve ser solicitado no agendamento pelo portal com pelo menos 48 horas de antecedência (Ficha FC-07, verificada em 01/10/2026).",
+          answer: "Para ter intérprete de Libras, agende o atendimento com 48 horas de antecedência (Ficha FC-07, verificada em 01/10/2026).",
           matchedServiceId: "FC-07"
         };
       }
@@ -1391,13 +1490,54 @@ fieldset.triage-row:first-of-type { border-top: 1px solid var(--rule); }
         };
       }
 
+      // Perguntas frequentes diretas das fichas (texto das fichas FC-01 a FC-07)
+      const rg = /\brg\b|identidade/.test(norm);
+      const FAQ = [
+        [rg && /custa|valor|preco/.test(norm), "FC-01", ["FC-01"],
+          "A segunda via do RG custa R$ 38,00, paga por guia gerada no portal da Central do Cidadão. A primeira via é gratuita (Ficha FC-01, verificada em 01/10/2026)."],
+        [rg && /marcar|agendar|agendamento|horario/.test(norm), "FC-01", ["FC-01", "FC-07"],
+          "Sim. O agendamento é obrigatório e deve ser feito pelo portal da Central do Cidadão (Fichas FC-01 e FC-07, verificadas em 01/10/2026)."],
+        [rg && /boletim|ocorrencia/.test(norm), "FC-01", ["FC-01"],
+          "Não, se foi perda: basta assinar a declaração de extravio no próprio balcão. O boletim de ocorrência só é exigido em caso de roubo ou furto (Ficha FC-01, verificada em 01/10/2026)."],
+        [rg && /documento|levar/.test(norm), "FC-01", ["FC-01"],
+          "Para a segunda via do RG: certidão de nascimento ou de casamento (original ou cópia autenticada); comprovante de residência dos últimos 90 dias; e boletim de ocorrência (roubo ou furto) ou declaração de extravio (perda) (Ficha FC-01, verificada em 01/10/2026)."],
+        [rg && /tempo|prazo|pronto|demora/.test(norm), "FC-01", ["FC-01"],
+          "O RG fica pronto em 10 dias úteis, contados do atendimento no Posto de Identificação (Ficha FC-01, verificada em 01/10/2026)."],
+        [/\bcpf\b/.test(norm) && /custa|valor|taxa|pago|gratuit/.test(norm), "FC-02", ["FC-02"],
+          "Pelo portal da Central do Cidadão, a inscrição e a correção de dados do CPF são gratuitas. No atendimento presencial, no balcão, há taxa de R$ 7,00 (Ficha FC-02, verificada em 01/10/2026)."],
+        [/\bcpf\b/.test(norm), "FC-02", ["FC-02"],
+          "Pelo portal da Central do Cidadão, na área CPF: preencha o formulário e anexe as imagens dos documentos. É gratuito, não precisa de agendamento e o comprovante sai em até 2 dias úteis (Ficha FC-02, verificada em 01/10/2026)."],
+        [/votar|voto/.test(norm) && /obrigat|facultativ/.test(norm), "FC-03", ["FC-03"],
+          "Não. Aos 16 e 17 anos o voto é facultativo, assim como a partir dos 70 anos. É obrigatório de 18 a 69 anos (Ficha FC-03, verificada em 01/10/2026)."],
+        [/titulo/.test(norm) && /pago|custa|gratuit|cobra|valor/.test(norm), "FC-03", ["FC-03"],
+          "Não. A primeira via, a segunda via e a transferência do título de eleitor são gratuitas (Ficha FC-03, verificada em 01/10/2026)."],
+        [/titulo/.test(norm) && /ate quando|mudar|transfer|prazo|150|eleicao/.test(norm), "FC-03", ["FC-03"],
+          "O cadastro fecha 150 dias antes de cada eleição. Pedidos feitos depois desse prazo só valem para a eleição seguinte (Ficha FC-03, verificada em 01/10/2026)."],
+        [/carteira de trabalho|ctps/.test(norm) && /custa|demora|quanto|prazo|gratuit/.test(norm), "FC-04", ["FC-04"],
+          "A Carteira de Trabalho digital é gratuita em qualquer canal e fica disponível na hora, logo após o cadastro no portal ou no aplicativo (no balcão também é imediato) (Ficha FC-04, verificada em 01/10/2026)."],
+        [/aluguel|alugad|inquilin/.test(norm) && /luz|energia|solar/.test(norm), "ERS-03", ["ERS-01", "ERS-03"],
+          "Há dois caminhos. Se a família está no CadÚnico ou recebe o BPC, a Tarifa Social dá desconto de 65% (até 30 kWh), 40% (31 a 100 kWh) e 10% (101 a 220 kWh). Para qualquer morador de aluguel, a assinatura de energia solar compartilhada não exige obra no imóvel e dá desconto estimado de 15% na conta. São estimativas, não resultados garantidos."],
+        [/por ela|por ele|outra pessoa|terceiro|procuracao/.test(norm), "FC-07B", ["FC-07"],
+          "Sim. O atendimento por terceiros é permitido com procuração simples e documento original com foto da pessoa que vai ao atendimento (Ficha FC-07, verificada em 01/10/2026). Confira na ficha do documento se há alguma exceção."]
+      ];
+      const hit = FAQ.find(f => f[0]);
+      if (hit) {
+        return {
+          status: "OK",
+          guardrail: "Entrada íntegra · Recuperação Ficha " + hit[2].join(" + "),
+          fichas: hit[2],
+          answer: hit[3],
+          matchedServiceId: hit[1]
+        };
+      }
+
       // Busca geral ponderada nas fichas
       const ranked = findBestServices(text);
       const best = ranked[0].service;
       return {
         status: "OK",
         guardrail: "Entrada íntegra · Recuperação Híbrida + Validação de Citação",
-        fichas: [...new Set([best.id.replace("FC-07B", "FC-07"), "FC-07"])],
+        fichas: [...new Set([best.id.replace("FC-07B", "FC-07"), ...(best.id.startsWith("FC-") ? ["FC-07"] : [])])],
         answer: best.shortDesc + " Custo: " + best.cost + ". Prazo: " + best.deadline + ". Canal: " + best.channel + ".",
         matchedServiceId: best.id,
         serviceObj: best
@@ -1647,7 +1787,7 @@ fieldset.triage-row:first-of-type { border-top: 1px solid var(--rule); }
           <details class="trace">
             <summary>${ICON("i-chev", 18)}Como esta resposta foi verificada</summary>
             <p>Checagem de segurança: ${res.guardrail}</p>
-            <p>Fontes: ${res.fichas.join(", ")} (conferidas em 01/10/2026).</p>
+            <p>Fontes: ${res.fichas.join(", ")}${res.fichas.some(f => /^FC-/.test(f)) ? " (fichas FC conferidas em 01/10/2026)" : ""}.</p>
           </details>
           <p class="disclaimer">Este assistente é um protótipo educacional e não é um canal oficial. Confirme prazos e valores no órgão responsável.</p>
         </div>`;

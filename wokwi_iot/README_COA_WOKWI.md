@@ -16,8 +16,8 @@
 
 Este módulo implementa a camada de **Computação Física e Internet das Coisas (IoT)** do ecossistema unificado **Citizen Assist AI — Central do Cidadão de Aurora**. O projeto une a sugestão central da Global Solution (*"sistema de fila virtual para postos de atendimento ao cidadão, registrando entrada e saída de pessoas por botões e estimando tempo de espera"*) aos requisitos de **Computer Organization and Architecture** (sensoriamento ambiental com `DHT22`, processamento lógico embarcado em `MicroPython` na `Raspberry Pi Pico` e acionamento de atuadores visuais e sonoros de acessibilidade).
 
-- **ODS 10 (Redução das Desigualdades):** Garantia automatizada de prioridade legal (Ficha `FC-07`: idosos 60+, gestantes, PcD, autistas e pessoas com criança de colo) e sinalização sonora diferenciada em frequência/pulsos para cidadãos com deficiência visual.
-- **ODS 11 (Cidades e Comunidades Sustentáveis):** Modernização de espaços públicos de atendimento com transparência de fila em tempo real e monitoramento de salubridade térmica.
+- **ODS 10 (Redução das Desigualdades):** Garantia automatizada de prioridade legal (Ficha `FC-07`: pessoas com 60 anos ou mais, gestantes e pessoas com deficiência) e sinalização sonora diferenciada em frequência/pulsos para cidadãos com deficiência visual.
+- **ODS 11 (Cidades e Comunidades Sustentáveis):** Modernização de espaços públicos de atendimento com transparência de fila (telemetria na saída serial do protótipo) e monitoramento de salubridade térmica.
 - **ODS 16 (Paz, Justiça e Instituições Eficazes):** Previsibilidade no atendimento presencial e eliminação de filas desorganizadas ou inanição (*starvation*) no serviço público.
 
 ---
@@ -32,8 +32,8 @@ Nos postos presenciais de emissão de documentos e serviços públicos municipai
 
 ### 1.2. Público Afetado
 - **Cidadãos em geral** que buscam atendimento presencial para emissão de documentos essenciais (`FC-01` a `FC-06`);
-- **Público prioritário e vulnerável (`FC-07`):** idosos (60+ anos), gestantes, lactantes, pessoas com deficiência (visual, auditiva ou motora), pessoas com transtorno do espectro autista (TEA) e pessoas com criança de colo;
-- **Atendentes e gestores públicos** da Central do Cidadão de Aurora, que carecem de telemetria em tempo real sobre lotação e condições térmicas do salão.
+- **Público prioritário e vulnerável (`FC-07`):** pessoas com 60 anos ou mais, gestantes e pessoas com deficiência (visual, auditiva ou motora), conforme a ficha `FC-07`. A Lei 10.048/2000 prevê outros grupos prioritários (como lactantes e pessoas com criança de colo), que o protótipo atenderia na mesma fila prioritária;
+- **Atendentes e gestores públicos** da Central do Cidadão de Aurora, que carecem de telemetria sobre lotação e condições térmicas do salão.
 
 ### 1.3. Justificativa da Solução Tecnológica (IoT + Computação Física)
 Um **Totem IoT embarcado baseado na `Raspberry Pi Pico`** resolve o problema na ponta (*Edge Computing*): captura eventos físicos de entrada e chamada por botões com tratamento de ruído (*debounce*), mede continuamente temperatura e umidade via sensor digital `DHT22`, calcula a previsão de espera por algoritmo adaptativo, aciona sinalizadores luminosos (semáforo de LEDs) e sonoros (Buzzer PWM acessível) e publica telemetria JSON estruturada para o painel do **Citizen Assist AI**, permitindo que o cidadão consulte a lotação antes mesmo de sair de casa.
