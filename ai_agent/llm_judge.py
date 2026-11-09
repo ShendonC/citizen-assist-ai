@@ -478,7 +478,9 @@ def executar_pipeline_completo(caminho_saida: Optional[Path] = None) -> Dict[str
                 "v1_baseline": {
                     "fichas_recuperadas": item_v1["fichas_recuperadas"],
                     "resposta_agente": item_v1["resposta_agente"],
+                    "juiz": item_v1["juiz"],
                     "classificacao": item_v1["classificacao"],
+                    "verificacao_deterministica": item_v1.get("verificacao_deterministica", item_v1["classificacao"]),
                     "criterios": {
                         "a_conteudo": item_v1["criterio_a_conteudo"],
                         "b_citacao": item_v1["criterio_b_citacao_fonte"],
@@ -489,7 +491,9 @@ def executar_pipeline_completo(caminho_saida: Optional[Path] = None) -> Dict[str
                 "v2_improved": {
                     "fichas_recuperadas": item_v2["fichas_recuperadas"],
                     "resposta_agente": item_v2["resposta_agente"],
+                    "juiz": item_v2["juiz"],
                     "classificacao": item_v2["classificacao"],
+                    "verificacao_deterministica": item_v2.get("verificacao_deterministica", item_v2["classificacao"]),
                     "criterios": {
                         "a_conteudo": item_v2["criterio_a_conteudo"],
                         "b_citacao": item_v2["criterio_b_citacao_fonte"],
