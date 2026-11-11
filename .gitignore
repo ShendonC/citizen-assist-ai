@@ -1,0 +1,5 @@
+.env
+__pycache__/
+*.py[cod]
+data/ml_resultados.json
+ai_agent/resultados_golden_llm.json

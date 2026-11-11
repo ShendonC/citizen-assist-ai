@@ -45,6 +45,7 @@ class Assistente:
         self.caminho_historico = str(caminho_historico)
         self.caminho_csv = str(caminho_csv)
         self.historico: list[dict[str, Any]] = []
+        self._atendimentos_sessao: int = 0
         self._carregar_historico()
 
     def _carregar_historico(self) -> None:
@@ -403,8 +404,15 @@ class Assistente:
             }
 
         self.historico.append(registro)
+        self._atendimentos_sessao += 1
         self._salvar_historico()
         return registro
+
+    def registrar_avaliacao_final(self, nota: int) -> None:
+        """Atualiza a nota de facilidade do último atendimento realizado nesta sessão."""
+        if 1 <= int(nota) <= 5 and self._atendimentos_sessao > 0 and self.historico:
+            self.historico[-1]["facilidade"] = int(nota)
+            self._salvar_historico()
 
     def indicadores(self) -> dict[str, Any]:
         """Calcula, exibe no terminal e retorna os indicadores de desempenho."""

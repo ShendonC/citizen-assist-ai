@@ -1,5 +1,6 @@
 ﻿# -*- coding: utf-8 -*-
-"""Computer Science: motor de decisão booleana do Citizen Assist AI.
+"""Computer Science: motor de decisão booleana do Citizen Assist AI (GS 2026.2 - FIAP 1CCPZ).
+Integrantes: Luiz Otávio Brito Freixo (RM 569977), Ana Beatriz Berbel Marini (RM 574876).
 
 Lê a lógica FEITA À MÃO pelo grupo em cs_regras.json (mintermos da tabela-verdade e a
 expressão simplificada). Este arquivo não contém a tabela, o mapa de Karnaugh nem o circuito.
@@ -16,9 +17,7 @@ from pathlib import Path
 REGRAS = Path(__file__).with_name("cs_regras.json")
 AVISO = ("Protótipo educacional: não é um canal oficial e não confirma a concessão de serviços "
          "ou direitos. Nenhum dado pessoal é pedido ou guardado. Confirme no canal oficial.")
-FALTA = ("A lógica ainda não foi cadastrada. Faça à mão a tabela-verdade, a simplificação e o "
-         "Karnaugh (roteiro: CS_ROTEIRO_FEITO_A_MAO.pdf) e preencha "
-         "'mintermos' e 'expr_simplificada' em cs_regras.json.")
+FALTA = ("A lógica ainda não foi cadastrada. Preencha 'mintermos' e 'expr_simplificada' em cs_regras.json.")
 SIM = {"1", "s", "sim"}
 NAO = {"0", "n", "nao", "não"}
 

@@ -2,6 +2,9 @@
 """
 Disciplina: Data Structures and Algorithms (DSA) — Global Solution 2026.2 (Citizen Tech)
 Projeto: Citizen Assist AI — Central do Cidadao de Aurora
+Integrantes (Turma 1CCPZ - FIAP):
+- Luiz Otavio Brito Freixo (RM 569977)
+- Ana Beatriz Berbel Marini (RM 574876)
 
 Implementacao de um sistema CRUD completo de catalogo de servicos publicos estruturado
 exclusivamente sobre uma Lista Simplesmente Encadeada propria (NoServico e ListaEncadeadaServicos),

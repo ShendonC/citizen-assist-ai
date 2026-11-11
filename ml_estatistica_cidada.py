@@ -1,12 +1,17 @@
 ﻿"""
-Modelagem Linear para Aprendizado de Maquina - Global Solution 2026.2 (FIAP)
+Modelagem Linear para Aprendizado de Maquina - Global Solution 2026.2 (FIAP - 1CCPZ)
+Integrantes:
+- Luiz Otávio Brito Freixo (RM 569977)
+- Ana Beatriz Berbel Marini (RM 574876)
+
 Tema: CitizenTech - inclusao digital e acesso a servicos publicos por assistente digital.
 
-Base: dados reais do IBGE (Censo 2022 e PIB dos Municipios 2022) para os 5.570 municipios.
-Arquivo: data/base_municipios_ibge.csv (fontes e data da consulta em data/fontes_base_municipios_ibge.txt).
+Base: dados reais do IBGE (Censo Demografico 2022 e PIB dos Municipios 2022) para os 5.570 municipios
+(consulta realizada em 07/11/2026 nas tabelas agregadas SIDRA/IBGE 4714, 5938, 9515, 9543, 9922 e 9936).
+Arquivo: base_municipios_ibge.csv (ou data/base_municipios_ibge.csv).
 
-Como executar (na pasta do projeto):  python ml_estatistica_cidada.py
-Gera: 7 graficos em relatorios/graficos_ml/ e data/ml_resultados.json
+Como executar:  python ml_estatistica_cidada.py
+Gera: 7 graficos em graficos_ml/ e resultados consolidados em data/ml_resultados.json
 """
 import json
 import sys
@@ -26,7 +31,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
 BASE = Path(__file__).resolve().parent
-GRAF = BASE / "relatorios" / "graficos_ml"
+_REL = BASE.parent / "03_Relatorios_e_Entregas"
+GRAF = (_REL if _REL.exists() else BASE) / "graficos_ml"  # solto no Portal: graficos ao lado do .py
 GRAF.mkdir(parents=True, exist_ok=True)
 
 Y_COL, Y_NOME = "pct_internet", "Domicílios com internet (%)"

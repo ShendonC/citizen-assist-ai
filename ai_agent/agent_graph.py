@@ -19,7 +19,11 @@ from __future__ import annotations
 
 import os
 import re
+import sys
 import unicodedata
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, TypedDict
@@ -816,12 +820,57 @@ def obter_diagrama_arquitetura_mermaid() -> str:
     )
 
 
+def executar_cli_interativo() -> None:
+    """Menu interativo acessível apenas por teclado (Seção 2.2): categorias numeradas e pergunta livre."""
+    print("\n" + "=" * 76)
+    print("  CENTRAL DO CIDADAO DE AURORA - CITIZEN ASSIST AI (LangGraph)")
+    print("  Aviso: Protótipo educacional (não é canal oficial). Não digite dados pessoais.")
+    print("=" * 76)
+    menu = listar_menu_categorias()
+    while True:
+        print("\nEscolha uma ficha por número, digite [8] para pergunta livre ou [0] para sair:")
+        for item in menu:
+            print(f"  [{item['opcao']}] {item['codigo']} - {item['titulo']}")
+        print("  [8] Digitar uma dúvida livre em linguagem natural")
+        print("  [0] Sair")
+        try:
+            escolha = input("\nOpção > ").strip()
+        except (EOFError, KeyboardInterrupt):
+            print("\nEncerrando atendimento.")
+            return
+        if escolha == "0":
+            print("Atendimento encerrado.")
+            return
+        if escolha in {m["opcao"] for m in menu}:
+            selecionada = next(m for m in menu if m["opcao"] == escolha)
+            pergunta = f"Quais são as orientações, documentos, prazos e taxas de {selecionada['titulo']} ({selecionada['codigo']})?"
+        elif escolha == "8":
+            try:
+                pergunta = input("Digite sua dúvida (sem CPF, telefone ou e-mail): ").strip()
+            except (EOFError, KeyboardInterrupt):
+                print("\nEncerrando atendimento.")
+                return
+        elif len(escolha) >= 4 and not escolha.isdigit():
+            pergunta = escolha
+        else:
+            print("Entrada inválida. Escolha um número de 0 a 8 ou digite sua dúvida.")
+            continue
+
+        resultado = executar_agente(pergunta, modo="v2_improved")
+        print("\n--- Orientação Fundamentada ---")
+        print(f"Fichas consultadas: {', '.join(resultado['fichas_recuperadas']) or 'Nenhuma'}")
+        print(resultado["resposta_final"])
+
+
 if __name__ == "__main__":
-    print("=== Central do Cidadao de Aurora - Teste Rapido do Agente (LangGraph) ===")
-    print(f"Fichas carregadas ({len(FICHAS_AURORA)}): {', '.join(FICHAS_AURORA.keys())}")
-    for item in listar_menu_categorias():
-        print(f"  [{item['opcao']}] {item['codigo']} - {item['titulo']}")
-    exemplo = executar_agente("Preciso marcar horário para fazer a segunda via do RG?", modo="v2_improved")
-    print("\nPergunta:", exemplo["mensagem_original"])
-    print("Fichas recuperadas:", exemplo["fichas_recuperadas"])
-    print("Resposta:", exemplo["resposta_final"])
+    if "--demo" in sys.argv or not sys.stdin.isatty():
+        print("=== Central do Cidadao de Aurora - Teste Rapido do Agente (LangGraph) ===")
+        print(f"Fichas carregadas ({len(FICHAS_AURORA)}): {', '.join(FICHAS_AURORA.keys())}")
+        for item in listar_menu_categorias():
+            print(f"  [{item['opcao']}] {item['codigo']} - {item['titulo']}")
+        exemplo = executar_agente("Preciso marcar horário para fazer a segunda via do RG?", modo="v2_improved")
+        print("\nPergunta:", exemplo["mensagem_original"])
+        print("Fichas recuperadas:", exemplo["fichas_recuperadas"])
+        print("Resposta:", exemplo["resposta_final"])
+    else:
+        executar_cli_interativo()

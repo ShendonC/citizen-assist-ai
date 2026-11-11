@@ -1,7 +1,10 @@
 ﻿"""
 Disciplina: Modelagem Matematica e Computacional (MMC)
-Global Solution 2026.2 - CitizenTech (FIAP - 1CC)
+Global Solution 2026.2 - CitizenTech (FIAP - 1CCPZ)
 Projeto: Mobilidade Urbana Inteligente - Gestao da Frota de Onibus de Aurora
+Integrantes:
+- Luiz Otavio Brito Freixo (RM 569977)
+- Ana Beatriz Berbel Marini (RM 574876)
 
 Implementa:
 - Etapa 1 (Relatorio I): Modelagem matricial A*x = b, analise de unicidade via
@@ -382,8 +385,11 @@ def gerar_grafico_mmc(
 def executar_pipeline_mmc() -> dict[str, Any]:
     """Executa todas as etapas de MMC, gera o grafico e exibe o relatorio no console."""
     base_dir = Path(__file__).resolve().parent
-    caminho_grafico = base_dir / "relatorios" / "graficos_ml" / "mmc_frota_onibus.png"
-    caminho_grafico.parent.mkdir(parents=True, exist_ok=True)
+    dir_relatorios = base_dir.parent / "03_Relatorios_e_Entregas" / "graficos_ml"
+    if dir_relatorios.exists():
+        caminho_grafico = dir_relatorios / "mmc_frota_onibus.png"
+    else:
+        caminho_grafico = base_dir / "mmc_frota_onibus.png"
 
     etapa1 = resolver_etapa_1()
     etapa2 = resolver_etapa_2(etapa1["x_atual"])
@@ -422,7 +428,7 @@ def executar_pipeline_mmc() -> dict[str, Any]:
     return {
         "etapa_1": etapa1,
         "etapa_2": etapa2,
-        "grafico_path": str(caminho_grafico.relative_to(base_dir)).replace("\\", "/"),
+        "grafico_path": str(caminho_grafico).replace("\\", "/"),
     }
 
 

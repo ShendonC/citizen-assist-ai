@@ -121,8 +121,6 @@
     }
   ],
   "connections": [
-    [ "pico:GP0", "$serialMonitor:RX", "", [] ],
-    [ "pico:GP1", "$serialMonitor:TX", "", [] ],
     [ "btn_normal:1.r", "pico:GP14", "green", [ "h20", "v-15" ] ],
     [ "btn_normal:2.r", "pico:GND.4", "black", [ "h30", "v-35" ] ],
     [ "btn_prio:1.r", "pico:GP15", "blue", [ "h25", "v-50" ] ],
@@ -144,5 +142,9 @@
     [ "pico:GP18", "bz1:2", "purple", [ "h25", "v-20" ] ],
     [ "pico:GND.5", "bz1:1", "black", [ "h35", "v-15" ] ]
   ],
+  "serialMonitor": {
+    "display": "always",
+    "newline": "lf"
+  },
   "dependencies": {}
 }
